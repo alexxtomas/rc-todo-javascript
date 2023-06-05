@@ -1,0 +1,45 @@
+:root {
+  --bg-color: #fafbfc;
+  --text-color: #8d9093;
+  --title-color: #202020;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--title-color);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+.rc-main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
