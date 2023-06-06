@@ -5,7 +5,8 @@
       "@components/*": ["src/components/*"],
       "@router/*": ["src/router/*"],
       "@utils/*": ["src/utils/*"],
-      "@views/*": ["src/views/*"]
+      "@views/*": ["src/views/*"],
+      "@validations/*": ["src/validations/*"]
     }
   }
 }

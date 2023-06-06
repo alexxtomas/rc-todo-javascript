@@ -21,7 +21,7 @@ body {
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  max-width: 800px;
+  max-width: 400px;
   margin: 0 auto;
   width: 100vw;
 }
@@ -34,12 +34,126 @@ h4 {
   font-weight: 600;
 }
 
-h1 {
-  font-size: 28px;
+button {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
 }
 
-.rc-main-header {
+h1 {
+  font-size: 28px;
+  letter-spacing: 1.7px;
+}
+
+.rcMainHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.rcMainHeader > button {
+  font-size: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.rcMainHeader > button:hover {
+  scale: 0.95;
+}
+
+.rcFlexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 10px;
+}
+
+.rcSpaceCard {
+  display: flex;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 4px 8px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.rcSpaceCard > header {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.rcSpaceCard > header > h3 {
+  font-size: 10px;
+}
+
+.validationError {
+  font-size: 8px;
+  color: red;
+  padding-left: 4px;
+}
+
+#newSpaceDialog {
+  margin: auto;
+  border: none !important;
+  border-radius: 8px;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  max-width: 400px;
+}
+
+#newSpaceDialog::backdrop {
+  backdrop-filter: blur(4px);
+}
+
+#newSpaceDialog > form {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#newSpaceDialog > form > label {
+  font-size: 8px;
+}
+
+#newSpaceDialog > form > input,
+#newSpaceDialog > form > select {
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  outline: none;
+  font-size: 10px !important;
+}
+
+#newSpaceDialog > form > select > option {
+  font-size: 8px;
+}
+
+#newSpaceDialog > form > footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+#newSpaceDialog > form > footer > button {
+  margin-top: 10px;
+  padding: 4px 8px;
+  font-size: 8px;
+  border-radius: 8px;
+}
+
+#saveButton {
+  background-color: #fff;
+  border: 1px solid #8d9093;
+  color: #8d9093;
+  transition: all 0.3s ease-in-out;
+}
+#cancelButton {
+  background-color: #8d9093;
+  border: 1px solid #8d9093;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
 }
