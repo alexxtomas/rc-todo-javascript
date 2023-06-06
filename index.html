@@ -13,11 +13,23 @@
         <button id="newSpace">new space +</button>
         <dialog id="newSpaceDialog">
           <form id="newSpaceForm">
-            <label for="newSpaceName">Space Name</label>
-            <input id="newSpaceName" name="newSpaceName" type="text" />
+            <div>
+              <label for="newSpaceName">Space Name</label>
+              <input id="newSpaceName" name="newSpaceName" type="text" />
+              <span
+                id="newSpaceNameValidationError"
+                class="validationError"
+              ></span>
+            </div>
 
-            <label for="newSpacePriority">Priority</label>
-            <select name="newSpacePriority" id="newSpacePriority"></select>
+            <div>
+              <label for="newSpacePriority">Priority</label>
+              <select name="newSpacePriority" id="newSpacePriority"></select>
+              <span
+                id="newSpacePriorityValidationError"
+                class="validationError"
+              ></span>
+            </div>
 
             <footer>
               <button type="submit" id="saveButton" value="default">

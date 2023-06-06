@@ -1,16 +1,16 @@
 import { PRIORITIES } from '@utils/constants'
 
 export const spaceNameValidation = ({ spaceName }) => {
-  const validation = {
-    id: 'spaceNameValidationError'
-  }
   if (typeof spaceName !== 'string') {
-    validation.message = 'Space name must be a string'
-  } else if (spaceName.length < 2) {
-    validation.message = 'Space name must be at least 2 characters'
+    return {
+      message: 'Space name must be a string'
+    }
   }
-
-  return validation
+  if (spaceName.length < 2) {
+    return {
+      message: 'Space name must be at least 2 characters'
+    }
+  }
 }
 export const spacePriorityValidation = ({ spacePriority }) => {
   const validation = {

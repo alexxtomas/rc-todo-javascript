@@ -110,15 +110,20 @@ h1 {
 #newSpaceDialog > form {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 8px;
+}
+#newSpaceDialog > form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-#newSpaceDialog > form > label {
+#newSpaceDialog > form > div > label {
   font-size: 8px;
 }
 
-#newSpaceDialog > form > input,
-#newSpaceDialog > form > select {
+#newSpaceDialog > form > div > input,
+#newSpaceDialog > form > div > select {
   padding: 2px 8px;
   border-radius: 8px;
   border: none;

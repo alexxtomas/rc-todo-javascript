@@ -27,6 +27,9 @@ const newSpaceDialogCloseButton = document.querySelector('#cancelButton')
 const newSpaceDialogForm = document.querySelector('#newSpaceForm')
 const newSpaceNameInput = document.querySelector('#newSpaceName')
 const newSpacePrioritySelect = document.querySelector('#newSpacePriority')
+const newSpaceNameValidationError = document.querySelector(
+  '#newSpaceNameValidationError'
+)
 
 newSpaceDialogForm.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -37,25 +40,20 @@ newSpaceDialogForm.addEventListener('submit', (e) => {
     spaceName: newSpaceName.value
   })
 
-  const newSpaceNameValidationError = document.querySelector(
-    `#${newSpaceNameValidation.id}`
-  )
-
-  if (newSpaceNameValidation?.message) {
-    if (newSpaceNameValidationError) {
-      newSpaceNameValidationError.remove()
+  if (newSpaceNameValidation) {
+    console.log('MESSAGE', newSpaceNameValidation.message)
+    console.log('TEXT CONTENT', newSpaceNameValidationError.textContent)
+    if (newSpaceNameValidationError.text !== '') {
+      newSpaceNameValidationError.textContent = ''
     }
-    const node = document.createElement('span')
-    node.id = newSpaceNameValidation.id
-    node.classList.add('validationError')
-    node.textContent = newSpaceNameValidation.message
-    newSpaceNameInput.insertAdjacentElement('afterend', node)
+
+    newSpaceNameValidationError.textContent = newSpaceNameValidation.message
 
     return
   }
 
-  if (newSpaceNameValidationError) {
-    newSpaceNameValidationError.remove()
+  if (newSpaceNameValidationError.textContent !== '') {
+    newSpaceNameValidationError.textContent = ''
   }
 })
 
@@ -74,11 +72,9 @@ newSpaceButton.addEventListener('click', () => {
 
 newSpaceDialogCloseButton.addEventListener('click', () => {
   newSpaceDialog.close()
-  const newSpaceNameValidationError = document.querySelector(
-    '#spaceNameValidationError'
-  )
-  if (newSpaceNameValidationError) {
-    newSpaceNameValidationError.remove()
+
+  if (newSpaceNameValidationError.textContent !== '') {
+    newSpaceNameValidationError.textContent = ''
   }
   newSpaceNameInput.value = ''
   newSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
