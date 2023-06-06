@@ -55,6 +55,8 @@ newSpaceDialogForm.addEventListener('submit', (e) => {
   if (newSpaceNameValidationError.textContent !== '') {
     newSpaceNameValidationError.textContent = ''
   }
+
+  newSpaceDialog.close()
 })
 
 newSpaceButton.addEventListener('click', () => {
