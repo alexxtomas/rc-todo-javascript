@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 
-body {
+#app {
   background-color: var(--bg-color);
   color: var(--text-color);
   display: flex;
@@ -25,13 +25,46 @@ body {
   margin: 0 auto;
   width: 100vw;
 }
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: fixed;
+  top: 30%;
+  left: 10%;
+}
+aside > header > h2 {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+aside > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+aside > ul > li > button {
+  display: flex;
+  gap: 8px;
+  margin-left: 10px;
+}
+
+aside > ul > li > button > h3 {
+  font-size: 8px;
+  font-weight: 400;
+  tab-size: 10;
+}
 
 h1,
-h2,
-h3,
-h4 {
+h2 {
   color: var(--title-color);
   font-weight: 600;
+}
+
+li {
+  list-style: none;
 }
 
 button {
@@ -60,32 +93,33 @@ h1 {
   scale: 0.95;
 }
 
-.rcFlexContainer {
+.rcSpacesContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr max-content;
+}
+
+.rcSpacesContainer > li > button {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 10px;
+  width: 100%;
+  gap: 2px;
+}
+
+.rcSpacesContainer > li > button > h3 {
+  width: 40px;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .rcSpaceCard {
   display: flex;
-  background-color: #fff;
-  cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 4px 8px;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.rcSpaceCard > header {
-  display: flex;
-  gap: 4px;
   align-items: center;
-}
-
-.rcSpaceCard > header > h3 {
-  font-size: 10px;
+  cursor: pointer;
+  padding: 4px 0 4px 3px;
 }
 
 .validationError {

@@ -1,4 +1,4 @@
-import { PRIORITIES } from '@utils/constants'
+import { PRIORITIES_LABELS } from '@utils/constants'
 
 export const spaceNameValidation = ({ spaceName }) => {
   if (typeof spaceName !== 'string') {
@@ -16,7 +16,7 @@ export const spacePriorityValidation = ({ spacePriority }) => {
   const validation = {
     id: 'spacePriorityValidationError'
   }
-  if (!PRIORITIES.includes(spacePriority)) {
+  if (!PRIORITIES_LABELS.includes(spacePriority)) {
     validation.message = 'Invalid priority'
   }
 

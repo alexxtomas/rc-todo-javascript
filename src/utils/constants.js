@@ -10,76 +10,84 @@ export const URL_ROUTES = {
     description: 'TODO APP home'
   }
 }
-
-const PRIORITIES_ENUM = {
-  URGENT: 'Urgent',
-  HIGH: 'High',
-  NORMAL: 'Normal',
-  LOW: 'Low'
+export const PRIORITIES = {
+  URGENT: {
+    LABEL: 'Urgent',
+    VALUE: 3,
+    COLOR: '#FF0000'
+  },
+  HIGH: {
+    LABEL: 'High',
+    VALUE: 2,
+    COLOR: '#FFA500'
+  },
+  NORMAL: {
+    LABEL: 'Normal',
+    VALUE: 1,
+    COLOR: '#FFFF00'
+  },
+  LOW: {
+    LABEL: 'Low',
+    VALUE: 0,
+    COLOR: '#008000'
+  }
 }
 
-export const PRIORITIES = ['Urgent', 'High', 'Normal', 'Low']
+export const PRIORITIES_LABELS = Object.values(PRIORITIES).map(
+  ({ LABEL }) => LABEL
+)
 
 export const SPACES = [
   {
-    id: 1,
     name: 'Sprint 1',
-    priority: PRIORITIES_ENUM.HIGH,
-    createdAt: new Date(),
+    priority: PRIORITIES.URGENT.LABEL,
     tasks: []
   },
   {
-    id: 2,
     name: 'Sprint2',
-    priority: PRIORITIES_ENUM.HIGH,
-    createdAt: new Date(),
+    priority: PRIORITIES.LOW.LABEL,
     tasks: []
   },
   {
-    id: 1,
     name: 'Sprint 1',
-    priority: PRIORITIES_ENUM.HIGH,
-    createdAt: new Date(),
+    priority: PRIORITIES.HIGH.LABEL,
     tasks: []
   },
   {
-    id: 2,
     name: 'Sprint2',
-    priority: PRIORITIES_ENUM.HIGH,
-    createdAt: new Date(),
+    priority: PRIORITIES.NORMAL.LABEL,
     tasks: []
   },
   {
-    id: 1,
-    name: 'Sprint 1',
-    priority: PRIORITIES_ENUM.HIGH,
-    createdAt: new Date(),
+    name: 'Sprint 1323232323',
+    priority: PRIORITIES.LOW.LABEL,
     tasks: []
   },
   {
-    id: 2,
-    name: 'Sprint2',
-    priority: PRIORITIES_ENUM.HIGH,
-    createdAt: new Date(),
+    name: 'Sprint2434343444',
+    priority: PRIORITIES.HIGH.LABEL,
+    tasks: []
+  },
+  {
+    name: 'Sprint2434343444',
+    priority: PRIORITIES.LOW.LABEL,
+    tasks: []
+  },
+  {
+    name: 'Sprint2434343444',
+    priority: PRIORITIES.NORMAL.LABEL,
+    tasks: []
+  },
+  {
+    name: 'Sprint2434343444',
+    priority: PRIORITIES.LOW.LABEL,
     tasks: []
   }
 ]
 
-export const PRIORITIES_SELECT_OPTIONS = [
-  {
-    value: 'Urgent',
-    label: 'Urgent'
-  },
-  {
-    value: 'High',
-    label: 'High'
-  },
-  {
-    value: 'Normal',
-    label: 'Normal'
-  },
-  {
-    value: 'Low',
-    label: 'Low'
-  }
-]
+export const PRIORITIES_SELECT_OPTIONS = Object.entries(PRIORITIES).map(
+  ([key, value]) => ({
+    value: key,
+    label: value.LABEL
+  })
+)

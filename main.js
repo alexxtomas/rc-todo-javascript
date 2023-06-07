@@ -1,83 +1,42 @@
-import SpaceCard from '@components/SpaceCard/SpaceCard'
-import { SPACES } from './src/utils/constants'
+import SpaceElement from '@components/SpaceElement/SpaceElement'
+import { PRIORITIES } from './src/utils/constants'
 import './style.css'
-import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
-import {
-  spacePriorityValidation,
-  spaceNameValidation
-} from '@validations/space.validation'
+import { dialogListeners } from '@listeners/dialog.listeners'
+import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
+import { globalStore } from '@store/global.state'
 
-const main = document.querySelector('#content')
+syncGlobalStateWithLocalStorage()
 
-main.classList.add('rcFlexContainer')
+const {
+  state: { spaces }
+} = globalStore()
 
-main.innerHTML = `
-      ${SPACES.map(({ name }, idx) => {
-        return SpaceCard({ name })
-      })
+if (spaces.length > 0 && spaces[0]?.name) {
+  const $ul = document.querySelector('#spacesContainer')
+  $ul.innerHTML += `
+      ${spaces
+        .map(({ name, priority }, idx) => {
+          return SpaceElement({
+            name,
+            iconColor: PRIORITIES[priority.toUpperCase()].COLOR
+          })
+        })
         .join('')
         .replaceAll(',', '')}
 `
+}
 
-const newSpaceDialog = document.querySelector('#newSpaceDialog')
-const newSpaceButton = document.querySelector('#newSpace')
-const newSpacePriorityDialog = document.querySelector('#newSpacePriority')
-const newSpaceDialogSaveButton = document.querySelector('#saveButton')
-const newSpaceDialogCloseButton = document.querySelector('#cancelButton')
-const newSpaceDialogForm = document.querySelector('#newSpaceForm')
-const newSpaceNameInput = document.querySelector('#newSpaceName')
-const newSpacePrioritySelect = document.querySelector('#newSpacePriority')
-const newSpaceNameValidationError = document.querySelector(
-  '#newSpaceNameValidationError'
-)
+const $asideUL = document.querySelector('aside > ul')
 
-newSpaceDialogForm.addEventListener('submit', (e) => {
-  e.preventDefault()
+$asideUL.innerHTML += `
+    ${Object.values(PRIORITIES)
+      .map((el) => {
+        return `
+       ${SpaceElement({ name: el.LABEL, iconColor: el.COLOR })}
+      `
+      })
+      .join('')
+      .replaceAll(',', '')}
+`
 
-  const { newSpaceName, spacePriority } = e.target
-
-  const newSpaceNameValidation = spaceNameValidation({
-    spaceName: newSpaceName.value
-  })
-
-  if (newSpaceNameValidation) {
-    console.log('MESSAGE', newSpaceNameValidation.message)
-    console.log('TEXT CONTENT', newSpaceNameValidationError.textContent)
-    if (newSpaceNameValidationError.text !== '') {
-      newSpaceNameValidationError.textContent = ''
-    }
-
-    newSpaceNameValidationError.textContent = newSpaceNameValidation.message
-
-    return
-  }
-
-  if (newSpaceNameValidationError.textContent !== '') {
-    newSpaceNameValidationError.textContent = ''
-  }
-
-  newSpaceDialog.close()
-})
-
-newSpaceButton.addEventListener('click', () => {
-  newSpaceDialog.showModal()
-
-  if (newSpacePrioritySelect.children.length === 0) {
-    PRIORITIES_SELECT_OPTIONS.forEach((el, idx) => {
-      const node = document.createElement('option')
-      node.value = el.value
-      node.text = el.label
-      newSpacePriorityDialog.appendChild(node)
-    })
-  }
-})
-
-newSpaceDialogCloseButton.addEventListener('click', () => {
-  newSpaceDialog.close()
-
-  if (newSpaceNameValidationError.textContent !== '') {
-    newSpaceNameValidationError.textContent = ''
-  }
-  newSpaceNameInput.value = ''
-  newSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
-})
+dialogListeners()
