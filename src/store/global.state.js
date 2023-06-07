@@ -8,10 +8,7 @@ const GLOBAL_ACTIONS = {
   initializeState: ({ spaces }) => (GLOBAL_STATE.spaces = spaces),
 
   addSpace: ({ space }) => {
-    console.log('addSpace', space)
-
     GLOBAL_STATE.spaces = GLOBAL_STATE.spaces.concat(space)
-    console.log('GLOBAL_STATE addSpace', GLOBAL_STATE)
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   removeSpace: ({ idx }) => {

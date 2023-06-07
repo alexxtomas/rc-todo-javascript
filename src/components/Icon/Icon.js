@@ -1,12 +1,16 @@
+import EditIcon from './components/EditIcon'
 import FlagIcon from './components/FlagIcon'
+import TrashIcon from './components/TrashIcon'
 const ICON_VARIANTS = {
-  FLAG: FlagIcon
+  FLAG: FlagIcon,
+  TRASH: TrashIcon,
+  EDIT: EditIcon
 }
 
 export const ICON_VARIANTS_ENUM = {
-  EDIT: 'EDIT',
   FLAG: 'FLAG',
-  FOLDER: 'FOLDER'
+  TRASH: 'TRASH',
+  EDIT: 'EDIT'
 }
 
 const Icon = ({ variant, props }) => {

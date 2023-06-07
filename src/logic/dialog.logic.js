@@ -1,7 +1,10 @@
 import { spaceNameValidation } from '@validations/space.validation'
 import { PRIORITIES, PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
-import SpaceElement from '@components/SpaceElement/SpaceElement'
+import SpaceElement, {
+  SPACE_ELEMENT_VARIANTS_ENUM
+} from '@components/SpaceElement/SpaceElement'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
+import { nanoid } from 'nanoid'
 
 const newSpaceDialog = document.querySelector('#newSpaceDialog')
 const newSpacePriorityDialog = document.querySelector('#newSpacePriority')
@@ -56,21 +59,23 @@ export const dialogLogic = {
     }
 
     const PRIORITY = PRIORITIES[newSpacePriority.value]
+    const id = nanoid()
 
     $spacesContainer.innerHTML += SpaceElement({
+      id,
       name: newSpaceName.value,
-      iconColor: PRIORITY.COLOR
+      iconColor: PRIORITY.COLOR,
+      variant: SPACE_ELEMENT_VARIANTS_ENUM.FUNCTIONAL
     })
 
     const newSpace = {
+      id,
       name: newSpaceName.value,
       priority: PRIORITY.LABEL,
       tasks: []
     }
 
     const { dispatch } = globalStore()
-
-    console.log({ newSpace })
 
     dispatch({
       action: GLOBAL_ACTIONS_ENUM.ADD_SPACE,
@@ -81,5 +86,10 @@ export const dialogLogic = {
     newSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
 
     newSpaceDialog.close()
+  },
+  outsideClick: (dialog) => (e) => {
+    if (e.target === dialog) {
+      dialog.close()
+    }
   }
 }

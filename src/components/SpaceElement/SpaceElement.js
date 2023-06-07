@@ -1,17 +1,18 @@
-import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon/Icon'
+import NormalSpaceElement from './components/NormalSpaceElement'
+import FunctionalSpaceElement from './components/FunctionalSpaceElement'
 
-const SpaceElement = ({ name, iconColor }) => {
-  return `
-     <li >
-      <button class='rcSpaceCard'>
-         ${Icon({
-           variant: ICON_VARIANTS_ENUM.FLAG,
-           props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor}`
-         })}
-        <h3>${name}</h3>
-      </button>
-      </li>
-    `
+const SPACE_ELEMENT_VARIANTS = {
+  NORMAL: NormalSpaceElement,
+  FUNCTIONAL: FunctionalSpaceElement
+}
+
+export const SPACE_ELEMENT_VARIANTS_ENUM = {
+  NORMAL: 'NORMAL',
+  FUNCTIONAL: 'FUNCTIONAL'
+}
+
+const SpaceElement = ({ variant, ...props }) => {
+  return SPACE_ELEMENT_VARIANTS[variant](props)
 }
 
 export default SpaceElement
