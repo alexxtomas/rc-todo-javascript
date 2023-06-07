@@ -8,7 +8,10 @@ export default defineConfig({
       '@router': path.resolve(__dirname, './src/router'),
       '@utils': path.resolve(__dirname, './src/utils/'),
       '@views': path.resolve(__dirname, './src/views'),
-      '@validations': path.resolve(__dirname, './src/validations')
+      '@validations': path.resolve(__dirname, './src/validations'),
+      '@listeners': path.resolve(__dirname, './src/listeners'),
+      '@logic': path.resolve(__dirname, './src/logic'),
+      '@store': path.resolve(__dirname, './src/store')
     }
   }
 })

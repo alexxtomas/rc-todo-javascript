@@ -6,7 +6,10 @@
       "@router/*": ["src/router/*"],
       "@utils/*": ["src/utils/*"],
       "@views/*": ["src/views/*"],
-      "@validations/*": ["src/validations/*"]
+      "@validations/*": ["src/validations/*"],
+      "@listeners/*": ["src/listeners/*"],
+      "@logic/*": ["src/logic/*"],
+      "@store/*": ["src/store/*"]
     }
   }
 }
