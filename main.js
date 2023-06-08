@@ -1,14 +1,42 @@
 import SpaceElement, {
   SPACE_ELEMENT_VARIANTS_ENUM
 } from '@components/SpaceElement/SpaceElement'
-import { PRIORITIES } from './src/utils/constants'
+import { PRIORITIES, PRIORITIES_SELECT_OPTIONS } from './src/utils/constants'
 import './style.css'
 import {
   newSpaceDialogListeners,
   removeSpaceDialogListeners
 } from '@listeners/dialog.listeners'
+import { editSpaceElementButtonListeners } from '@listeners/button.listeners'
 import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
 import { globalStore } from '@store/global.state'
+import Dialog, { DIALOG_VARIANTS_ENUM } from '@components/Dialog/Dialog'
+
+const $pageHeader = document.querySelector('#pageHeader')
+
+$pageHeader.innerHTML += Dialog({
+  variant: DIALOG_VARIANTS_ENUM.FORM,
+  dialogAttributes: 'id="newSpaceDialog"',
+  formAttributes: 'id="newSpaceForm"',
+  input: {
+    attributes: 'id="newSpaceName" name="newSpaceName" type="text"',
+    label: 'for="newSpaceName"'
+  },
+  select: {
+    label: 'newSpacePriority',
+    attributes: 'id="newSpacePriority" name="newSpacePriority"',
+    options: PRIORITIES_SELECT_OPTIONS
+  },
+  firstButton: {
+    attributes: 'type="submit" id="saveButton" value="default"',
+    text: 'Save'
+  },
+  secondButton: {
+    attributes:
+      'type="reset" id="cancelButton" value="cancel" formmethod="dialog"',
+    text: 'Close'
+  }
+})
 
 syncGlobalStateWithLocalStorage()
 
@@ -50,5 +78,6 @@ $asideUL.innerHTML += `
       .join('')
       .replaceAll(',', '')}
 `
+editSpaceElementButtonListeners()
 removeSpaceDialogListeners()
 newSpaceDialogListeners()

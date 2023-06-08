@@ -8,48 +8,13 @@
   </head>
   <body>
     <div id="app">
-      <header class="rcMainHeader">
+      <header id="pageHeader" class="pageHeader">
         <h1>ToDo App</h1>
         <button id="newSpace">new space +</button>
-        <dialog id="newSpaceDialog">
-          <form id="newSpaceForm">
-            <div>
-              <label for="newSpaceName">Space Name</label>
-              <input id="newSpaceName" name="newSpaceName" type="text" />
-              <span
-                id="newSpaceNameValidationError"
-                class="validationError"
-              ></span>
-            </div>
-
-            <div>
-              <label for="newSpacePriority">Priority</label>
-              <select name="newSpacePriority" id="newSpacePriority"></select>
-              <span
-                id="newSpacePriorityValidationError"
-                class="validationError"
-              ></span>
-            </div>
-
-            <footer>
-              <button type="submit" id="saveButton" value="default">
-                Save
-              </button>
-              <button
-                type="reset"
-                id="cancelButton"
-                value="cancel"
-                formmethod="dialog"
-              >
-                Close
-              </button>
-            </footer>
-          </form>
-        </dialog>
       </header>
       <main id="content">
         <section>
-          <ul class="rcSpacesContainer" id="spacesContainer"></ul>
+          <ul class="spacesContainer" id="spacesContainer"></ul>
         </section>
       </main>
     </div>

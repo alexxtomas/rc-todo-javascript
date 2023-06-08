@@ -1,7 +1,4 @@
 :root {
-  --bg-color: #fafbfc;
-  --text-color: #8d9093;
-  --title-color: #202020;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -49,7 +46,7 @@ a {
 
 h1,
 h2 {
-  color: var(--title-color);
+  color: #202020;
   font-weight: 600;
 }
 
@@ -94,22 +91,22 @@ dialog::backdrop {
   white-space: nowrap;
 }
 
-.rcMainHeader {
+.pageHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.rcMainHeader > button {
+.pageHeader > button {
   font-size: 12px;
   transition: all 0.3s ease-in-out;
 }
 
-.rcMainHeader > button:hover {
+.pageHeader > button:hover {
   scale: 0.95;
 }
 
-.rcSpacesContainer {
+.spacesContainer {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -117,184 +114,12 @@ dialog::backdrop {
   row-gap: 10px;
 }
 
-.rcSpacesContainer > li {
+.spacesContainer > li {
   width: 100%;
-}
-
-.functionalSpaceElementLink {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  cursor: pointer;
-  padding: 4px 4px 4px 3px;
-}
-
-.functionalSpaceElementLink:hover {
-  background-color: #dfdfdf;
-  border-radius: 2px;
-}
-
-.functionalSpaceElementLink > div {
-  display: flex;
-  gap: 10px;
-}
-
-.functionalSpaceElementLink > div > button:hover > svg:last-child {
-  color: #f71310;
-}
-
-.functionalSpaceElementLink > header {
-  display: flex;
-  justify-content: space-between;
-  width: 50%;
-}
-
-.functionalSpaceElementLink > header > h3 {
-  width: 90%;
-  font-weight: 300;
-  font-size: 10px;
-  letter-spacing: 0.2px;
-  text-align: start;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.functionalSpaceElementDialog {
-  max-width: 300px;
-  overflow: hidden;
-}
-
-.functionalSpaceElementDialog > section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 8px;
-}
-.functionalSpaceElementDialog > section > p {
-  font-size: 12px;
-  max-width: 180px;
-  text-align: center;
-  font-weight: 400;
-}
-
-.functionalSpaceElementDialog > section > div {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-}
-
-.functionalSpaceElementDialog > section > div > button {
-  font-size: 8px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: none;
-  outline: none;
-  font-weight: 400;
-  transition: all 0.2s ease-in-out;
-  width: 50px;
-}
-
-.functionalSpaceElementDialog > section > div > button:hover {
-  scale: 1.1;
-}
-
-.functionalSpaceElementDialog > section > div > button:hover + button {
-  filter: blur(0.7px);
-  scale: 0.9;
-}
-.functionalSpaceElementDialog > section > div > button:has(+ button:hover) {
-  filter: blur(0.7px);
-  scale: 0.9;
-}
-
-.functionalSpaceElementDelete {
-  background-color: #ff0000ab;
-}
-
-.functionalSpaceElementCloseDialog {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.normalSpaceElement {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-left: 10px;
-  padding: 4px 0 4px 3px;
-}
-
-.normalSpaceElement > h3 {
-  font-size: 8px;
-  font-weight: 400;
-  tab-size: 10;
 }
 
 .validationError {
   font-size: 8px;
   color: #f71310;
   padding-left: 4px;
-}
-
-#newSpaceDialog {
-  max-width: 400px;
-}
-
-#newSpaceDialog > form {
-  display: flex;
-  padding: 16px;
-  width: 100%;
-  flex-direction: column;
-  gap: 8px;
-}
-#newSpaceDialog > form > div {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-#newSpaceDialog > form > div > label {
-  font-size: 8px;
-}
-
-#newSpaceDialog > form > div > input,
-#newSpaceDialog > form > div > select {
-  padding: 2px 8px;
-  border-radius: 8px;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.1);
-  outline: none;
-  font-size: 10px !important;
-}
-
-#newSpaceDialog > form > select > option {
-  font-size: 8px;
-}
-
-#newSpaceDialog > form > footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-
-#newSpaceDialog > form > footer > button {
-  margin-top: 10px;
-  padding: 4px 8px;
-  font-size: 8px;
-  border-radius: 8px;
-}
-
-#saveButton {
-  background-color: #fff;
-  border: 1px solid #8d9093;
-  color: #8d9093;
-  transition: all 0.3s ease-in-out;
-}
-#cancelButton {
-  background-color: #8d9093;
-  border: 1px solid #8d9093;
-  color: #fff;
-  transition: all 0.3s ease-in-out;
 }

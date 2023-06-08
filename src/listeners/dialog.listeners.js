@@ -30,7 +30,9 @@ export function removeSpaceDialogListeners() {
   )
   $openDialogButton.forEach(($el) => {
     const id = $el.getAttribute('data-id')
-    const $dialog = document.querySelector(`#${id} > dialog`)
+    const $dialog = document.querySelector(
+      `#${id} > dialog[data-function="removeDialog"]`
+    )
     const $removeSpaceElementDialogButton = document.querySelector(
       `#${id} button[data-function="removeSpaceElement"]`
     )

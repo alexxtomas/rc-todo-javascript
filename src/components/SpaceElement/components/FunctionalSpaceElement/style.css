@@ -1,0 +1,43 @@
+.functionalSpaceElement {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  padding: 4px 4px 4px 3px;
+}
+
+.functionalSpaceElement:hover {
+  background-color: #dfdfdf;
+  border-radius: 2px;
+}
+
+.functionalSpaceElementHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.functionalSpaceElementContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.functionalSpaceElementFirstButton:hover {
+  color: blue;
+}
+
+.functionalSpaceElementSecondButton:hover {
+  color: #f71310;
+}
+
+.functionalSpaceElementTitle {
+  width: 90%;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

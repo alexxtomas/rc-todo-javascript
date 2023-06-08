@@ -7,12 +7,6 @@ import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { nanoid } from 'nanoid'
 import { removeSpaceDialogListeners } from '@listeners/dialog.listeners'
 
-const $dialogSpacePrioritySelect = document.querySelector('#newSpacePriority')
-const $dialogSpaceNameInput = document.querySelector('#newSpaceName')
-const $dialogValidationErrorMessage = document.querySelector(
-  '#newSpaceNameValidationError'
-)
-
 const outsideClick = (dialog) => (e) => {
   if (e.target === dialog) {
     dialog.close()
@@ -22,17 +16,14 @@ const outsideClick = (dialog) => (e) => {
 export const newSpaceDialogLogic = {
   showDialogClick: (dialog) => () => {
     dialog.showModal()
-
-    if ($dialogSpacePrioritySelect.children.length === 0) {
-      PRIORITIES_SELECT_OPTIONS.forEach((el, idx) => {
-        const node = document.createElement('option')
-        node.value = el.value
-        node.text = el.label
-        $dialogSpacePrioritySelect.appendChild(node)
-      })
-    }
   },
   closeDialogClick: (dialog) => () => {
+    const $dialogSpaceNameInput = document.querySelector('#newSpaceName')
+    const $dialogValidationErrorMessage = document.querySelector(
+      '#newSpaceNameValidationError'
+    )
+    const $dialogSpacePrioritySelect =
+      document.querySelector('#newSpacePriority')
     dialog.close()
 
     if ($dialogValidationErrorMessage.textContent !== '') {
@@ -42,9 +33,14 @@ export const newSpaceDialogLogic = {
     $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
   },
   saveDialogSubmit: ($dialog) => (e) => {
-    const $spacesContainer = document.querySelector('.rcSpacesContainer')
     e.preventDefault()
-
+    const $spacesContainer = document.querySelector('#spacesContainer')
+    const $dialogValidationErrorMessage = document.querySelector(
+      '#newSpaceNameValidationError'
+    )
+    const $dialogSpaceNameInput = document.querySelector('#newSpaceName')
+    const $dialogSpacePrioritySelect =
+      document.querySelector('#newSpacePriority')
     const { newSpaceName, newSpacePriority } = e.target
 
     const newSpaceNameValidation = spaceNameValidation({
