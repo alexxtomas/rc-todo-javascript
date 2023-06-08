@@ -5,38 +5,43 @@ import SpaceElement, {
 } from '@components/SpaceElement/SpaceElement'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { nanoid } from 'nanoid'
+import { removeSpaceDialogListeners } from '@listeners/dialog.listeners'
 
-const newSpaceDialog = document.querySelector('#newSpaceDialog')
-const newSpacePriorityDialog = document.querySelector('#newSpacePriority')
-const newSpaceNameInput = document.querySelector('#newSpaceName')
-const newSpacePrioritySelect = document.querySelector('#newSpacePriority')
-const newSpaceNameValidationError = document.querySelector(
+const $dialogSpacePrioritySelect = document.querySelector('#newSpacePriority')
+const $dialogSpaceNameInput = document.querySelector('#newSpaceName')
+const $dialogValidationErrorMessage = document.querySelector(
   '#newSpaceNameValidationError'
 )
 
-export const dialogLogic = {
-  showDialogClick: () => {
-    newSpaceDialog.showModal()
+const outsideClick = (dialog) => (e) => {
+  if (e.target === dialog) {
+    dialog.close()
+  }
+}
 
-    if (newSpacePrioritySelect.children.length === 0) {
+export const newSpaceDialogLogic = {
+  showDialogClick: (dialog) => () => {
+    dialog.showModal()
+
+    if ($dialogSpacePrioritySelect.children.length === 0) {
       PRIORITIES_SELECT_OPTIONS.forEach((el, idx) => {
         const node = document.createElement('option')
         node.value = el.value
         node.text = el.label
-        newSpacePriorityDialog.appendChild(node)
+        $dialogSpacePrioritySelect.appendChild(node)
       })
     }
   },
-  closeDialogClick: () => {
-    newSpaceDialog.close()
+  closeDialogClick: (dialog) => () => {
+    dialog.close()
 
-    if (newSpaceNameValidationError.textContent !== '') {
-      newSpaceNameValidationError.textContent = ''
+    if ($dialogValidationErrorMessage.textContent !== '') {
+      $dialogValidationErrorMessage.textContent = ''
     }
-    newSpaceNameInput.value = ''
-    newSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
+    $dialogSpaceNameInput.value = ''
+    $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
   },
-  saveDialogSubmit: (e) => {
+  saveDialogSubmit: ($dialog) => (e) => {
     const $spacesContainer = document.querySelector('.rcSpacesContainer')
     e.preventDefault()
 
@@ -47,24 +52,25 @@ export const dialogLogic = {
     })
 
     if (newSpaceNameValidation) {
-      if (newSpaceNameValidationError.text !== '') {
-        newSpaceNameValidationError.textContent = ''
+      if ($dialogValidationErrorMessage.text !== '') {
+        $dialogValidationErrorMessage.textContent = ''
       }
-      newSpaceNameValidationError.textContent = newSpaceNameValidation.message
+      $dialogValidationErrorMessage.textContent = newSpaceNameValidation.message
       return
     }
 
-    if (newSpaceNameValidationError.textContent !== '') {
-      newSpaceNameValidationError.textContent = ''
+    if ($dialogValidationErrorMessage.textContent !== '') {
+      $dialogValidationErrorMessage.textContent = ''
     }
 
     const PRIORITY = PRIORITIES[newSpacePriority.value]
-    const id = nanoid()
+    const id = `a${nanoid()}`
 
     $spacesContainer.innerHTML += SpaceElement({
       id,
       name: newSpaceName.value,
       iconColor: PRIORITY.COLOR,
+      tasks: [],
       variant: SPACE_ELEMENT_VARIANTS_ENUM.FUNCTIONAL
     })
 
@@ -82,14 +88,28 @@ export const dialogLogic = {
       payload: { space: newSpace }
     })
 
-    newSpaceNameInput.value = ''
-    newSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
+    $dialogSpaceNameInput.value = ''
+    $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
 
-    newSpaceDialog.close()
+    $dialog.close()
+    removeSpaceDialogListeners()
   },
-  outsideClick: (dialog) => (e) => {
-    if (e.target === dialog) {
-      dialog.close()
-    }
-  }
+  outsideClick
+}
+
+export const removeSpaceElementDialogLogic = {
+  showDialogClick: ($dialog) => () => {
+    $dialog.showModal()
+  },
+  remove: ($dialog, id) => () => {
+    const $spaceElement = document.querySelector(`#${id}`)
+    const { dispatch } = globalStore()
+
+    $spaceElement.remove()
+    dispatch({ action: GLOBAL_ACTIONS_ENUM.REMOVE_SPACE, payload: { id } })
+  },
+  closeDialogClick: ($dialog) => () => {
+    $dialog.close()
+  },
+  outsideClick
 }

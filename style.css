@@ -68,6 +68,32 @@ h1 {
   letter-spacing: 1.7px;
 }
 
+dialog {
+  padding: 0;
+  margin: auto;
+  border: none !important;
+  border-radius: 8px;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(4px);
+}
+
+.visually-hidden {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .rcMainHeader {
   display: flex;
   justify-content: space-between;
@@ -111,14 +137,21 @@ h1 {
 
 .functionalSpaceElementLink > div {
   display: flex;
+  gap: 10px;
 }
 
-.functionalSpaceElementLink > button:hover > svg {
+.functionalSpaceElementLink > div > button:hover > svg:last-child {
   color: #f71310;
 }
 
-.functionalSpaceElementLink > div > h3 {
-  width: 50px;
+.functionalSpaceElementLink > header {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.functionalSpaceElementLink > header > h3 {
+  width: 90%;
   font-weight: 300;
   font-size: 10px;
   letter-spacing: 0.2px;
@@ -126,6 +159,62 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.functionalSpaceElementDialog {
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.functionalSpaceElementDialog > section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 8px;
+}
+.functionalSpaceElementDialog > section > p {
+  font-size: 12px;
+  max-width: 180px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.functionalSpaceElementDialog > section > div {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.functionalSpaceElementDialog > section > div > button {
+  font-size: 8px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  transition: all 0.2s ease-in-out;
+  width: 50px;
+}
+
+.functionalSpaceElementDialog > section > div > button:hover {
+  scale: 1.1;
+}
+
+.functionalSpaceElementDialog > section > div > button:hover + button {
+  filter: blur(0.7px);
+  scale: 0.9;
+}
+.functionalSpaceElementDialog > section > div > button:has(+ button:hover) {
+  filter: blur(0.7px);
+  scale: 0.9;
+}
+
+.functionalSpaceElementDelete {
+  background-color: #ff0000ab;
+}
+
+.functionalSpaceElementCloseDialog {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .normalSpaceElement {
@@ -149,17 +238,7 @@ h1 {
 }
 
 #newSpaceDialog {
-  padding: 0;
-  margin: auto;
-  border: none !important;
-  border-radius: 8px;
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-
   max-width: 400px;
-}
-
-#newSpaceDialog::backdrop {
-  backdrop-filter: blur(4px);
 }
 
 #newSpaceDialog > form {

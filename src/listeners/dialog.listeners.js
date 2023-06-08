@@ -1,19 +1,61 @@
-import { dialogLogic } from '@logic/dialog.logic'
+import {
+  removeSpaceElementDialogLogic,
+  newSpaceDialogLogic
+} from '@logic/dialog.logic'
 
-export function dialogListeners() {
-  const newSpaceButton = document.querySelector('#newSpace')
-  const newSpaceDialogCloseButton = document.querySelector('#cancelButton')
-  const newSpaceDialogForm = document.querySelector('#newSpaceForm')
-  const $newSpaceDialog = document.querySelector('#newSpaceDialog')
+export function newSpaceDialogListeners() {
+  const $dialog = document.querySelector('#newSpaceDialog')
+  const $openDialogButton = document.querySelector('#newSpace')
+  const $closeDialogButton = document.querySelector('#cancelButton')
+  const $dialogForm = document.querySelector('#newSpaceForm')
 
-  newSpaceButton?.addEventListener('click', dialogLogic.showDialogClick)
-  newSpaceDialogCloseButton?.addEventListener(
+  $openDialogButton?.addEventListener(
     'click',
-    dialogLogic.closeDialogClick
+    newSpaceDialogLogic.showDialogClick($dialog)
   )
-  $newSpaceDialog?.addEventListener(
+  $closeDialogButton?.addEventListener(
     'click',
-    dialogLogic.outsideClick($newSpaceDialog)
+    newSpaceDialogLogic.closeDialogClick($dialog)
   )
-  newSpaceDialogForm?.addEventListener('submit', dialogLogic.saveDialogSubmit)
+  $dialog?.addEventListener('click', newSpaceDialogLogic.outsideClick($dialog))
+  $dialogForm?.addEventListener(
+    'submit',
+    newSpaceDialogLogic.saveDialogSubmit($dialog)
+  )
+}
+
+export function removeSpaceDialogListeners() {
+  const $openDialogButton = document.querySelectorAll(
+    '#functionalSpaceElementTrashButton'
+  )
+  $openDialogButton.forEach(($el) => {
+    const id = $el.getAttribute('data-id')
+    const $dialog = document.querySelector(`#${id} > dialog`)
+    const $removeSpaceElementDialogButton = document.querySelector(
+      `#${id} button[data-function="removeSpaceElement"]`
+    )
+    const $closeDialogButton = document.querySelector(
+      `#${id}  button[data-function="closeDialog"]`
+    )
+
+    $el?.addEventListener(
+      'click',
+      removeSpaceElementDialogLogic.showDialogClick($dialog)
+    )
+
+    $removeSpaceElementDialogButton?.addEventListener(
+      'click',
+      removeSpaceElementDialogLogic.remove($dialog, id)
+    )
+
+    $closeDialogButton?.addEventListener(
+      'click',
+      removeSpaceElementDialogLogic.closeDialogClick($dialog)
+    )
+
+    $dialog?.addEventListener(
+      'click',
+      removeSpaceElementDialogLogic.outsideClick($dialog)
+    )
+  })
 }

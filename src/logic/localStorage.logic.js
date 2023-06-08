@@ -10,7 +10,7 @@ export function syncGlobalStateWithLocalStorage() {
 
   if (globalStateFromLocalStorage) {
     dispatch({
-      action: GLOBAL_ACTIONS_ENUM.INITIALIZE_STATE,
+      action: GLOBAL_ACTIONS_ENUM.INITIALIZE_SPACES,
       payload: JSON.parse(globalStateFromLocalStorage)
     })
   }

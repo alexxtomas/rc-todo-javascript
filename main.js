@@ -3,7 +3,10 @@ import SpaceElement, {
 } from '@components/SpaceElement/SpaceElement'
 import { PRIORITIES } from './src/utils/constants'
 import './style.css'
-import { dialogListeners } from '@listeners/dialog.listeners'
+import {
+  newSpaceDialogListeners,
+  removeSpaceDialogListeners
+} from '@listeners/dialog.listeners'
 import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
 import { globalStore } from '@store/global.state'
 
@@ -17,10 +20,11 @@ if (spaces.length > 0 && spaces[0]?.name) {
   const $ul = document.querySelector('#spacesContainer')
   $ul.innerHTML += `
       ${spaces
-        .map(({ name, priority, id }, idx) => {
+        .map(({ name, priority, id, tasks }, idx) => {
           return SpaceElement({
             id,
             name,
+            tasks,
             iconColor: PRIORITIES[priority.toUpperCase()].COLOR,
             variant: SPACE_ELEMENT_VARIANTS_ENUM.FUNCTIONAL
           })
@@ -28,13 +32,6 @@ if (spaces.length > 0 && spaces[0]?.name) {
         .join('')
         .replaceAll(',', '')}
 `
-  const $trashButton = document.querySelector(
-    '#functionalSpaceElementTrashButton'
-  )
-  // Here, add id to li element to delete from DOM and dispatch removeSpace action
-  $trashButton.addEventListener('click', () => {
-    const id = $trashButton.getAttribute('data-id')
-  })
 }
 
 const $asideUL = document.querySelector('aside > ul')
@@ -53,5 +50,5 @@ $asideUL.innerHTML += `
       .join('')
       .replaceAll(',', '')}
 `
-
-dialogListeners()
+removeSpaceDialogListeners()
+newSpaceDialogListeners()
