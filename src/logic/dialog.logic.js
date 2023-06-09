@@ -142,6 +142,8 @@ export const editSpaceDialogLogic = {
     })
 
     dispatch({ action: GLOBAL_ACTIONS_ENUM.EDIT_SPACE, payload: { id, name: spaceName.value, priority: PRIORITY.LABEL } })
+
+    console.log($dialogSpaceNameInput, $dialogSpacePrioritySelect)
     $dialogSpaceNameInput.value = ''
     $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
 
