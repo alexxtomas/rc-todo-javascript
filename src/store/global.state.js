@@ -1,8 +1,7 @@
 import { updateGlobalStateStorage } from '@logic/localStorage.logic'
 
 const GLOBAL_STATE = {
-  spaces: [],
-  focusedSpaceId: ''
+  spaces: []
 }
 
 const GLOBAL_ACTIONS = {
@@ -16,20 +15,20 @@ const GLOBAL_ACTIONS = {
     GLOBAL_STATE.spaces = GLOBAL_STATE.spaces.filter((space) => space.id !== id)
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
-  addFocusedSpaceId: ({ id }) => {
-    GLOBAL_STATE.focusedSpaceId = id
-  },
-  removeFocusedSpaceId: () => {
-    GLOBAL_STATE.focusedSpaceId = ''
+  editSpace: ({ id, name, priority }) => {
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === id)
+    GLOBAL_STATE.spaces[spaceIndex].name = name
+    GLOBAL_STATE.spaces[spaceIndex].priority = priority
+    updateGlobalStateStorage({ state: GLOBAL_STATE })
   }
+
 }
 
 export const GLOBAL_ACTIONS_ENUM = {
   INITIALIZE_SPACES: 'initializeSpaces',
   ADD_SPACE: 'addSpace',
   REMOVE_SPACE: 'removeSpace',
-  ADD_FOCUSED_SPACE_ID: 'addFocusedSpaceId',
-  REMOVE_FOCUSED_SPACE_ID: 'removeFocusedSpaceId'
+  EDIT_SPACE: 'editSpace'
 }
 
 export function globalStore() {

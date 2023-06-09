@@ -5,38 +5,28 @@ import SpaceElement, {
 } from '@components/SpaceElement/SpaceElement'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { nanoid } from 'nanoid'
-import { removeSpaceDialogListeners } from '@listeners/dialog.listeners'
-
-const outsideClick = (dialog) => (e) => {
-  if (e.target === dialog) {
-    dialog.close()
-  }
-}
+import { editSpaceDialogListeners, removeSpaceDialogListeners } from '@listeners/dialog.listeners'
+import { outsideClick, showDialogClick } from './shared'
+import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon/Icon'
 
 export const newSpaceDialogLogic = {
-  showDialogClick: (dialog) => () => {
-    dialog.showModal()
-  },
+  showDialogClick,
   closeDialogClick: (dialog) => () => {
-    const $dialogSpaceNameInput = document.querySelector('#newSpaceName')
     const $dialogValidationErrorMessage = document.querySelector(
-      '#newSpaceNameValidationError'
+      '[data-function="inputValidationError"]'
     )
-    const $dialogSpacePrioritySelect =
-      document.querySelector('#newSpacePriority')
+
     dialog.close()
 
     if ($dialogValidationErrorMessage.textContent !== '') {
       $dialogValidationErrorMessage.textContent = ''
     }
-    $dialogSpaceNameInput.value = ''
-    $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
   },
   saveDialogSubmit: ($dialog) => (e) => {
     e.preventDefault()
     const $spacesContainer = document.querySelector('#spacesContainer')
     const $dialogValidationErrorMessage = document.querySelector(
-      '#newSpaceNameValidationError'
+      '[data-function="inputValidationError"]'
     )
     const $dialogSpaceNameInput = document.querySelector('#newSpaceName')
     const $dialogSpacePrioritySelect =
@@ -48,9 +38,6 @@ export const newSpaceDialogLogic = {
     })
 
     if (newSpaceNameValidation) {
-      if ($dialogValidationErrorMessage.text !== '') {
-        $dialogValidationErrorMessage.textContent = ''
-      }
       $dialogValidationErrorMessage.textContent = newSpaceNameValidation.message
       return
     }
@@ -88,16 +75,15 @@ export const newSpaceDialogLogic = {
     $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
 
     $dialog.close()
+    editSpaceDialogListeners()
     removeSpaceDialogListeners()
   },
   outsideClick
 }
 
-export const removeSpaceElementDialogLogic = {
-  showDialogClick: ($dialog) => () => {
-    $dialog.showModal()
-  },
-  remove: ($dialog, id) => () => {
+export const removeSpaceDialogLogic = {
+  showDialogClick,
+  remove: (id) => () => {
     const $spaceElement = document.querySelector(`#${id}`)
     const { dispatch } = globalStore()
 
@@ -108,4 +94,59 @@ export const removeSpaceElementDialogLogic = {
     $dialog.close()
   },
   outsideClick
+}
+
+export const editSpaceDialogLogic = {
+  showDialogClick,
+  closeDialogClick: ($dialog) => () => {
+    const $dialogValidationErrorMessage = document.querySelector(
+      '[data-function="inputValidationError"]'
+    )
+    $dialog.close()
+    if ($dialogValidationErrorMessage.textContent !== '') {
+      $dialogValidationErrorMessage.textContent = ''
+    }
+  },
+  saveDialogSubmit: ($dialog, id) => (e) => {
+    e.preventDefault()
+    const $dialogValidationErrorMessage = document.querySelector(
+      `#${id} [data-function="inputValidationError"]`
+    )
+    const $spaceElementName = document.querySelector(`#${id} [data-function="showSpaceElementName"]`)
+    const $spaceElementPriority = document.querySelector(`#${id} [data-function="showSpaceElementPriority"]`)
+    const $dialogSpaceNameInput = document.querySelector('#spaceName')
+    const $dialogSpacePrioritySelect =
+       document.querySelector('#spacePriority')
+    const { spaceName, spacePriority } = e.target
+    const { dispatch } = globalStore()
+
+    const spaceNameValidaation = spaceNameValidation({
+      spaceName: spaceName.value
+    })
+
+    if (spaceNameValidaation) {
+      $dialogValidationErrorMessage.innerHTML = spaceNameValidaation.message
+      return
+    }
+
+    if ($dialogValidationErrorMessage.textContent !== '') {
+      $dialogValidationErrorMessage.textContent = ''
+    }
+
+    const PRIORITY = PRIORITIES[spacePriority.value]
+
+    $spaceElementName.textContent = spaceName.value
+    $spaceElementPriority.innerHTML = Icon({
+      variant: ICON_VARIANTS_ENUM.FLAG,
+      props: `width=30px stroke-width="0.8" fill=${PRIORITY.COLOR} color=${PRIORITY.COLOR} data-function="showSpaceElementPriority"`
+    })
+
+    dispatch({ action: GLOBAL_ACTIONS_ENUM.EDIT_SPACE, payload: { id, name: spaceName.value, priority: PRIORITY.LABEL } })
+    $dialogSpaceNameInput.value = ''
+    $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
+
+    $dialog.close()
+  },
+  outsideClick
+
 }

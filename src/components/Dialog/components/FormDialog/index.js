@@ -15,7 +15,7 @@ const FormDialog = ({
       <label class="formDialogLabel" ${input.label}>Space Name</label>
       <input class="formDialogInput" ${input.attributes} />
       <span
-        id="newSpaceNameValidationError"
+        data-function="inputValidationError"
         class="validationError"
       ></span>
     </div>

@@ -1,17 +1,17 @@
 import './style.css'
 import Dialog from '@components/Dialog/Dialog'
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon/Icon'
-import { getConfirmDialogProps } from '../utils/functions'
+import { getConfirmDialogProps, getFormDialogProps } from '../utils/functions'
 
 const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
   return `
   <li id=${id}>
   <a class='functionalSpaceElement'>
    <header class="functionalSpaceElementHeader">
-    <h3 class="functionalSpaceElementTitle">${name}</h3>
+    <h3 data-function="showSpaceElementName" class="functionalSpaceElementTitle">${name}</h3>
     ${Icon({
       variant: ICON_VARIANTS_ENUM.FLAG,
-      props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor}`
+      props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="showSpaceElementPriority"`
     })}
     </header>
     <div class="functionalSpaceElementContainer">
@@ -29,6 +29,8 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
     </button>
     </div>
   </a>
+
+  ${Dialog(getFormDialogProps())}
 
   ${Dialog(
     getConfirmDialogProps({ numberOfTasks: tasks.length, spaceName: name })

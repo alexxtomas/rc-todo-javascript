@@ -5,9 +5,9 @@ import { PRIORITIES, PRIORITIES_SELECT_OPTIONS } from './src/utils/constants'
 import './style.css'
 import {
   newSpaceDialogListeners,
-  removeSpaceDialogListeners
+  removeSpaceDialogListeners,
+  editSpaceDialogListeners
 } from '@listeners/dialog.listeners'
-import { editSpaceElementButtonListeners } from '@listeners/button.listeners'
 import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
 import { globalStore } from '@store/global.state'
 import Dialog, { DIALOG_VARIANTS_ENUM } from '@components/Dialog/Dialog'
@@ -28,12 +28,12 @@ $pageHeader.innerHTML += Dialog({
     options: PRIORITIES_SELECT_OPTIONS
   },
   firstButton: {
-    attributes: 'type="submit" id="saveButton" value="default"',
+    attributes: 'type="submit" value="default"',
     text: 'Save'
   },
   secondButton: {
     attributes:
-      'type="reset" id="cancelButton" value="cancel" formmethod="dialog"',
+      'type="reset" id="cancelNewSpaceButton" value="cancel" formmethod="dialog"',
     text: 'Close'
   }
 })
@@ -78,6 +78,6 @@ $asideUL.innerHTML += `
       .join('')
       .replaceAll(',', '')}
 `
-editSpaceElementButtonListeners()
+editSpaceDialogListeners()
 removeSpaceDialogListeners()
 newSpaceDialogListeners()
