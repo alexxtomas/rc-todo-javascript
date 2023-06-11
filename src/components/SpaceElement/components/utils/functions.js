@@ -1,4 +1,4 @@
-import { DIALOG_VARIANTS_ENUM } from '@components/Dialog/Dialog'
+import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
 import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 
 export const getConfirmDialogProps = ({ spaceName, numberOfTasks }) => ({

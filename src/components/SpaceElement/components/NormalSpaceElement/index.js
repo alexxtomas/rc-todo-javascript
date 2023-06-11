@@ -1,6 +1,6 @@
 import './style.css'
 
-import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon/Icon'
+import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 
 const NormalSpaceElement = ({ name, iconColor }) => {
   return `

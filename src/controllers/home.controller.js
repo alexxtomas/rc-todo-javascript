@@ -1,5 +1,5 @@
-import Dialog, { DIALOG_VARIANTS_ENUM } from '@components/Dialog/Dialog'
-import SpaceElement, { SPACE_ELEMENT_VARIANTS_ENUM } from '@components/SpaceElement/SpaceElement'
+import Dialog, { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
+import SpaceElement, { SPACE_ELEMENT_VARIANTS_ENUM } from '@components/SpaceElement'
 import { editSpaceDialogListeners, newSpaceDialogListeners, removeSpaceDialogListeners } from '@listeners/dialog.listeners'
 import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
 import { globalStore } from '@store/global.state'
@@ -57,7 +57,7 @@ export const homeController = () => {
  `
   }
 
-  const $asideUL = document.querySelector('#asideContainer')
+  const $asideUL = document.querySelector('#prioritiesAsideContainer')
 
   $asideUL.innerHTML += `
      ${Object.values(PRIORITIES)

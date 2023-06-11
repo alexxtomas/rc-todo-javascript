@@ -11,3 +11,23 @@
 .spacesContainer > li {
   width: 100%;
 }
+
+.prioritiesAside {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: fixed;
+  top: 30%;
+  left: 10%;
+}
+.prioritiesAsideTitle{
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+.prioritiesAsideContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

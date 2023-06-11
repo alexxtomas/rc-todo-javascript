@@ -2,12 +2,12 @@ import { spaceNameValidation } from '@validations/space.validation'
 import { PRIORITIES, PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 import SpaceElement, {
   SPACE_ELEMENT_VARIANTS_ENUM
-} from '@components/SpaceElement/SpaceElement'
+} from '@components/SpaceElement'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { nanoid } from 'nanoid'
 import { editSpaceDialogListeners, removeSpaceDialogListeners } from '@listeners/dialog.listeners'
 import { outsideClick, showDialogClick } from './shared'
-import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon/Icon'
+import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 
 export const newSpaceDialogLogic = {
   showDialogClick,

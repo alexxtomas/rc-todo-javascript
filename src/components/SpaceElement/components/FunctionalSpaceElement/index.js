@@ -1,6 +1,6 @@
 import './style.css'
-import Dialog from '@components/Dialog/Dialog'
-import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon/Icon'
+import Dialog from '@components/Dialog'
+import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import { getConfirmDialogProps, getFormDialogProps } from '../utils/functions'
 
 const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
