@@ -11,7 +11,8 @@ export default defineConfig({
       '@validations': path.resolve(__dirname, './src/validations'),
       '@listeners': path.resolve(__dirname, './src/listeners'),
       '@logic': path.resolve(__dirname, './src/logic'),
-      '@store': path.resolve(__dirname, './src/store')
+      '@store': path.resolve(__dirname, './src/store'),
+      '@controllers': path.resolve(__dirname, './src/controllers')
     }
   }
 })

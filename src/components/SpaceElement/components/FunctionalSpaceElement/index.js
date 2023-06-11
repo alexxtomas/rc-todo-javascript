@@ -5,8 +5,8 @@ import { getConfirmDialogProps, getFormDialogProps } from '../utils/functions'
 
 const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
   return `
-  <li id=${id}>
-  <a href="#/${id}" data-function="navigate" class='functionalSpaceElement' style="z-index: 1; position: relative;">
+  <li id=${id} class='functionalSpaceElement'>
+  <a href="#/${id}" data-function="navigate" class="functionalSpaceElementAnchore">
    <header class="functionalSpaceElementHeader">
     <h3 data-function="showSpaceElementName" class="functionalSpaceElementTitle">${name}</h3>
     ${Icon({
@@ -14,6 +14,7 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
       props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="showSpaceElementPriority"`
     })}
     </header>
+    </a>
     <div class="functionalSpaceElementContainer">
     <button class="functionalSpaceElementFirstButton" id="functionalSpaceElementEditButton" data-id=${id}>
     ${Icon({
@@ -28,7 +29,6 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
     })}
     </button>
     </div>
-  </a>
 
   ${Dialog(getFormDialogProps())}
 

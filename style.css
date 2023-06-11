@@ -13,7 +13,7 @@
   box-sizing: border-box;
 }
 
-#app {
+body {
   display: flex;
   flex-direction: column;
   max-width: 400px;
@@ -105,18 +105,6 @@ dialog::backdrop {
 
 .pageHeader > button:hover {
   scale: 0.95;
-}
-
-.spacesContainer {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  row-gap: 10px;
-}
-
-.spacesContainer > li {
-  width: 100%;
 }
 
 .validationError {

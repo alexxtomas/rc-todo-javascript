@@ -1,12 +1,8 @@
-import { routerLogic } from '@logic/router.logic'
+import { router } from '@router/index'
 
 export function routerListeners() {
-  // document.addEventListener('click', routerLogic.documentClick)
-  // window.route = routerLogic.route
-  // window.addEventListener('popstate', routerLogic.locationHandler)
-
-  // routerLogic.locationHandler()
-  window.addEventListener('hashchange', routerLogic.locationHandler)
-
-  routerLogic.locationHandler()
+  window.addEventListener('hashchange', () => {
+    const location = window.location.hash.replace('#', '')
+    router(location)
+  })
 }

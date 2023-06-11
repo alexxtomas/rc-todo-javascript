@@ -1,0 +1,13 @@
+
+
+.spacesContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 10px;
+}
+
+.spacesContainer > li {
+  width: 100%;
+}
