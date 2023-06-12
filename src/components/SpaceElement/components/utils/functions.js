@@ -1,4 +1,5 @@
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
+import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
 import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 
 export const getConfirmDialogProps = ({ spaceName, numberOfTasks }) => ({
@@ -19,15 +20,25 @@ export const getFormDialogProps = () => ({
   variant: DIALOG_VARIANTS_ENUM.FORM,
   dialogAttributes: 'data-function="editDialog"',
   formAttributes: 'data-function="submitData"',
-  input: {
-    attributes: 'id="spaceName" name="spaceName" type="text"',
-    label: 'for="spaceName"'
-  },
-  select: {
-    label: 'spacePriority',
-    attributes: 'id="spacePriority" name="spacePriority"',
-    options: PRIORITIES_SELECT_OPTIONS
-  },
+  elements: [
+    {
+      variant: FORM_FIELDS_VARIANTS_ENUM.INPUT,
+      attributes: 'id="spaceName" name="spaceName" type="text"',
+      label: {
+        attributes: 'for="spaceName"',
+        text: 'Space name'
+      }
+    },
+    {
+      variant: FORM_FIELDS_VARIANTS_ENUM.SELECT,
+      label: {
+        attributes: 'for="spacePriority"',
+        text: 'Space priority'
+      },
+      attributes: 'id="spacePriority" name="spacePriority"',
+      options: PRIORITIES_SELECT_OPTIONS
+    }
+  ],
   firstButton: {
     attributes: 'type="submit" value="default"',
     text: 'Save'

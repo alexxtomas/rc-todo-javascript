@@ -11,12 +11,12 @@ import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 
 export const newSpaceDialogLogic = {
   showDialogClick,
-  closeDialogClick: (dialog) => () => {
+  closeDialogClick: ($dialog) => () => {
     const $dialogValidationErrorMessage = document.querySelector(
       '[data-function="inputValidationError"]'
     )
 
-    dialog.close()
+    $dialog.close()
 
     if ($dialogValidationErrorMessage.textContent !== '') {
       $dialogValidationErrorMessage.textContent = ''
@@ -143,12 +143,18 @@ export const editSpaceDialogLogic = {
 
     dispatch({ action: GLOBAL_ACTIONS_ENUM.EDIT_SPACE, payload: { id, name: spaceName.value, priority: PRIORITY.LABEL } })
 
-    console.log($dialogSpaceNameInput, $dialogSpacePrioritySelect)
     $dialogSpaceNameInput.value = ''
     $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
 
     $dialog.close()
   },
+  outsideClick
+
+}
+
+export const newTaskDialogLogic = {
+  showDialogClick,
+
   outsideClick
 
 }

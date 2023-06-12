@@ -6,7 +6,7 @@ import { getConfirmDialogProps, getFormDialogProps } from '../utils/functions'
 const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
   return `
   <li id=${id} class='functionalSpaceElement'>
-  <a href="#/${id}" data-function="navigate" class="functionalSpaceElementAnchore">
+  <a href="#/${id}" class="functionalSpaceElementAnchore">
    <header class="functionalSpaceElementHeader">
     <h3 data-function="showSpaceElementName" class="functionalSpaceElementTitle">${name}</h3>
     ${Icon({

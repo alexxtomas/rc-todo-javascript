@@ -1,7 +1,8 @@
 import {
   removeSpaceDialogLogic,
   newSpaceDialogLogic,
-  editSpaceDialogLogic
+  editSpaceDialogLogic,
+  newTaskDialogLogic
 } from '@logic/dialog.logic'
 
 export function newSpaceDialogListeners() {
@@ -87,4 +88,25 @@ export function editSpaceDialogListeners() {
 
     $dialogForm?.addEventListener('submit', editSpaceDialogLogic.saveDialogSubmit($dialog, id))
   })
+}
+
+export function newTaskDialogListeners() {
+  const $dialog = document.querySelector('#newTaskDialog')
+  const $openDialogButton = document.querySelector('#newTask')
+  // const $closeDialogButton = document.querySelector('#cancelNewTaskButton')
+  // const $dialogForm = document.querySelector('#newTaskForm')
+
+  $openDialogButton?.addEventListener(
+    'click',
+    newTaskDialogLogic.showDialogClick($dialog)
+  )
+  // $closeDialogButton?.addEventListener(
+  //   'click',
+  //   newSpaceDialogLogic.closeDialogClick($dialog)
+  // )
+  $dialog?.addEventListener('click', newTaskDialogLogic.outsideClick($dialog))
+  // $dialogForm?.addEventListener(
+  //   'submit',
+  //   newSpaceDialogLogic.saveDialogSubmit($dialog)
+  // )
 }

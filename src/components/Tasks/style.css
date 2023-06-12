@@ -1,0 +1,111 @@
+.backlogTasksContainer {
+  margin-top: 20px;
+}
+
+.backlogTasksHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.accordion-toggle  {
+  position: absolute;
+  left: -16px;
+  top: 4px;
+  cursor: pointer;
+}
+.rotate {
+  rotate: 90deg;
+
+}
+.accordion-toggle:hover {
+  stroke-width: 1px;
+}
+
+
+.backlogTasksHeaderContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.backlogTasksTitle {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: capitalize;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px 4px 0 0;
+}
+
+.backlogTasksCounter, .backlogTasksTitleCounter  {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.backlogTasksCounter{
+  font-size: 7px;
+  color: rgba(101, 111, 125 ,1)
+}
+
+.backlogTasksTitleCounter  {
+color: #343434;
+font-size: 6px;
+margin-left: 5px;
+display: inline-block;
+}
+
+.backlogTasksLabelsContainer {
+  display: flex;
+  gap: 30px;
+  padding-right: 30px;
+}
+
+
+.backlogTasksLabel {
+  font-size: 8px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+.backlogTasksElement {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 6px 4px 4px;
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid #fff;
+  border-block-end-color: rgba(240, 241, 243, 1)
+}
+
+.backlogTaskElementTitle {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.backlogTaskElementContainer {
+  display: flex;
+  align-items: center;
+}
+
+.backlogTaskElementActionContainer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.backlogTaskElementActionContainer p {
+  font-size: 8px;
+}
+
+.inactive {
+  display: none
+}

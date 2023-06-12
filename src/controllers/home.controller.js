@@ -1,4 +1,5 @@
 import Dialog, { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
+import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
 import SpaceElement, { SPACE_ELEMENT_VARIANTS_ENUM } from '@components/SpaceElement'
 import { editSpaceDialogListeners, newSpaceDialogListeners, removeSpaceDialogListeners } from '@listeners/dialog.listeners'
 import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
@@ -9,31 +10,44 @@ import '@views/Home/style.css'
 export const homeController = () => {
   syncGlobalStateWithLocalStorage()
 
-  const $pageHeader = document.querySelector('#pageHeader')
+  const $pageHeaderContent = document.querySelector('#pageHeaderContent')
 
-  $pageHeader.innerHTML += Dialog({
-    variant: DIALOG_VARIANTS_ENUM.FORM,
-    dialogAttributes: 'id="newSpaceDialog"',
-    formAttributes: 'id="newSpaceForm"',
-    input: {
-      attributes: 'id="newSpaceName" name="newSpaceName" type="text"',
-      label: 'for="newSpaceName"'
-    },
-    select: {
-      label: 'newSpacePriority',
-      attributes: 'id="newSpacePriority" name="newSpacePriority"',
-      options: PRIORITIES_SELECT_OPTIONS
-    },
-    firstButton: {
-      attributes: 'type="submit" value="default"',
-      text: 'Save'
-    },
-    secondButton: {
-      attributes:
-       'type="reset" id="cancelNewSpaceButton" value="cancel" formmethod="dialog"',
-      text: 'Close'
-    }
-  })
+  $pageHeaderContent.innerHTML += `
+    <button id="newSpace" class="pageHeaderButton">new space +</button>
+    ${Dialog({
+      variant: DIALOG_VARIANTS_ENUM.FORM,
+      dialogAttributes: 'id="newSpaceDialog"',
+      formAttributes: 'id="newSpaceForm"',
+      elements: [
+        {
+           variant: FORM_FIELDS_VARIANTS_ENUM.INPUT,
+          attributes: 'id="newSpaceName" name="newSpaceName" type="text"',
+        label: {
+          attributes: 'for="newSpaceName"',
+          text: 'Space name'
+          }
+        },
+        {
+          variant: FORM_FIELDS_VARIANTS_ENUM.SELECT,
+          label: {
+            attributes: 'for="newSpacePriority"',
+            text: 'Space priority'
+          },
+          attributes: 'id="newSpacePriority" name="newSpacePriority"',
+          options: PRIORITIES_SELECT_OPTIONS
+        }
+      ],
+      firstButton: {
+        attributes: 'type="submit" value="default"',
+        text: 'Save'
+      },
+      secondButton: {
+        attributes:
+         'type="reset" id="cancelNewSpaceButton" value="cancel" formmethod="dialog"',
+        text: 'Close'
+      }
+    })}
+  `
 
   const {
     state: { spaces }

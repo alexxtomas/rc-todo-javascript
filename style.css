@@ -19,6 +19,7 @@ body {
   max-width: 400px;
   margin: 0 auto;
   width: 100vw;
+  background-color: rgba(247, 248, 249, 1);
 }
 
 a {
@@ -58,6 +59,20 @@ dialog {
 dialog::backdrop {
   backdrop-filter: blur(4px);
 }
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageHeaderButton {
+  font-size: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.pageHeaderButton:hover {
+  scale: 0.95;
+}
 
 .visually-hidden {
   border: 0;
@@ -73,20 +88,7 @@ dialog::backdrop {
   white-space: nowrap;
 }
 
-.pageHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.pageHeader > button {
-  font-size: 12px;
-  transition: all 0.3s ease-in-out;
-}
-
-.pageHeader > button:hover {
-  scale: 0.95;
-}
 
 .validationError {
   font-size: 8px;
