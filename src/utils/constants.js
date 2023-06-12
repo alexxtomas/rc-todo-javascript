@@ -80,4 +80,13 @@ export const PRIORITIES_SELECT_OPTIONS = Object.entries(PRIORITIES).map(
   })
 )
 
-// const TASKS_STATUS = ['Backlog', 'In Progress', 'Blocked', 'Done']
+export const TASKS_STATUS = [{ name: 'Backlog', color: 'rgba(0, 0, 0, 0.1)' }, {
+  name: 'In Progress',
+  color: '#FFFF00'
+}, {
+  name: 'Blocked',
+  color: '#FF0000'
+}, {
+  name: 'Done',
+  color: '#12EE2A'
+}]
