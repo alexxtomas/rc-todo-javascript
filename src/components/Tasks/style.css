@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .tasks-header {
   display: flex;
   justify-content: space-between;
@@ -20,17 +19,12 @@
   stroke-width: 1px;
 }
 
-.rotate {
-  rotate: 90deg;
-
-}
 
 .tasks-header-container {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-
 .tasks-status {
   font-size: 10px;
   font-weight: 600;
@@ -39,7 +33,6 @@
   padding: 2px 8px;
   border-radius: 4px 4px 0 0;
 }
-
 .tasks-counter, .tasks-status-counter  {
   font-weight: 500;
   white-space: nowrap;
@@ -49,64 +42,29 @@
   text-transform: uppercase;
   user-select: none;
 }
-
 .tasks-counter{
   font-size: 7px;
   color: rgba(101, 111, 125 ,1)
 }
-
 .tasks-status-counter  {
 color: #343434;
 font-size: 6px;
 margin-left: 5px;
 display: inline-block;
 }
-
 .tasks-labels-container {
   display: flex;
-  gap: 30px;
+  gap: 25px;
   padding-right: 30px;
 }
-
-
 .tasks-label {
   font-size: 8px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.5);
 }
-
-
-
-.task-element {
-  display: flex;
-  justify-content: space-between;
-  padding: 4px 6px 4px 4px;
-  background-color: #fff;
-  width: 100%;
-  border: 1px solid #fff;
-  border-block-end-color: rgba(240, 241, 243, 1)
+.rotate {
+  rotate: 90deg;
 }
-
-.task-element-title {
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.tasks-element-container {
-  display: flex;
-  align-items: center;
-}
-
-.task-element-info-container {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.task-element-info-container p {
-  font-size: 8px;
-}
-
 .inactive {
   display: none
 }

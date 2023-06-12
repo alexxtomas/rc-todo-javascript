@@ -7,7 +7,7 @@ import {
 
 export function newSpaceDialogListeners() {
   const $dialog = document.querySelector('#new-space-dialog')
-  const $openDialogButton = document.querySelector('#newSpace')
+  const $openDialogButton = document.querySelector('#new-space')
   const $closeDialogButton = document.querySelector('#cancel-new-space-button')
   const $dialogForm = document.querySelector('#new-space-form')
 
@@ -91,11 +91,11 @@ export function editSpaceDialogListeners() {
 }
 
 export function newTaskDialogListeners() {
-  const $dialog = document.querySelector('#newTaskDialog')
-  const $openDialogButton = document.querySelector('#newTask')
+  const $dialog = document.querySelector('#new-task-dialog')
+  const $openDialogButton = document.querySelector('#new-task')
   // const $closeDialogButton = document.querySelector('#cancelNewTaskButton')
-  // const $dialogForm = document.querySelector('#newTaskForm')
-
+  const $dialogForm = document.querySelector('#new-task-form')
+  const spaceId = $dialog.getAttribute('data-id')
   $openDialogButton?.addEventListener(
     'click',
     newTaskDialogLogic.showDialogClick($dialog)
@@ -105,8 +105,8 @@ export function newTaskDialogListeners() {
   //   newSpaceDialogLogic.closeDialogClick($dialog)
   // )
   $dialog?.addEventListener('click', newTaskDialogLogic.outsideClick($dialog))
-  // $dialogForm?.addEventListener(
-  //   'submit',
-  //   newSpaceDialogLogic.saveDialogSubmit($dialog)
-  // )
+  $dialogForm?.addEventListener(
+    'submit',
+    newTaskDialogLogic.saveDialogSubmit($dialog, spaceId)
+  )
 }

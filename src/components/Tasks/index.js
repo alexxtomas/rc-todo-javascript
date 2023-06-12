@@ -1,6 +1,7 @@
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import { PRIORITIES } from '@utils/constants'
 import './style.css'
+import TaskElement from '@components/TaskElement'
 
 const Tasks = ({ status, tasks, idx }) => {
   return `
@@ -12,26 +13,15 @@ const Tasks = ({ status, tasks, idx }) => {
       <p data-function="show-tasks-counter" class="tasks-counter">${tasks.length} ${tasks.length === 1 ? 'Task' : 'Tasks'}</p>
    </div>
     <div data-function="tasks-labels-container" class="tasks-labels-container">
-      <h4 class="tasks-label">Created At</h4>
+      <h4 class="tasks-label">Creation Date</h4>
       <h4 class="tasks-label">Priority</h4>
     </div>
     </header>
   <ul data-function="show-tasks" >
-    ${tasks.map(task => {
-    const iconColor = PRIORITIES[task.priority].color
-      return `
-        <li class="task-element">
-        <div class="tasks-element-container">
-          <div></div>
-          <h4 class="task-element-title">${task.name}</h4>
-        </div>
-        <div class="task-element-info-container">
-          <p>${task.creationDate}</p>
-          <p>${Icon({ variant: ICON_VARIANTS_ENUM.FLAG, props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="show-space-element-priority"` })}</p>
-          <p>${Icon({ variant: ICON_VARIANTS_ENUM.TRASH, props: 'width=10px stroke-width="1" fill="none"' })}</p>
-        </div>
-      </li>
-      `
+    ${tasks.map(({ creationDate, name, priority }) => {
+    const iconColor = PRIORITIES[priority.toUpperCase().replaceAll(' ', '_')].COLOR
+
+      return TaskElement({ creationDate, iconColor, name })
     }).join('').replaceAll(',', '')}
   
 

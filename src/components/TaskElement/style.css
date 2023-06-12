@@ -1,0 +1,32 @@
+.task-element {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 6px 4px 4px;
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid #fff;
+  border-block-end-color: rgba(240, 241, 243, 1)
+}
+.tasks-element-container {
+  display: flex;
+  align-items: center;
+}
+.task-element-title {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.task-element-info-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.task-element-info-container p {
+  font-size: 8px;
+}
+
+.task-element-info-container p:nth-last-child(2) {
+  margin-left: 5px;
+}
+

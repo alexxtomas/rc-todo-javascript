@@ -1,5 +1,5 @@
 import { spaceNameValidation } from '@validations/space.validation'
-import { PRIORITIES, PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
+import { PRIORITIES, PRIORITIES_SELECT_OPTIONS, TASKS_STATUS_ENUM } from '@utils/constants'
 import SpaceElement, {
   SPACE_ELEMENT_VARIANTS_ENUM
 } from '@components/SpaceElement'
@@ -8,6 +8,8 @@ import { nanoid } from 'nanoid'
 import { editSpaceDialogListeners, removeSpaceDialogListeners } from '@listeners/dialog.listeners'
 import { outsideClick, showDialogClick } from './shared'
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
+import { taskNameValidation } from '@validations/task.validation'
+import TaskElement from '@components/TaskElement'
 
 export const newSpaceDialogLogic = {
   showDialogClick,
@@ -26,7 +28,7 @@ export const newSpaceDialogLogic = {
     e.preventDefault()
     const $spacesContainer = document.querySelector('#spaces-container')
     const $dialogValidationErrorMessage = document.querySelector(
-      '[data-function="input-validat ion-error"]'
+      '[data-function="input-validation-error"]'
     )
     const $dialogSpaceNameInput = document.querySelector('#new-space-name')
     const $dialogSpacePrioritySelect =
@@ -154,6 +156,50 @@ export const editSpaceDialogLogic = {
 
 export const newTaskDialogLogic = {
   showDialogClick,
+  saveDialogSubmit: ($dialog, spaceId) => (e) => {
+    e.preventDefault()
+    const $dialogValidationErrorMessage = document.querySelector(
+      '#new-task-dialog [data-function="input-validation-error"]'
+    )
+    const $backlogTasks = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks"]`)
+    const $dialogTaskNameInput = document.querySelector('#new-task-name')
+
+    const { newTaskName } = e.target
+
+    const newTaskNameValidation = taskNameValidation({
+      taskName: newTaskName.value
+    })
+
+    if (newTaskNameValidation) {
+      $dialogValidationErrorMessage.textContent = newTaskNameValidation.message
+      return
+    }
+
+    if ($dialogValidationErrorMessage.textContent !== '') {
+      $dialogValidationErrorMessage.textContent = ''
+    }
+
+    const taskId = `a${nanoid()}`
+    const creationDate = new Date().toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric' })
+
+    const { dispatch } = globalStore()
+
+    $backlogTasks.innerHTML += TaskElement({ creationDate, id: taskId, name: newTaskName.value, iconColor: PRIORITIES.NOT_ASSIGNED.COLOR })
+
+    const newTask = {
+      id: taskId,
+      name: newTaskName.value,
+      creationDate,
+      status: TASKS_STATUS_ENUM.BACKLOG,
+      priority: PRIORITIES.NOT_ASSIGNED.LABEL
+    }
+
+    dispatch({ action: GLOBAL_ACTIONS_ENUM.ADD_TASK, payload: { id: spaceId, task: newTask } })
+
+    $dialogTaskNameInput.value = ''
+
+    $dialog.close()
+  },
 
   outsideClick
 

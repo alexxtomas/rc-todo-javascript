@@ -20,6 +20,14 @@ const GLOBAL_ACTIONS = {
     GLOBAL_STATE.spaces[spaceIndex].name = name
     GLOBAL_STATE.spaces[spaceIndex].priority = priority
     updateGlobalStateStorage({ state: GLOBAL_STATE })
+  },
+  getSpaceById: ({ id }) => GLOBAL_STATE.spaces.find((space) => space.id === id),
+  addTask: ({ id, task }) => {
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === id)
+    GLOBAL_STATE.spaces[spaceIndex].tasks = GLOBAL_STATE.spaces[
+      spaceIndex
+    ].tasks.concat(task)
+    updateGlobalStateStorage({ state: GLOBAL_STATE })
   }
 
 }
@@ -28,7 +36,9 @@ export const GLOBAL_ACTIONS_ENUM = {
   INITIALIZE_SPACES: 'initializeSpaces',
   ADD_SPACE: 'addSpace',
   REMOVE_SPACE: 'removeSpace',
-  EDIT_SPACE: 'editSpace'
+  EDIT_SPACE: 'editSpace',
+  GET_SPACE_BY_ID: 'getSpaceById',
+  ADD_TASK: 'addTask'
 }
 
 export function globalStore() {

@@ -6,7 +6,7 @@ const FORM_FIELDS_VARIANTS = {
   <label class="form-field-label" ${element.label.attributes}>${element.label.text}</label>
   <input class="form-field-input" ${element.attributes} />
   <span
-    data-function="input-validat ion-error"
+    data-function="input-validation-error"
     class="validation-error"
   ></span>
 </div>

@@ -12,8 +12,8 @@ export const homeController = () => {
 
   const $pageHeaderContent = document.querySelector('#pageHeaderContent')
 
-  $pageHeaderContent.innerHTML += `
-    <button id="newSpace" class="page-header-button">new space +</button>
+  $pageHeaderContent.innerHTML = `
+    <button id="new-space" class="page-header-button">new space +</button>
     ${Dialog({
       variant: DIALOG_VARIANTS_ENUM.FORM,
       dialogAttributes: 'id="new-space-dialog"',
@@ -34,7 +34,7 @@ export const homeController = () => {
             text: 'Space priority'
           },
           attributes: 'id="new-space-priority" name="newSpacePriority"',
-          options: PRIORITIES_SELECT_OPTIONS
+          options: PRIORITIES_SELECT_OPTIONS.filter(el => el.label !== 'Not Assigned')
         }
       ],
       firstButton: {
@@ -75,6 +75,7 @@ export const homeController = () => {
 
   $prioritiesAsideContainer.innerHTML += `
      ${Object.values(PRIORITIES)
+        .filter(el => el.LABEL !== 'Not Assigned')
        .map((el) => {
          return `
         ${SpaceElement({
