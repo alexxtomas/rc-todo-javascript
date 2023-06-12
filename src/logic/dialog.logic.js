@@ -13,7 +13,7 @@ export const newSpaceDialogLogic = {
   showDialogClick,
   closeDialogClick: ($dialog) => () => {
     const $dialogValidationErrorMessage = document.querySelector(
-      '[data-function="inputValidationError"]'
+      '[data-function="input-validat ion-error"]'
     )
 
     $dialog.close()
@@ -24,13 +24,13 @@ export const newSpaceDialogLogic = {
   },
   saveDialogSubmit: ($dialog) => (e) => {
     e.preventDefault()
-    const $spacesContainer = document.querySelector('#spacesContainer')
+    const $spacesContainer = document.querySelector('#spaces-container')
     const $dialogValidationErrorMessage = document.querySelector(
-      '[data-function="inputValidationError"]'
+      '[data-function="input-validat ion-error"]'
     )
-    const $dialogSpaceNameInput = document.querySelector('#newSpaceName')
+    const $dialogSpaceNameInput = document.querySelector('#new-space-name')
     const $dialogSpacePrioritySelect =
-      document.querySelector('#newSpacePriority')
+      document.querySelector('#new-space-priority')
     const { newSpaceName, newSpacePriority } = e.target
 
     const newSpaceNameValidation = spaceNameValidation({
@@ -100,7 +100,7 @@ export const editSpaceDialogLogic = {
   showDialogClick,
   closeDialogClick: ($dialog) => () => {
     const $dialogValidationErrorMessage = document.querySelector(
-      '[data-function="inputValidationError"]'
+      '[data-function="input-validat ion-error"]'
     )
     $dialog.close()
     if ($dialogValidationErrorMessage.textContent !== '') {
@@ -110,13 +110,13 @@ export const editSpaceDialogLogic = {
   saveDialogSubmit: ($dialog, id) => (e) => {
     e.preventDefault()
     const $dialogValidationErrorMessage = document.querySelector(
-      `#${id} [data-function="inputValidationError"]`
+      `#${id} [data-function="input-validation-error"]`
     )
-    const $spaceElementName = document.querySelector(`#${id} [data-function="showSpaceElementName"]`)
-    const $spaceElementPriority = document.querySelector(`#${id} [data-function="showSpaceElementPriority"]`)
-    const $dialogSpaceNameInput = document.querySelector('#spaceName')
+    const $spaceElementName = document.querySelector(`#${id} [data-function="show-space-element-name"]`)
+    const $spaceElementPriority = document.querySelector(`#${id} [data-function="show-space-element-priority"]`)
+    const $dialogSpaceNameInput = document.querySelector('#space-name')
     const $dialogSpacePrioritySelect =
-       document.querySelector('#spacePriority')
+       document.querySelector('#space-priority')
     const { spaceName, spacePriority } = e.target
     const { dispatch } = globalStore()
 
@@ -138,7 +138,7 @@ export const editSpaceDialogLogic = {
     $spaceElementName.textContent = spaceName.value
     $spaceElementPriority.innerHTML = Icon({
       variant: ICON_VARIANTS_ENUM.FLAG,
-      props: `width=30px stroke-width="0.8" fill=${PRIORITY.COLOR} color=${PRIORITY.COLOR} data-function="showSpaceElementPriority"`
+      props: `width=30px stroke-width="0.8" fill=${PRIORITY.COLOR} color=${PRIORITY.COLOR} data-function="show-space-element-priority"`
     })
 
     dispatch({ action: GLOBAL_ACTIONS_ENUM.EDIT_SPACE, payload: { id, name: spaceName.value, priority: PRIORITY.LABEL } })

@@ -59,18 +59,18 @@ dialog {
 dialog::backdrop {
   backdrop-filter: blur(4px);
 }
-.pageHeader {
+.page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.pageHeaderButton {
+.page-header-button {
   font-size: 12px;
   transition: all 0.3s ease-in-out;
 }
 
-.pageHeaderButton:hover {
+.page-header-button:hover {
   scale: 0.95;
 }
 
@@ -90,7 +90,7 @@ dialog::backdrop {
 
 
 
-.validationError {
+.validation-error {
   font-size: 8px;
   color: #f71310;
   padding-left: 4px;

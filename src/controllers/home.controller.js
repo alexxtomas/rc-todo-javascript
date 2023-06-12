@@ -13,27 +13,27 @@ export const homeController = () => {
   const $pageHeaderContent = document.querySelector('#pageHeaderContent')
 
   $pageHeaderContent.innerHTML += `
-    <button id="newSpace" class="pageHeaderButton">new space +</button>
+    <button id="newSpace" class="page-header-button">new space +</button>
     ${Dialog({
       variant: DIALOG_VARIANTS_ENUM.FORM,
-      dialogAttributes: 'id="newSpaceDialog"',
-      formAttributes: 'id="newSpaceForm"',
+      dialogAttributes: 'id="new-space-dialog"',
+      formAttributes: 'id="new-space-form"',
       elements: [
         {
            variant: FORM_FIELDS_VARIANTS_ENUM.INPUT,
-          attributes: 'id="newSpaceName" name="newSpaceName" type="text"',
+          attributes: 'id="new-space-name" name="newSpaceName" type="text"',
         label: {
-          attributes: 'for="newSpaceName"',
+          attributes: 'for="new-space-name"',
           text: 'Space name'
           }
         },
         {
           variant: FORM_FIELDS_VARIANTS_ENUM.SELECT,
           label: {
-            attributes: 'for="newSpacePriority"',
+            attributes: 'for="new-space-priority"',
             text: 'Space priority'
           },
-          attributes: 'id="newSpacePriority" name="newSpacePriority"',
+          attributes: 'id="new-space-priority" name="newSpacePriority"',
           options: PRIORITIES_SELECT_OPTIONS
         }
       ],
@@ -43,7 +43,7 @@ export const homeController = () => {
       },
       secondButton: {
         attributes:
-         'type="reset" id="cancelNewSpaceButton" value="cancel" formmethod="dialog"',
+         'type="reset" id="cancel-new-space-button" value="cancel" formmethod="dialog"',
         text: 'Close'
       }
     })}
@@ -54,7 +54,7 @@ export const homeController = () => {
   } = globalStore()
 
   if (spaces.length > 0 && spaces[0]?.name) {
-    const $ul = document.querySelector('#spacesContainer')
+    const $ul = document.querySelector('#spaces-container')
     $ul.innerHTML += `
        ${spaces
          .map(({ name, priority, id, tasks }, idx) => {
@@ -71,9 +71,9 @@ export const homeController = () => {
  `
   }
 
-  const $asideUL = document.querySelector('#prioritiesAsideContainer')
+  const $prioritiesAsideContainer = document.querySelector('#priorities-aside-container')
 
-  $asideUL.innerHTML += `
+  $prioritiesAsideContainer.innerHTML += `
      ${Object.values(PRIORITIES)
        .map((el) => {
          return `

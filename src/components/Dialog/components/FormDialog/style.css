@@ -1,59 +1,36 @@
-.formDialog {
+.form-dialog {
   max-width: 400px;
 }
-.formDialogForm {
+.form-dialog-form {
   display: flex;
   padding: 16px;
   width: 100%;
   flex-direction: column;
   gap: 8px;
 }
-.formDialogContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
 
-.formDialogLabel {
-  font-size: 8px;
-}
-
-.formDialogInput,
-.formDialogSelect {
-  padding: 2px 8px;
-  border-radius: 8px;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.1);
-  outline: none;
-  font-size: 10px !important;
-}
-
-.formDialogSelectOption {
-  font-size: 8px;
-}
-
-.formDialogFooter {
+.form-dialog-footer {
   width: 100%;
   display: flex;
   justify-content: center;
   gap: 8px;
 }
 
-.formDialogFirstButton,
-.formDialogSecondButton {
+.form-dialog-first-button,
+.form-dialog-second-button {
   margin-top: 10px;
   padding: 4px 8px;
   font-size: 8px;
   border-radius: 8px;
 }
 
-.formDialogFirstButton {
+.form-dialog-first-button {
   background-color: #fff;
   border: 1px solid #8d9093;
   color: #8d9093;
   transition: all 0.3s ease-in-out;
 }
-.formDialogSecondButton {
+.form-dialog-second-button {
   background-color: #8d9093;
   border: 1px solid #8d9093;
   color: #fff;

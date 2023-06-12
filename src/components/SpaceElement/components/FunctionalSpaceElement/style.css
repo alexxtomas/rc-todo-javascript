@@ -1,32 +1,32 @@
-.functionalSpaceElement {
+.functional-space-element {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.functionalSpaceElement:hover {
+.functional-space-element:hover {
   background-color: #dfdfdf;
   border-radius: 2px;
 }
 
-.functionalSpaceElementAnchore {
+.functional-space-element-anchore {
   padding: 4px 4px 4px 3px;
   width: 100%;
   height: 100%;
 }
 
-.functionalSpaceElementHeader {
+.functional-space-element-header {
   display: flex;
   justify-content: space-between;
   width: 50%;
 }
 
-.functionalSpaceElementContainer {
+.functional-space-element-container {
   display: flex;
   gap: 10px;
 }
 
-.functionalSpaceElementFirstButton:hover {
+.functional-space-element-first-button:hover {
   color: blue;
 }
 
@@ -34,7 +34,7 @@
   color: #f71310;
 }
 
-.functionalSpaceElementTitle {
+.functional-space-element-title {
   width: 90%;
   font-weight: 300;
   font-size: 10px;

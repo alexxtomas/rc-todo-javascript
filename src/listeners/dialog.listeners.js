@@ -6,10 +6,10 @@ import {
 } from '@logic/dialog.logic'
 
 export function newSpaceDialogListeners() {
-  const $dialog = document.querySelector('#newSpaceDialog')
+  const $dialog = document.querySelector('#new-space-dialog')
   const $openDialogButton = document.querySelector('#newSpace')
-  const $closeDialogButton = document.querySelector('#cancelNewSpaceButton')
-  const $dialogForm = document.querySelector('#newSpaceForm')
+  const $closeDialogButton = document.querySelector('#cancel-new-space-button')
+  const $dialogForm = document.querySelector('#new-space-form')
 
   $openDialogButton?.addEventListener(
     'click',
@@ -28,18 +28,18 @@ export function newSpaceDialogListeners() {
 
 export function removeSpaceDialogListeners() {
   const $openDialogButton = document.querySelectorAll(
-    '#functionalSpaceElementTrashButton'
+    'button[data-function="remove-space-element"]'
   )
   $openDialogButton.forEach(($el) => {
     const id = $el.getAttribute('data-id')
     const $dialog = document.querySelector(
-      `#${id} > dialog[data-function="removeDialog"]`
+      `#${id} > dialog[data-function="remove-dialog"]`
     )
     const $removeSpaceElementDialogButton = document.querySelector(
-      `#${id} button[data-function="removeSpaceElement"]`
+      `#${id} button[data-function="remove-space-element"]`
     )
     const $closeDialogButton = document.querySelector(
-      `#${id}  button[data-function="closeRemoveSpaceElementDialog"]`
+      `#${id}  button[data-function="close-remove-space-element-dialog"]`
     )
 
     $el?.addEventListener(
@@ -66,19 +66,19 @@ export function removeSpaceDialogListeners() {
 
 export function editSpaceDialogListeners() {
   const $editSpaceElementButton = document.querySelectorAll(
-    '#functionalSpaceElementEditButton'
+    'button[data-function="edit-space-element"]'
   )
 
   $editSpaceElementButton.forEach(($el) => {
     const id = $el.getAttribute('data-id')
     const $dialog = document.querySelector(
-      `#${id} > dialog[data-function="editDialog"]`
+      `#${id} > dialog[data-function="edit-dialog"]`
     )
 
-    const $dialogForm = document.querySelector(`#${id} [data-function="submitData"]`)
+    const $dialogForm = document.querySelector(`#${id} [data-function="submit-data"]`)
 
     const $closeDialogButton = document.querySelector(
-      `#${id} button[data-function="closeEditSpaceElementDialog"]`
+      `#${id} button[data-function="close-edit-space-element-dialog"]`
     )
     $el?.addEventListener('click', editSpaceDialogLogic.showDialogClick($dialog))
 

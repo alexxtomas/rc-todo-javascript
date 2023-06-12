@@ -1,24 +1,24 @@
+import './style.css'
+
 const FORM_FIELDS_VARIANTS = {
   INPUT: (element) => `
-  <div class="formDialogContainer">
-  <label class="formDialogLabel" ${element.label.attributes}>${element.label.text}</label>
-  <input class="formDialogInput" ${element.attributes} />
+  <div class="form-field-container">
+  <label class="form-field-label" ${element.label.attributes}>${element.label.text}</label>
+  <input class="form-field-input" ${element.attributes} />
   <span
-    data-function="inputValidationError"
-    class="validationError"
+    data-function="input-validat ion-error"
+    class="validation-error"
   ></span>
 </div>
   `,
   SELECT: (element) => `
-  <div class="formDialogContainer">
-  <label class="formDialogLabel" ${element.label.attributes}">${element.label.text}</label>
-  <select class="formDialogSelect" ${element.attributes}>
+  <div class="form-field-container">
+  <label class="form-field-label" ${element.label.attributes}">${element.label.text}</label>
+  <select class="form-field-select" ${element.attributes}>
    ${element.options.map((el) => {
-     return `<option class="formDialogSelectOption" value="${el.value}">${el.label}</option>`
+     return `<option class="form-field-select-option" value="${el.value}">${el.label}</option>`
    })}
   </select>
-  <span id="newSpaceNameValidationError"
-  class="validationError"></span>
 </div>
   `
 }

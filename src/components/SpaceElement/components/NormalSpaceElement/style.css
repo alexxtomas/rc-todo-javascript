@@ -1,4 +1,4 @@
-.normalSpaceElement {
+.normal-space-elemen-containert {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -6,7 +6,7 @@
   padding: 4px 0 4px 3px;
 }
 
-.normalSpaceElementTitle {
+.normal-space-elemen-containert-title {
   font-size: 8px;
   font-weight: 400;
   tab-size: 10;

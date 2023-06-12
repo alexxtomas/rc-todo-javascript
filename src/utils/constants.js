@@ -1,15 +1,3 @@
-export const URL_ROUTES = {
-  '/': {
-    view: '/views/Home/index.html',
-    title: 'TODO APP',
-    description: 'TODO APP home'
-  },
-  '/pepe': {
-    view: '/views/Pepe/index.html',
-    title: 'TODO APP | Pepe',
-    description: 'TODO APP home'
-  }
-}
 export const PRIORITIES = {
   URGENT: {
     LABEL: 'Urgent',
@@ -91,3 +79,5 @@ export const PRIORITIES_SELECT_OPTIONS = Object.entries(PRIORITIES).map(
     label: value.LABEL
   })
 )
+
+// const TASKS_STATUS = ['Backlog', 'In Progress', 'Blocked', 'Done']

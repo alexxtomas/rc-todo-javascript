@@ -1,6 +1,6 @@
 
 
-.spacesContainer {
+.spaces-container {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -8,11 +8,7 @@
   row-gap: 10px;
 }
 
-.spacesContainer > li {
-  width: 100%;
-}
-
-.prioritiesAside {
+.priorities-aside {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -20,13 +16,13 @@
   top: 30%;
   left: 10%;
 }
-.prioritiesAsideTitle{
+.priorities-aside-title{
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.2px;
 }
 
-.prioritiesAsideContainer {
+.priorities-aside-container {
   display: flex;
   flex-direction: column;
   gap: 4px;

@@ -1,29 +1,29 @@
-.confirmationDialog {
+.confirmation-dialog {
   max-width: 300px;
   overflow: hidden;
 }
 
-.confirmationDialogSection {
+.confirmation-dialog-section {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 8px;
 }
-.confirmationDialogText {
+.confirmation-dialog-text {
   font-size: 12px;
   max-width: 180px;
   text-align: center;
   font-weight: 400;
 }
 
-.confirmationDialogContainer {
+.confirmation-dialog-container {
   display: flex;
   justify-content: center;
   gap: 12px;
 }
 
-.confirmationDialogFirstButton,
-.confirmationDialogSecondButton {
+.confirmation-dialog-first-button,
+.confirmation-dialog-second-button {
   font-size: 8px;
   padding: 4px 10px;
   border-radius: 4px;
@@ -34,21 +34,21 @@
   width: 50px;
 }
 
-.confirmationDialogFirstButton:hover,
-.confirmationDialogSecondButton:hover {
+.confirmation-dialog-first-button:hover,
+.confirmation-dialog-second-button:hover {
   scale: 1.1;
 }
 
-.confirmationDialogFirstButton:has(+ .confirmationDialogSecondButton:hover),
-.confirmationDialogFirstButton:hover + .confirmationDialogSecondButton {
+.confirmation-dialog-first-button:has(+ .confirmation-dialog-second-button:hover),
+.confirmation-dialog-first-button:hover + .confirmation-dialog-second-button {
   filter: blur(0.7px);
   scale: 0.9;
 }
 
-.confirmationDialogFirstButton {
+.confirmation-dialog-first-button {
   background-color: #ff0000ab;
 }
 
-.confirmationDialogSecondButton {
+.confirmation-dialog-second-button {
   background-color: rgba(0, 0, 0, 0.1);
 }

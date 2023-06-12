@@ -5,12 +5,12 @@ import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 const NormalSpaceElement = ({ name, iconColor }) => {
   return `
   <li>
-   <div class='normalSpaceElement'>
+   <div class='normal-space-elemen-containert'>
       ${Icon({
         variant: ICON_VARIANTS_ENUM.FLAG,
         props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor}`
       })}
-     <h3 class="normalSpaceElementTitle">${name}</h3>
+     <h3 class="normal-space-elemen-containert-title">${name}</h3>
    </div>
    </li>
  `

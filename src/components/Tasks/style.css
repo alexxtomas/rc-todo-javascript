@@ -1,35 +1,37 @@
-.backlogTasksContainer {
+.tasks-element {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.backlogTasksHeader {
+.tasks-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
 }
-.accordion-toggle  {
+.tasks-accordion-toggle  {
   position: absolute;
   left: -16px;
   top: 4px;
   cursor: pointer;
 }
+.tasks-accordion-toggle:hover {
+  stroke-width: 1px;
+}
+
 .rotate {
   rotate: 90deg;
 
 }
-.accordion-toggle:hover {
-  stroke-width: 1px;
-}
 
-
-.backlogTasksHeaderContainer {
+.tasks-header-container {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.backlogTasksTitle {
+.tasks-status {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1.2px;
@@ -39,7 +41,7 @@
   border-radius: 4px 4px 0 0;
 }
 
-.backlogTasksCounter, .backlogTasksTitleCounter  {
+.tasks-counter, .tasks-status-counter  {
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -49,26 +51,26 @@
   user-select: none;
 }
 
-.backlogTasksCounter{
+.tasks-counter{
   font-size: 7px;
   color: rgba(101, 111, 125 ,1)
 }
 
-.backlogTasksTitleCounter  {
+.tasks-status-counter  {
 color: #343434;
 font-size: 6px;
 margin-left: 5px;
 display: inline-block;
 }
 
-.backlogTasksLabelsContainer {
+.tasks-labels-container {
   display: flex;
   gap: 30px;
   padding-right: 30px;
 }
 
 
-.backlogTasksLabel {
+.tasks-label {
   font-size: 8px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.5);
@@ -76,7 +78,7 @@ display: inline-block;
 
 
 
-.backlogTasksElement {
+.task-element {
   display: flex;
   justify-content: space-between;
   padding: 4px 6px 4px 4px;
@@ -86,23 +88,23 @@ display: inline-block;
   border-block-end-color: rgba(240, 241, 243, 1)
 }
 
-.backlogTaskElementTitle {
+.task-element-title {
   font-size: 10px;
   font-weight: 600;
 }
 
-.backlogTaskElementContainer {
+.tasks-element-container {
   display: flex;
   align-items: center;
 }
 
-.backlogTaskElementActionContainer {
+.task-element-info-container {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
-.backlogTaskElementActionContainer p {
+.task-element-info-container p {
   font-size: 8px;
 }
 
