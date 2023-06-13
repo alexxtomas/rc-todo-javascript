@@ -4,22 +4,22 @@ import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 
 export const getConfirmDialogProps = ({ spaceName, numberOfTasks }) => ({
   variant: DIALOG_VARIANTS_ENUM.CONFIRMATION,
-  dialogAttributes: 'data-function="remove-dialog"',
-  text: `Are you sure you want to remove the space ${spaceName} with ${numberOfTasks} tasks?`,
+  dialogAttributes: 'data-function="show-remove-space-element-dialog"',
+  text: `Are you sure you want to remove the space "${spaceName}" with ${numberOfTasks} tasks?`,
   firstButton: {
-    attributes: 'data-function="remove-space-element"',
+    attributes: 'data-function="remove-space-element-button"',
     text: 'Yes'
   },
   secondButton: {
-    attributes: 'data-function="close-remove-space-element-dialog"',
+    attributes: 'data-function="close-remove-space-element-dialog-button"',
     text: 'No'
   }
 })
 
 export const getFormDialogProps = () => ({
   variant: DIALOG_VARIANTS_ENUM.FORM,
-  dialogAttributes: 'data-function="edit-dialog"',
-  formAttributes: 'data-function="submit-data"',
+  dialogAttributes: 'data-function="show-edit-space-element-dialog"',
+  formAttributes: 'data-function="edit-space-element-submit-data"',
   elements: [
     {
       variant: FORM_FIELDS_VARIANTS_ENUM.INPUT,
