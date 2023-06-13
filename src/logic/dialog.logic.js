@@ -1,29 +1,19 @@
 import { spaceNameValidation } from '@validations/space.validation'
-import { PRIORITIES, PRIORITIES_SELECT_OPTIONS, TASKS_STATUS_ENUM } from '@utils/constants'
+import { PRIORITIES, PRIORITIES_SELECT_OPTIONS, TASKS_STATUS, TASKS_STATUS_ENUM } from '@utils/constants'
 import SpaceElement, {
   SPACE_ELEMENT_VARIANTS_ENUM
 } from '@components/SpaceElement'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { nanoid } from 'nanoid'
-import { editSpaceDialogListeners, removeSpaceDialogListeners } from '@listeners/dialog.listeners'
-import { outsideClick, showDialogClick } from './shared'
+import { editSpaceDialogListeners, removeSpaceDialogListeners, removeTaskDialogListeners } from '@listeners/dialog.listeners'
+import { outsideClick, showDialogClick, closeDialogClick } from './shared'
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import { taskNameValidation } from '@validations/task.validation'
 import TaskElement from '@components/TaskElement'
 
 export const newSpaceDialogLogic = {
   showDialogClick,
-  closeDialogClick: ($dialog) => () => {
-    const $dialogValidationErrorMessage = document.querySelector(
-      '[data-function="input-validat ion-error"]'
-    )
-
-    $dialog.close()
-
-    if ($dialogValidationErrorMessage.textContent !== '') {
-      $dialogValidationErrorMessage.textContent = ''
-    }
-  },
+  closeDialogClick,
   saveDialogSubmit: ($dialog) => (e) => {
     e.preventDefault()
     const $spacesContainer = document.querySelector('#spaces-container')
@@ -48,13 +38,13 @@ export const newSpaceDialogLogic = {
       $dialogValidationErrorMessage.textContent = ''
     }
 
-    const PRIORITY = PRIORITIES[newSpacePriority.value]
+    const priority = PRIORITIES[newSpacePriority.value]
     const id = `a${nanoid()}`
 
     $spacesContainer.innerHTML += SpaceElement({
       id,
       name: newSpaceName.value,
-      iconColor: PRIORITY.COLOR,
+      iconColor: priority.color,
       tasks: [],
       variant: SPACE_ELEMENT_VARIANTS_ENUM.FUNCTIONAL
     })
@@ -62,7 +52,7 @@ export const newSpaceDialogLogic = {
     const newSpace = {
       id,
       name: newSpaceName.value,
-      priority: PRIORITY.LABEL,
+      priority: newSpacePriority.value,
       tasks: []
     }
 
@@ -135,15 +125,15 @@ export const editSpaceDialogLogic = {
       $dialogValidationErrorMessage.textContent = ''
     }
 
-    const PRIORITY = PRIORITIES[spacePriority.value]
+    const priority = PRIORITIES[spacePriority.value]
 
     $spaceElementName.textContent = spaceName.value
     $spaceElementPriority.innerHTML = Icon({
       variant: ICON_VARIANTS_ENUM.FLAG,
-      props: `width=30px stroke-width="0.8" fill=${PRIORITY.COLOR} color=${PRIORITY.COLOR} data-function="show-space-element-priority"`
+      props: `width=30px stroke-width="0.8" fill=${priority.color} color=${priority.color} data-function="show-space-element-priority"`
     })
 
-    dispatch({ action: GLOBAL_ACTIONS_ENUM.EDIT_SPACE, payload: { id, name: spaceName.value, priority: PRIORITY.LABEL } })
+    dispatch({ action: GLOBAL_ACTIONS_ENUM.EDIT_SPACE, payload: { id, name: spaceName.value, priority: spacePriority.value } })
 
     $dialogSpaceNameInput.value = ''
     $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
@@ -156,12 +146,14 @@ export const editSpaceDialogLogic = {
 
 export const newTaskDialogLogic = {
   showDialogClick,
-  saveDialogSubmit: ($dialog, spaceId) => (e) => {
+  saveDialogSubmit: ($dialog) => (e) => {
     e.preventDefault()
+    const { state: { focusedSpace } } = globalStore()
     const $dialogValidationErrorMessage = document.querySelector(
       '#new-task-dialog [data-function="input-validation-error"]'
     )
     const $backlogTasks = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks"]`)
+    const $backlogTasksCounter = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks-counter"]`)
     const $dialogTaskNameInput = document.querySelector('#new-task-name')
 
     const { newTaskName } = e.target
@@ -184,23 +176,42 @@ export const newTaskDialogLogic = {
 
     const { dispatch } = globalStore()
 
-    $backlogTasks.innerHTML += TaskElement({ creationDate, id: taskId, name: newTaskName.value, iconColor: PRIORITIES.NOT_ASSIGNED.COLOR })
+    $backlogTasks.innerHTML += TaskElement({ creationDate, id: taskId, name: newTaskName.value, iconColor: PRIORITIES.NOT_ASSIGNED.color, statusColor: TASKS_STATUS.BACKLOG.color })
+
+    const updatedCounterValue = Number($backlogTasksCounter.dataset.counter) + 1
+    $backlogTasksCounter.setAttribute('data-counter', updatedCounterValue)
+    $backlogTasksCounter.innerHTML = `${updatedCounterValue} ${updatedCounterValue === 1 ? 'Task' : 'Tasks'}`
 
     const newTask = {
       id: taskId,
       name: newTaskName.value,
       creationDate,
       status: TASKS_STATUS_ENUM.BACKLOG,
-      priority: PRIORITIES.NOT_ASSIGNED.LABEL
+      priority: 'NOT_ASSIGNED'
     }
 
-    dispatch({ action: GLOBAL_ACTIONS_ENUM.ADD_TASK, payload: { id: spaceId, task: newTask } })
+    dispatch({ action: GLOBAL_ACTIONS_ENUM.ADD_TASK, payload: { spaceId: focusedSpace.id, task: newTask } })
 
     $dialogTaskNameInput.value = ''
 
     $dialog.close()
+    removeTaskDialogListeners()
   },
-
+  closeDialogClick,
   outsideClick
 
+}
+
+export const removeTaskDialogLogic = {
+  showDialogClick,
+  remove: (taskId) => () => {
+    const { state: { focusedSpace }, dispatch } = globalStore()
+
+    const $task = document.querySelector(`#${taskId}`)
+
+    $task.remove()
+    dispatch({ action: GLOBAL_ACTIONS_ENUM.REMOVE_TASK, payload: { spaceId: focusedSpace.id, taskId } })
+  },
+  closeDialogClick,
+  outsideClick
 }
