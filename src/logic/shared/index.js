@@ -7,3 +7,14 @@ export const outsideClick = (dialog) => (e) => {
 export const showDialogClick = ($dialog) => (e) => {
   $dialog.showModal()
 }
+
+export const closeDialogClick = ($dialog, dialogId) => (e) => {
+  const $dialogValidationErrorMessage = document.querySelector(
+    `${dialogId} [data-function="input-validation-error"]`
+  )
+
+  $dialog.close()
+  if ($dialogValidationErrorMessage.textContent !== '') {
+    $dialogValidationErrorMessage.textContent = ''
+  }
+}
