@@ -1,13 +1,16 @@
 import Dialog, { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
 import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
+import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import Tasks from '@components/Tasks'
-import { newTaskDialogListeners } from '@listeners/dialog.listeners'
+import { newTaskDialogListeners, removeTaskDialogListeners } from '@listeners/dialog.listeners'
 import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
-import { TASKS_STATUS } from '@utils/constants'
+import { PRIORITIES, TASKS_STATUS } from '@utils/constants'
 import '@views/Detail/style.css'
 
-export const detailController = (id) => {
+export const detailController = () => {
+  const { state: { focusedSpace }, dispatch } = globalStore()
+
   syncGlobalStateWithLocalStorage(
   )
   const $pageHeaderContent = document.querySelector('#pageHeaderContent')
@@ -16,7 +19,7 @@ export const detailController = (id) => {
     <button id="new-task" class="page-header-button">new task +</button>
     ${Dialog({
       variant: DIALOG_VARIANTS_ENUM.FORM,
-      dialogAttributes: `id="new-task-dialog" data-id=${id}`,
+      dialogAttributes: 'id="new-task-dialog"',
       formAttributes: 'id="new-task-form"',
       elements: [
         {
@@ -41,15 +44,13 @@ export const detailController = (id) => {
   `
 
   const $tasksContainer = document.querySelector('#tasks-container')
-  const { dispatch } = globalStore()
 
-  const space = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_SPACE_BY_ID, payload: { id } })
-
-  TASKS_STATUS.forEach((status, idx) => {
-    const tasks = space.tasks.filter(task => task.status === status.name)
+  Object.entries(TASKS_STATUS).forEach(([key, value]) => {
+    const tasks = focusedSpace.tasks.filter(task => task.status === key)
     $tasksContainer.innerHTML += Tasks({
-      status,
-      idx,
+      color: value.color,
+      id: key,
+      label: value.label,
       tasks
     })
   })
@@ -85,5 +86,55 @@ export const detailController = (id) => {
     })
   })
 
+  const $$showTaskElementPriorityButton = document.querySelectorAll('[data-function="show-task-element-priority-button"]')
+
+  $$showTaskElementPriorityButton.forEach($showTaskElementPriorityButton => {
+    $showTaskElementPriorityButton.addEventListener('click', () => {
+      const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
+
+      const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
+      const $transparentBackground = document.querySelector('#transparent-background')
+      const $showTooltipText = document.querySelector(`#${taskId} [data-function="show-tooltip-text"]`)
+
+      const $showDropdownContent = document.querySelector(`#${taskId} [data-function="show-dropdown-content"]`)
+      $transparentBackground.classList.remove('visually-hidden')
+      $showTooltipText.classList.add('visibility-hidden')
+      $showDropdownContent.classList.add('display-block')
+
+      $transparentBackground.addEventListener('click', () => {
+        $transparentBackground.classList.add('visually-hidden')
+        $showTooltipText.classList.remove('visibility-hidden')
+        $showDropdownContent.classList.remove('display-block')
+      })
+
+      const $$setTaskElementPriority = document.querySelectorAll(`#${taskId} [data-function="set-task-element-priority"]`)
+
+      const $clearTaskElementPriority = document.querySelector(`#${taskId} [data-function="clear-task-element-priority"]`)
+
+      $$setTaskElementPriority.forEach($setTaskElementPriority => {
+        $setTaskElementPriority.addEventListener('click', () => {
+          const priorityKey = $setTaskElementPriority.getAttribute('data-priority-key')
+          const priority = PRIORITIES[priorityKey]
+
+          dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_PRIORITY, payload: { spaceId: focusedSpace.id, taskId, priority: priorityKey } })
+
+          const $showTaskPriority = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+
+          $showTaskPriority.style.fill = priority.color
+          $showTaskPriority.style.color = priority.color
+        })
+      })
+
+      $clearTaskElementPriority.addEventListener('click', () => {
+        dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_PRIORITY, payload: { spaceId: focusedSpace.id, taskId, priority: PRIORITIES.NOT_ASSIGNED } })
+
+        const $showTaskPriority = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+        $showTaskPriority.style.fill = 'none'
+        $showTaskPriority.style.color = '#000'
+      })
+    })
+  })
+
   newTaskDialogListeners()
+  removeTaskDialogListeners()
 }
