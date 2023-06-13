@@ -2,7 +2,8 @@ import {
   removeSpaceDialogLogic,
   newSpaceDialogLogic,
   editSpaceDialogLogic,
-  newTaskDialogLogic
+  newTaskDialogLogic,
+  removeTaskDialogLogic
 } from '@logic/dialog.logic'
 
 export function newSpaceDialogListeners() {
@@ -17,7 +18,7 @@ export function newSpaceDialogListeners() {
   )
   $closeDialogButton?.addEventListener(
     'click',
-    newSpaceDialogLogic.closeDialogClick($dialog)
+    newSpaceDialogLogic.closeDialogClick($dialog, '#new-space-dialog')
   )
   $dialog?.addEventListener('click', newSpaceDialogLogic.outsideClick($dialog))
   $dialogForm?.addEventListener(
@@ -27,22 +28,22 @@ export function newSpaceDialogListeners() {
 }
 
 export function removeSpaceDialogListeners() {
-  const $openDialogButton = document.querySelectorAll(
+  const $$showRemoveSpaceElementDialog = document.querySelectorAll(
     'button[data-function="show-remove-space-element-dialog"]'
   )
-  $openDialogButton.forEach(($el) => {
-    const id = $el.getAttribute('data-id')
+  $$showRemoveSpaceElementDialog.forEach(($showRemoveSpaceElementDialog) => {
+    const id = $showRemoveSpaceElementDialog.getAttribute('data-id')
     const $dialog = document.querySelector(
-      `#${id}  dialog[data-function="remove-dialog"]`
+      `#${id} dialog[data-function="show-remove-space-element-dialog"]`
     )
     const $removeSpaceElementDialogButton = document.querySelector(
-      `#${id} button[data-function="remove-space-element"]`
+      `#${id} button[data-function="remove-space-element-button"]`
     )
     const $closeDialogButton = document.querySelector(
-      `#${id}  button[data-function="close-remove-space-element-dialog"]`
+      `#${id}  button[data-function="close-remove-space-element-dialog-button"]`
     )
 
-    $el?.addEventListener(
+    $showRemoveSpaceElementDialog?.addEventListener(
       'click',
       removeSpaceDialogLogic.showDialogClick($dialog)
     )
@@ -65,22 +66,22 @@ export function removeSpaceDialogListeners() {
 }
 
 export function editSpaceDialogListeners() {
-  const $editSpaceElementButton = document.querySelectorAll(
+  const $$editSpaceElementButton = document.querySelectorAll(
     'button[data-function="edit-space-element"]'
   )
 
-  $editSpaceElementButton.forEach(($el) => {
-    const id = $el.getAttribute('data-id')
+  $$editSpaceElementButton.forEach(($editSpaceElementButton) => {
+    const id = $editSpaceElementButton.getAttribute('data-id')
     const $dialog = document.querySelector(
-      `#${id} > dialog[data-function="edit-dialog"]`
+      `#${id} > dialog[data-function="show-edit-space-element-dialog"]`
     )
 
-    const $dialogForm = document.querySelector(`#${id} [data-function="submit-data"]`)
+    const $dialogForm = document.querySelector(`#${id} [data-function="edit-space-element-submit-data"]`)
 
     const $closeDialogButton = document.querySelector(
       `#${id} button[data-function="close-edit-space-element-dialog"]`
     )
-    $el?.addEventListener('click', editSpaceDialogLogic.showDialogClick($dialog))
+    $editSpaceElementButton?.addEventListener('click', editSpaceDialogLogic.showDialogClick($dialog))
 
     $closeDialogButton?.addEventListener('click', editSpaceDialogLogic.closeDialogClick($dialog))
 
@@ -93,20 +94,38 @@ export function editSpaceDialogListeners() {
 export function newTaskDialogListeners() {
   const $dialog = document.querySelector('#new-task-dialog')
   const $openDialogButton = document.querySelector('#new-task')
-  // const $closeDialogButton = document.querySelector('#cancelNewTaskButton')
+  const $closeDialogButton = document.querySelector('#cancel-new-task-button')
   const $dialogForm = document.querySelector('#new-task-form')
-  const spaceId = $dialog.getAttribute('data-id')
   $openDialogButton?.addEventListener(
     'click',
     newTaskDialogLogic.showDialogClick($dialog)
   )
-  // $closeDialogButton?.addEventListener(
-  //   'click',
-  //   newSpaceDialogLogic.closeDialogClick($dialog)
-  // )
+  $closeDialogButton?.addEventListener(
+    'click',
+    newTaskDialogLogic.closeDialogClick($dialog, '#new-task-dialog')
+  )
   $dialog?.addEventListener('click', newTaskDialogLogic.outsideClick($dialog))
   $dialogForm?.addEventListener(
     'submit',
-    newTaskDialogLogic.saveDialogSubmit($dialog, spaceId)
+    newTaskDialogLogic.saveDialogSubmit($dialog)
   )
+}
+
+export function removeTaskDialogListeners() {
+  const $$showRemoveTaskElementDialog = document.querySelectorAll('[data-function="show-remove-task-element-dialog"]')
+
+  $$showRemoveTaskElementDialog.forEach($showRemoveTaskElementDialog => {
+    const taskId = $showRemoveTaskElementDialog.getAttribute('data-id')
+    const $dialog = document.querySelector(`#${taskId} dialog[data-function="remove-task-element-dialog"]`)
+    const $removeTaskDialogButton = document.querySelector(`#${taskId} button[data-function="remove-task-element-button"]`)
+    const $closeDialogButton = document.querySelector(`#${taskId} button[data-function="close-remove-task-element-dialog-button"]`)
+
+    $showRemoveTaskElementDialog?.addEventListener('click', removeTaskDialogLogic.showDialogClick($dialog))
+
+    $closeDialogButton?.addEventListener('click', removeTaskDialogLogic.closeDialogClick($dialog))
+
+    $removeTaskDialogButton?.addEventListener('click', removeTaskDialogLogic.remove(taskId))
+
+    $dialog?.addEventListener('click', removeTaskDialogLogic.outsideClick($dialog))
+  })
 }
