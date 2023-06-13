@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2px 4px;
 }
 
 .functional-space-element:hover {
@@ -28,10 +29,6 @@
 
 .functional-space-element-first-button:hover {
   color: blue;
-}
-
-.functionalSpaceElementSecondButton:hover {
-  color: #f71310;
 }
 
 .functional-space-element-title {

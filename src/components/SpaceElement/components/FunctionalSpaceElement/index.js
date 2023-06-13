@@ -22,7 +22,7 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
       props: 'width=10px stroke-width="1.2" fill="none"'
     })}
     </button>
-    <button class="functionalSpaceElementSecondButton" data-function="show-remove-space-element-dialog" data-id=${id}>
+    <button class="remove-element" data-function="show-remove-space-element-dialog" data-id=${id}>
     ${Icon({
       variant: ICON_VARIANTS_ENUM.TRASH,
       props: 'width=10px stroke-width="1" fill="none" '
