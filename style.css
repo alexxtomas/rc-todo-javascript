@@ -87,11 +87,20 @@ dialog::backdrop {
   clip-path: inset(50%);
   white-space: nowrap;
 }
-
-
-
 .validation-error {
   font-size: 8px;
   color: #f71310;
   padding-left: 4px;
+}
+.remove-element:hover {
+  color: #f71310;
+}
+.transparent-background {
+  background-color: transparent;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
