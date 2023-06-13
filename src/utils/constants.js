@@ -1,57 +1,66 @@
+import { nanoid } from 'nanoid'
+
 export const PRIORITIES = {
   URGENT: {
-    LABEL: 'Urgent',
-    VALUE: 3,
-    COLOR: '#FF0000'
+    label: 'Urgent',
+    value: 3,
+    color: '#FF0000'
   },
   HIGH: {
-    LABEL: 'High',
-    VALUE: 2,
-    COLOR: '#FFA500'
+    label: 'High',
+    value: 2,
+    color: '#FFA500'
   },
   NORMAL: {
-    LABEL: 'Normal',
-    VALUE: 1,
-    COLOR: '#FFFF00'
+    label: 'Normal',
+    value: 1,
+    color: '#EBEA0D'
   },
   LOW: {
-    LABEL: 'Low',
-    VALUE: 0,
-    COLOR: '#008000'
+    label: 'Low',
+    value: 0,
+    color: '#008000'
   },
   NOT_ASSIGNED: {
-    LABEL: 'Not Assigned',
-    VALUE: 4,
-    COLOR: 'none'
+    label: 'Not Assigned',
+    value: 4,
+    color: 'none'
   }
 }
 
-export const PRIORITIES_LABELS = Object.values(PRIORITIES).map(
-  ({ LABEL }) => LABEL
-)
-
-export const PRIORITIES_SELECT_OPTIONS = Object.entries(PRIORITIES).map(
+export const PRIORITIES_SELECT_OPTIONS = Object.entries(PRIORITIES).filter(([key, value]) => {
+  return value.label !== 'Not Assigned'
+}).map(
   ([key, value]) => ({
     value: key,
-    label: value.LABEL
+    label: value.label
   })
 )
 
-export const TASKS_STATUS = [
-  { name: 'Backlog', color: 'rgba(0, 0, 0, 0.1)' }, {
-    name: 'In Progress',
+export const TASKS_STATUS = {
+  BACKLOG: {
+    label: 'Backlog',
+    color: '#0000001a'
+  },
+  IN_PROGRESS: {
+    label: 'In Progress',
     color: '#FFFF00'
-  }, {
-    name: 'Blocked',
-    color: '#FF0000'
-  }, {
-    name: 'Done',
+  },
+  BLOCKED: {
+    label: 'Blocked',
+    color: '#FF0000',
+    id: `a${nanoid()}`
+  },
+  DONE: {
+    label: 'Done',
     color: '#12EE2A'
-  }]
+  }
+}
 
 export const TASKS_STATUS_ENUM = {
-  BACKLOG: 'Backlog',
-  IN_PROGRESS: 'In Progress',
-  BLOCKED: 'Blocked',
-  DONE: 'Done'
+  BACKLOG: 'BACKLOG',
+  IN_PROGRESS: 'IN_PROGRESS',
+  BLOCKED: 'BLOCKED',
+  DONE: 'DONE'
+
 }
