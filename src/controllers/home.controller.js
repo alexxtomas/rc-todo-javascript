@@ -34,7 +34,7 @@ export const homeController = () => {
             text: 'Space priority'
           },
           attributes: 'id="new-space-priority" name="newSpacePriority"',
-          options: PRIORITIES_SELECT_OPTIONS.filter(el => el.label !== 'Not Assigned')
+          options: PRIORITIES_SELECT_OPTIONS
         }
       ],
       firstButton: {
@@ -57,12 +57,13 @@ export const homeController = () => {
     const $ul = document.querySelector('#spaces-container')
     $ul.innerHTML += `
        ${spaces
-         .map(({ name, priority, id, tasks }, idx) => {
+         .map(({ name, priority, id, tasks }) => {
+          const iconColor = PRIORITIES[priority].color
            return SpaceElement({
              id,
              name,
              tasks,
-             iconColor: PRIORITIES[priority.toUpperCase()].COLOR,
+             iconColor,
              variant: SPACE_ELEMENT_VARIANTS_ENUM.FUNCTIONAL
            })
          })
@@ -75,12 +76,12 @@ export const homeController = () => {
 
   $prioritiesAsideContainer.innerHTML += `
      ${Object.values(PRIORITIES)
-        .filter(el => el.LABEL !== 'Not Assigned')
-       .map((el) => {
+        .filter(priority => priority.label !== 'Not Assigned')
+       .map((priority) => {
          return `
         ${SpaceElement({
-          name: el.LABEL,
-          iconColor: el.COLOR,
+          name: priority.label,
+          iconColor: priority.color,
           variant: SPACE_ELEMENT_VARIANTS_ENUM.NORMAL
         })}
        `
