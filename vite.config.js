@@ -12,7 +12,9 @@ export default defineConfig({
       '@listeners': path.resolve(__dirname, './src/listeners'),
       '@logic': path.resolve(__dirname, './src/logic'),
       '@store': path.resolve(__dirname, './src/store'),
-      '@controllers': path.resolve(__dirname, './src/controllers')
+      '@controllers': path.resolve(__dirname, './src/controllers'),
+      '@content-loaders': path.resolve(__dirname, './src/content-loaders')
+
     }
   }
 })
