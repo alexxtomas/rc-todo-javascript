@@ -21,7 +21,7 @@ const Tasks = ({ color, id, label, tasks }) => {
   <ul data-function="show-tasks" >
     ${tasks.map(({ id: taskId, creationDate, name, priority }) => {
       const iconColor = PRIORITIES[priority].color
-      return TaskElement({ id: taskId, creationDate, iconColor, name, statusColor: color })
+      return TaskElement({ id: taskId, creationDate, iconColor, name, statusColor: color, statusId: id })
     }).join('').replaceAll(',', '')}
   
 
