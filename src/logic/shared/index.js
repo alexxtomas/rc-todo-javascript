@@ -5,13 +5,15 @@ export const dialogSharedLogic = {
     $dialog.showModal()
   },
   closeDialogClick: ($dialog, dialogSelector) => () => {
-    const $dialogValidationErrorMessage = document.querySelector(
-      `${dialogSelector} [data-function="input-validation-error"]`
-    )
-
     $dialog.close()
-    if ($dialogValidationErrorMessage.textContent !== '') {
-      $dialogValidationErrorMessage.textContent = ''
+
+    if (dialogSelector) {
+      const $dialogValidationErrorMessage = document.querySelector(
+        `${dialogSelector} [data-function="input-validation-error"]`
+      )
+      if ($dialogValidationErrorMessage.textContent !== '') {
+        $dialogValidationErrorMessage.textContent = ''
+      }
     }
   },
   outsideClick: ($dialog) => (e) => {
