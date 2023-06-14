@@ -169,7 +169,7 @@ export const newTaskDialogLogic = {
 
     const { dispatch } = globalStore()
 
-    $backlogTasks.innerHTML += TaskElement({ creationDate, id: taskId, name: newTaskName.value, iconColor: PRIORITIES.NOT_ASSIGNED.color, statusColor: TASKS_STATUS.BACKLOG.color })
+    $backlogTasks.innerHTML += TaskElement({ creationDate, id: taskId, name: newTaskName.value, iconColor: PRIORITIES.NOT_ASSIGNED.color, statusColor: TASKS_STATUS.BACKLOG.color, statusId: TASKS_STATUS_ENUM.BACKLOG })
 
     const updatedCounterValue = Number($backlogTasksCounter.dataset.counter) + 1
     $backlogTasksCounter.setAttribute('data-counter', updatedCounterValue)
@@ -202,6 +202,13 @@ export const removeTaskDialogLogic = {
     const { state: { focusedSpace }, dispatch } = globalStore()
 
     const $task = document.querySelector(`#${taskId}`)
+
+    const statusKey = $task.getAttribute('data-status')
+    const $statusCounter = document.querySelector(`#${statusKey} [data-function="show-tasks-counter"]`)
+
+    const updatedCounterValue = Number($statusCounter.getAttribute('data-counter')) - 1
+    $statusCounter.setAttribute('data-counter', updatedCounterValue)
+    $statusCounter.innerHTML = `${updatedCounterValue} ${updatedCounterValue === 1 ? 'Task' : 'Tasks'}`
 
     $task.remove()
     dispatch({ action: GLOBAL_ACTIONS_ENUM.REMOVE_TASK, payload: { spaceId: focusedSpace.id, taskId } })
