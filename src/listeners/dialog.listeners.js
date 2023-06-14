@@ -9,7 +9,7 @@ import {
 export function newSpaceDialogListeners() {
   const $dialog = document.querySelector('#new-space-dialog')
   const $openDialogButton = document.querySelector('#new-space')
-  const $closeDialogButton = document.querySelector('#cancel-new-space-button')
+  const $closeDialogButton = document.querySelector('#close-new-space-dialog-button')
   const $dialogForm = document.querySelector('#new-space-form')
 
   $openDialogButton?.addEventListener(
@@ -83,7 +83,7 @@ export function editSpaceDialogListeners() {
     )
     $editSpaceElementButton?.addEventListener('click', editSpaceDialogLogic.showDialogClick($dialog))
 
-    $closeDialogButton?.addEventListener('click', editSpaceDialogLogic.closeDialogClick($dialog))
+    $closeDialogButton?.addEventListener('click', editSpaceDialogLogic.closeDialogClick($dialog, `#${id} > dialog[data-function="show-edit-space-element-dialog"]`))
 
     $dialog?.addEventListener('click', editSpaceDialogLogic.outsideClick($dialog))
 

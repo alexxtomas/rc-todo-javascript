@@ -1,15 +1,18 @@
 import { spaceNameValidation } from '@validations/space.validation'
-import { PRIORITIES, PRIORITIES_SELECT_OPTIONS, TASKS_STATUS, TASKS_STATUS_ENUM } from '@utils/constants'
+import { PRIORITIES, PRIORITIES_ENUM, PRIORITIES_SELECT_OPTIONS, TASKS_STATUS, TASKS_STATUS_ENUM } from '@utils/constants'
 import SpaceElement, {
   SPACE_ELEMENT_VARIANTS_ENUM
 } from '@components/SpaceElement'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { nanoid } from 'nanoid'
 import { editSpaceDialogListeners, removeSpaceDialogListeners, removeTaskDialogListeners } from '@listeners/dialog.listeners'
-import { outsideClick, showDialogClick, closeDialogClick } from './shared'
+import { dialogSharedLogic } from './shared'
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import { taskNameValidation } from '@validations/task.validation'
 import TaskElement from '@components/TaskElement'
+import { taskPriorityDropdownListeners } from '@listeners/dropwdown.listeners'
+
+const { outsideClick, showDialogClick, closeDialogClick } = dialogSharedLogic
 
 export const newSpaceDialogLogic = {
   showDialogClick,
@@ -82,23 +85,13 @@ export const removeSpaceDialogLogic = {
     $spaceElement.remove()
     dispatch({ action: GLOBAL_ACTIONS_ENUM.REMOVE_SPACE, payload: { id } })
   },
-  closeDialogClick: ($dialog) => () => {
-    $dialog.close()
-  },
+  closeDialogClick,
   outsideClick
 }
 
 export const editSpaceDialogLogic = {
   showDialogClick,
-  closeDialogClick: ($dialog) => () => {
-    const $dialogValidationErrorMessage = document.querySelector(
-      '[data-function="input-validat ion-error"]'
-    )
-    $dialog.close()
-    if ($dialogValidationErrorMessage.textContent !== '') {
-      $dialogValidationErrorMessage.textContent = ''
-    }
-  },
+  closeDialogClick,
   saveDialogSubmit: ($dialog, id) => (e) => {
     e.preventDefault()
     const $dialogValidationErrorMessage = document.querySelector(
@@ -187,7 +180,7 @@ export const newTaskDialogLogic = {
       name: newTaskName.value,
       creationDate,
       status: TASKS_STATUS_ENUM.BACKLOG,
-      priority: 'NOT_ASSIGNED'
+      priority: PRIORITIES_ENUM.NOT_ASSIGNED
     }
 
     dispatch({ action: GLOBAL_ACTIONS_ENUM.ADD_TASK, payload: { spaceId: focusedSpace.id, task: newTask } })
@@ -196,6 +189,7 @@ export const newTaskDialogLogic = {
 
     $dialog.close()
     removeTaskDialogListeners()
+    taskPriorityDropdownListeners()
   },
   closeDialogClick,
   outsideClick

@@ -1,15 +1,15 @@
 import Dialog, { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
 import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
-import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import Tasks from '@components/Tasks'
 import { newTaskDialogListeners, removeTaskDialogListeners } from '@listeners/dialog.listeners'
+import { taskPriorityDropdownListeners } from '@listeners/dropwdown.listeners'
 import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
-import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
-import { PRIORITIES, TASKS_STATUS } from '@utils/constants'
+import { globalStore } from '@store/global.state'
+import { TASKS_STATUS } from '@utils/constants'
 import '@views/Detail/style.css'
 
 export const detailController = () => {
-  const { state: { focusedSpace }, dispatch } = globalStore()
+  const { state: { focusedSpace } } = globalStore()
 
   syncGlobalStateWithLocalStorage(
   )
@@ -86,54 +86,160 @@ export const detailController = () => {
     })
   })
 
-  const $$showTaskElementPriorityButton = document.querySelectorAll('[data-function="show-task-element-priority-button"]')
+  // const $$showTaskElementPriorityButton = document.querySelectorAll('[data-function="show-task-element-priority-button"]')
 
-  $$showTaskElementPriorityButton.forEach($showTaskElementPriorityButton => {
-    $showTaskElementPriorityButton.addEventListener('click', () => {
-      const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
+  // $$showTaskElementPriorityButton.forEach($showTaskElementPriorityButton => {
+  //   $showTaskElementPriorityButton.addEventListener('click', (e) => {
+  //     e.stopPropagation()
+  //     const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
+  //     const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
+  //     const $transparentBackground = document.querySelector('#transparent-background')
+  //     const $showTooltipText = document.querySelector(`#${taskId} [data-function="show-tooltip-text"]`)
+  //     const $showDropdownContent = document.querySelector(`#${taskId} [data-function="show-dropdown-content"]`)
 
-      const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
-      const $transparentBackground = document.querySelector('#transparent-background')
-      const $showTooltipText = document.querySelector(`#${taskId} [data-function="show-tooltip-text"]`)
+  //     $transparentBackground.classList.remove('visually-hidden')
+  //     $showTooltipText.classList.add('visibility-hidden')
+  //     $showDropdownContent.classList.add('display-block')
 
-      const $showDropdownContent = document.querySelector(`#${taskId} [data-function="show-dropdown-content"]`)
-      $transparentBackground.classList.remove('visually-hidden')
-      $showTooltipText.classList.add('visibility-hidden')
-      $showDropdownContent.classList.add('display-block')
+  //     $transparentBackground.addEventListener('click', () => {
+  //       $transparentBackground.classList.add('visually-hidden')
+  //       $showTooltipText.classList.remove('visibility-hidden')
+  //       $showDropdownContent.classList.remove('display-block')
+  //     })
 
-      $transparentBackground.addEventListener('click', () => {
-        $transparentBackground.classList.add('visually-hidden')
-        $showTooltipText.classList.remove('visibility-hidden')
-        $showDropdownContent.classList.remove('display-block')
-      })
+  //     const $$setTaskElementPriority = document.querySelectorAll(`#${taskId} [data-function="set-task-element-priority"]`)
 
-      const $$setTaskElementPriority = document.querySelectorAll(`#${taskId} [data-function="set-task-element-priority"]`)
+  //     const $clearTaskElementPriority = document.querySelector(`#${taskId} [data-function="clear-task-element-priority"]`)
 
-      const $clearTaskElementPriority = document.querySelector(`#${taskId} [data-function="clear-task-element-priority"]`)
+  //     $$setTaskElementPriority.forEach($setTaskElementPriority => {
+  //       $setTaskElementPriority.addEventListener('click', (e) => {
+  //         e.stopPropagation()
+  //         const $transparentBackground = document.querySelector('#transparent-background')
+  //         const $showTooltipText = document.querySelector(`#${taskId} [data-function="show-tooltip-text"]`)
+  //         const $showDropdownContent = document.querySelector(`#${taskId} [data-function="show-dropdown-content"]`)
+  //         const priorityKey = $setTaskElementPriority.getAttribute('data-priority-key')
+  //         const priority = PRIORITIES[priorityKey]
 
-      $$setTaskElementPriority.forEach($setTaskElementPriority => {
-        $setTaskElementPriority.addEventListener('click', () => {
-          const priorityKey = $setTaskElementPriority.getAttribute('data-priority-key')
-          const priority = PRIORITIES[priorityKey]
+  //         if (task.priority === priorityKey) {
+  //           $transparentBackground.classList.add('visually-hidden')
+  //           $showTooltipText.classList.remove('visibility-hidden')
+  //           $showDropdownContent.classList.remove('display-block')
+  //           return
+  //         }
 
-          dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_PRIORITY, payload: { spaceId: focusedSpace.id, taskId, priority: priorityKey } })
+  //         dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_PRIORITY, payload: { spaceId: focusedSpace.id, taskId, priority: priorityKey } })
 
-          const $showTaskPriority = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+  //         const $showTaskPriority = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
 
-          $showTaskPriority.style.fill = priority.color
-          $showTaskPriority.style.color = priority.color
-        })
-      })
+  //         $showTaskPriority.style.fill = priority.color
+  //         $showTaskPriority.style.color = priority.color
 
-      $clearTaskElementPriority.addEventListener('click', () => {
-        dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_PRIORITY, payload: { spaceId: focusedSpace.id, taskId, priority: PRIORITIES.NOT_ASSIGNED } })
+  //         console.log($transparentBackground, $showTooltipText, $showDropdownContent)
 
-        const $showTaskPriority = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
-        $showTaskPriority.style.fill = 'none'
-        $showTaskPriority.style.color = '#000'
-      })
-    })
-  })
+  //         $transparentBackground.classList.add('visually-hidden')
+  //         $showTooltipText.classList.remove('visibility-hidden')
+  //         $showDropdownContent.classList.remove('display-block')
+  //       })
+  //     })
+
+  //     $clearTaskElementPriority.addEventListener('click', (e) => {
+  //       e.stopPropagation()
+  //       if (task.priority === PRIORITIES_ENUM.NOT_ASSIGNED) {
+  //         $transparentBackground.classList.add('visually-hidden')
+  //         $showTooltipText.classList.remove('visibility-hidden')
+  //         $showDropdownContent.classList.remove('display-block')
+  //         return
+  //       }
+  //       dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_PRIORITY, payload: { spaceId: focusedSpace.id, taskId, priority: PRIORITIES_ENUM.NOT_ASSIGNED } })
+
+  //       const $showTaskPriority = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+  //       $showTaskPriority.style.fill = 'none'
+  //       $showTaskPriority.style.color = '#000'
+
+  //       $transparentBackground.classList.add('visually-hidden')
+  //       $showTooltipText.classList.remove('visibility-hidden')
+  //       $showDropdownContent.classList.remove('display-block')
+  //     })
+  //   })
+  // })
+  // const closeDropdown = ({ $tooltip, $dropdown }) => () => {
+  //   const $transparentBackground = document.querySelector('#transparent-background')
+
+  //   $transparentBackground.classList.add('visually-hidden')
+  //   $tooltip.classList.remove('visibility-hidden')
+  //   $dropdown.classList.remove('display-block')
+  // }
+
+  // function showDropDown({ $tooltip, $dropdown }) {
+  //   const $transparentBackground = document.querySelector('#transparent-background')
+
+  //   $transparentBackground.classList.remove('visually-hidden')
+  //   $tooltip.classList.add('visibility-hidden')
+  //   $dropdown.classList.add('display-block')
+
+  //   transparentBackgroundListeners({ onClick: closeDropdown, props: { $tooltip, $dropdown } })
+  // }
+
+  // function changeTaskPriority({ priorityKey, style, $svg, taskId }) {
+  //   const { dispatch, state: { focusedSpace } } = globalStore()
+
+  //   dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_PRIORITY, payload: { spaceId: focusedSpace.id, taskId, priority: priorityKey } })
+
+  //   $svg.style.fill = style.fill
+  //   $svg.style.color = style.color
+  // }
+
+  // const $$showTaskElementPriorityButton = document.querySelectorAll('[data-function="show-task-element-priority-button"]')
+
+  // $$showTaskElementPriorityButton.forEach($showTaskElementPriorityButton => {
+  //   $showTaskElementPriorityButton.addEventListener('click', (e) => {
+  //     e.stopPropagation()
+  //     const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
+  //     const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
+  //     const $tooltip = document.querySelector(`#${taskId} [data-function="show-tooltip-text"]`)
+  //     const $dropdown = document.querySelector(`#${taskId} [data-function="show-dropdown-content"]`)
+
+  //     showDropDown({ $dropdown, $tooltip })
+
+  //     const $$setTaskElementPriority = document.querySelectorAll(`#${taskId} [data-function="set-task-element-priority"]`)
+
+  //     const $clearTaskElementPriority = document.querySelector(`#${taskId} [data-function="clear-task-element-priority"]`)
+
+  //     $$setTaskElementPriority.forEach($setTaskElementPriority => {
+  //       $setTaskElementPriority.addEventListener('click', (e) => {
+  //         e.stopPropagation()
+  //         const priorityKey = $setTaskElementPriority.getAttribute('data-priority-key')
+  //         const priorityColor = PRIORITIES[priorityKey].color
+  //         const $svg = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+
+  //         if (task.priority === priorityKey) {
+  //           closeDropdown({ $dropdown, $tooltip })()
+  //           return
+  //         }
+
+  //         changeTaskPriority({ priorityKey, style: { fill: priorityColor, color: priorityColor }, $svg, taskId })
+
+  //         closeDropdown({ $dropdown, $tooltip })()
+  //       })
+  //     })
+
+  //     $clearTaskElementPriority.addEventListener('click', (e) => {
+  //       e.stopPropagation()
+  //       const $svg = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+
+  //       if (task.priority === PRIORITIES_ENUM.NOT_ASSIGNED) {
+  //         closeDropdown({ $dropdown, $tooltip })()
+  //         return
+  //       }
+
+  //       changeTaskPriority({ style: { fill: 'none', color: '#000' }, $svg, taskId, priorityKey: PRIORITIES_ENUM.NOT_ASSIGNED })
+
+  //       closeDropdown({ $dropdown, $tooltip })()
+  //     })
+  //   })
+  // })
+
+  taskPriorityDropdownListeners()
 
   newTaskDialogListeners()
   removeTaskDialogListeners()

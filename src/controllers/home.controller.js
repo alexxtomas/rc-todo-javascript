@@ -43,7 +43,7 @@ export const homeController = () => {
       },
       secondButton: {
         attributes:
-         'type="reset" id="cancel-new-space-button" value="cancel" formmethod="dialog"',
+         'type="reset" id="close-new-space-dialog-button" value="cancel" formmethod="dialog"',
         text: 'Close'
       }
     })}

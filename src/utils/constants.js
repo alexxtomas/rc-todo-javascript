@@ -28,6 +28,14 @@ export const PRIORITIES = {
   }
 }
 
+export const PRIORITIES_ENUM = {
+  URGENT: 'URGENT',
+  HIGH: 'HIGH',
+  NORMAL: 'NORMAL',
+  LOW: 'LOW',
+  NOT_ASSIGNED: 'NOT_ASSIGNED'
+}
+
 export const PRIORITIES_SELECT_OPTIONS = Object.entries(PRIORITIES).filter(([key, value]) => {
   return value.label !== 'Not Assigned'
 }).map(
@@ -62,5 +70,4 @@ export const TASKS_STATUS_ENUM = {
   IN_PROGRESS: 'IN_PROGRESS',
   BLOCKED: 'BLOCKED',
   DONE: 'DONE'
-
 }
