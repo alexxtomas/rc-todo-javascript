@@ -65,14 +65,13 @@ dialog::backdrop {
   align-items: center;
 }
 
-.page-header-button {
-  font-size: 12px;
-  transition: all 0.3s ease-in-out;
+.page-header-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
 }
 
-.page-header-button:hover {
-  scale: 0.95;
-}
 
 .visually-hidden {
   border: 0;
@@ -92,9 +91,7 @@ dialog::backdrop {
   color: #f71310;
   padding-left: 4px;
 }
-.remove-element:hover {
-  color: #f71310;
-}
+
 .transparent-background {
   background-color: transparent;
   height: 100vh;
