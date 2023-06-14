@@ -1,0 +1,12 @@
+.add-button {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.add-button:hover {
+  scale: 0.95;
+}
