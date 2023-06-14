@@ -6,7 +6,7 @@ import NotFoundHtml from '@views/404/index.html?raw'
 import { homeController } from '@controllers/home.controller'
 import { detailController } from '@controllers/detail.controller'
 const $content = document.querySelector('#content')
-const $pageHeaderContent = document.querySelector('#pageHeaderContent')
+const $pageHeaderContent = document.querySelector('#page-header-content')
 
 export const router = (route) => {
   const { dispatch } = globalStore()
