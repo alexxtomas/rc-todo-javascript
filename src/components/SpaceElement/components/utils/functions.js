@@ -1,20 +1,7 @@
+import { BUTTON_VARIANTS_ENUM } from '@components/Button'
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
 import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
 import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
-
-export const getConfirmDialogProps = ({ spaceName, numberOfTasks }) => ({
-  variant: DIALOG_VARIANTS_ENUM.CONFIRMATION,
-  dialogAttributes: 'data-function="show-remove-space-element-dialog"',
-  text: `Are you sure you want to remove the space "${spaceName}" with ${numberOfTasks} tasks?`,
-  firstButton: {
-    attributes: 'data-function="remove-space-element-button"',
-    text: 'Yes'
-  },
-  secondButton: {
-    attributes: 'data-function="close-remove-space-element-dialog-button"',
-    text: 'No'
-  }
-})
 
 export const getFormDialogProps = () => ({
   variant: DIALOG_VARIANTS_ENUM.FORM,
@@ -47,5 +34,23 @@ export const getFormDialogProps = () => ({
     attributes:
       'type="reset" data-function="close-edit-space-element-dialog" value="cancel" formmethod="dialog"',
     text: 'Close'
+  }
+})
+
+export const getRemoveButtonProps = ({ spaceName, numberOfTasks, id }) => ({
+  variant: BUTTON_VARIANTS_ENUM.REMOVE,
+  buttonAttributes: `data-function="show-remove-space-element-dialog" data-id=${id}`,
+  confirmDialogProps: {
+    variant: DIALOG_VARIANTS_ENUM.CONFIRMATION,
+    dialogAttributes: 'data-function="show-remove-space-element-dialog"',
+    text: `Are you sure you want to remove the space "${spaceName}" with ${numberOfTasks} tasks?`,
+    firstButton: {
+      attributes: 'data-function="remove-space-element-button"',
+      text: 'Yes'
+    },
+    secondButton: {
+      attributes: 'data-function="close-remove-space-element-dialog-button"',
+      text: 'No'
+    }
   }
 })

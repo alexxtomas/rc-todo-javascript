@@ -1,7 +1,8 @@
 import './style.css'
 import Dialog from '@components/Dialog'
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
-import { getConfirmDialogProps, getFormDialogProps } from '../utils/functions'
+import { getFormDialogProps, getRemoveButtonProps } from '../utils/functions'
+import Button from '@components/Button'
 
 const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
   return `
@@ -22,19 +23,13 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
       props: 'width=10px stroke-width="1.2" fill="none"'
     })}
     </button>
-    <button class="remove-element" data-function="show-remove-space-element-dialog" data-id=${id}>
-    ${Icon({
-      variant: ICON_VARIANTS_ENUM.TRASH,
-      props: 'width=10px stroke-width="1" fill="none" '
-    })}
-    </button>
+    ${Button(getRemoveButtonProps({ spaceName: name, numberOfTasks: tasks.length, id }))}
+   
     </div>
 
   ${Dialog(getFormDialogProps())}
 
-  ${Dialog(
-    getConfirmDialogProps({ numberOfTasks: tasks.length, spaceName: name })
-  )}
+ 
   
   </li>
   `
