@@ -1,19 +1,31 @@
 import { BUTTON_VARIANTS_ENUM } from '@components/Button'
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
-import TaskElementDropdownListItems from '../components/TaskElementDropdownContent'
+import TaskElementDropdownListItems, { TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS } from '../components/TaskElementDropdownListItems'
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
+import TaskElementStatusBox from '../components/TaskElementStatusBox'
 
-export const getDropdownButtonProps = ({ iconColor, id }) => ({
+export const getStatusDropdownButtonProps = ({ statusColor, id }) => ({
+  variant: BUTTON_VARIANTS_ENUM.DROP_DOWN,
+  tooltip: {
+    text: 'Set status',
+    attributes: 'data-function="show-task-element-status-tooltip-text"'
+  },
+  children: TaskElementStatusBox({ statusColor }),
+  dropdownListItems: TaskElementDropdownListItems({ variant: TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS.STATUS }),
+  buttonAttributes: `data-function="show-task-element-status-button"  data-id=${id}`,
+  dropdownContentAttributes: 'data-function="show-task-element-status-dropdown-content"'
+})
+export const getPriorityDropdownButtonProps = ({ iconColor, id }) => ({
   variant: BUTTON_VARIANTS_ENUM.DROP_DOWN,
 
   tooltip: {
     text: 'Set priority',
-    attributes: 'data-function="show-tooltip-text"'
+    attributes: 'data-function="show-task-element-priority-tooltip-text"'
   },
   children: Icon({ variant: ICON_VARIANTS_ENUM.FLAG, props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="show-task-element-priority" ` }),
-  dropdownListItems: TaskElementDropdownListItems(),
+  dropdownListItems: TaskElementDropdownListItems({ variant: TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS.PRIORITY }),
   buttonAttributes: `data-function="show-task-element-priority-button" data-id=${id}`,
-  dropdownContentAttributes: 'data-function="show-dropdown-content"'
+  dropdownContentAttributes: 'data-function="show-task-element-priority-dropdown-content"'
 })
 
 export const getRemoveButtonProps = ({ taskName, id }) => ({

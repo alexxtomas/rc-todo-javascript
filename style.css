@@ -20,6 +20,7 @@ body {
   margin: 0 auto;
   width: 100vw;
   background-color: rgba(247, 248, 249, 1);
+  overflow-x: hidden;
 }
 
 a {
@@ -58,6 +59,10 @@ dialog {
 
 dialog::backdrop {
   backdrop-filter: blur(4px);
+}
+
+main {
+  margin-bottom: 200px;
 }
 .page-header {
   display: flex;

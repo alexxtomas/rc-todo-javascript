@@ -26,7 +26,6 @@ export const dialogSharedLogic = {
 export const dropdownSharedLogic = {
   showDropdown({ $tooltip, $dropdown }) {
     const $transparentBackground = document.querySelector('#transparent-background')
-
     $transparentBackground.classList.remove('visually-hidden')
     $tooltip.classList.add('visibility-hidden')
     $dropdown.classList.add('display-block')

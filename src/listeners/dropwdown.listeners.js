@@ -1,4 +1,4 @@
-import { taskPriorityDropdownLogic } from '@logic/dropdown.logic'
+import { taskPriorityDropdownLogic, taskStatusDropdownLogic } from '@logic/dropdown.logic'
 
 export const taskPriorityDropdownListenersObject = {
   showTaskElementPriorityButtonListeners() {
@@ -6,7 +6,7 @@ export const taskPriorityDropdownListenersObject = {
 
     $$showTaskElementPriorityButton.forEach($showTaskElementPriorityButton => {
       $showTaskElementPriorityButton.addEventListener('click',
-        taskPriorityDropdownLogic.handleShowTaskElementPriorityButtonClick({ $showTaskElementPriorityButton, callbacks: [taskPriorityDropdownListenersObject.setTaskElementPriorityListeners, taskPriorityDropdownListenersObject.clearTaskElementPriorityListeners] })
+        taskPriorityDropdownLogic.handleShowTaskElementPriorityButtonClick({ $showTaskElementPriorityButton, callbacks: [this.setTaskElementPriorityListeners, this.clearTaskElementPriorityListeners] })
       )
     })
   },
@@ -22,7 +22,26 @@ export const taskPriorityDropdownListenersObject = {
   }
 
 }
+export const taskStatusDropdownListenersObject = {
+  showTaskElementStatusButtonListeners() {
+    const $$showTaskElementPriorityButton = document.querySelectorAll('[data-function="show-task-element-status-button"]')
+
+    $$showTaskElementPriorityButton.forEach($showTaskElementPriorityButton => {
+      $showTaskElementPriorityButton.addEventListener('click',
+        taskStatusDropdownLogic.handleShowTaskElementStatusButtonClick({ $showTaskElementPriorityButton, callbacks: [this.setTaskElementStatusListeners] })
+      )
+    })
+  },
+  setTaskElementStatusListeners({ taskId, task, $dropdown, $tooltip }) {
+    const $$setTaskElementStatus = document.querySelectorAll(`#${taskId} [data-function="set-task-element-status"]`)
+    $$setTaskElementStatus.forEach($setTaskElementStatus => {
+      $setTaskElementStatus.addEventListener('click', taskStatusDropdownLogic.handleSetTaskElementStatusClick({ taskId, task, $dropdown, $tooltip, $setTaskElementStatus }))
+    })
+  }
+
+}
 
 export const taskPriorityDropdownListeners = () => {
   taskPriorityDropdownListenersObject.showTaskElementPriorityButtonListeners()
+  taskStatusDropdownListenersObject.showTaskElementStatusButtonListeners()
 }

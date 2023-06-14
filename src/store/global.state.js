@@ -28,6 +28,7 @@ const GLOBAL_ACTIONS = {
     ].tasks.concat(task)
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
+
   getTaskById: ({ spaceId, taskId }) => {
     const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
     return GLOBAL_STATE.spaces[spaceIndex].tasks.find((task) => task.id === taskId)
@@ -43,6 +44,12 @@ const GLOBAL_ACTIONS = {
     const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
     const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
     GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].priority = priority
+    updateGlobalStateStorage({ state: GLOBAL_STATE })
+  },
+  setTaskStatus: ({ spaceId, taskId, statusKey }) => {
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
+    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
+    GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].status = statusKey
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   addFocusedSpace: ({ spaceId }) => {
@@ -61,10 +68,10 @@ export const GLOBAL_ACTIONS_ENUM = {
   ADD_SPACE: 'addSpace',
   REMOVE_SPACE: 'removeSpace',
   EDIT_SPACE: 'editSpace',
-  // GET_SPACE_BY_ID: 'getSpaceById',
   ADD_TASK: 'addTask',
   REMOVE_TASK: 'removeTask',
   SET_TASK_PRIORITY: 'setTaskPriority',
+  SET_TASK_STATUS: 'setTaskStatus',
   GET_TASK_BY_ID: 'getTaskById',
   ADD_FOCUSED_SPACE: 'addFocusedSpace',
   REMOVE_FOUCSED_SPACE: 'removeFocusedSpace'

@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid'
-
 export const PRIORITIES = {
   URGENT: {
     label: 'Urgent',
@@ -56,8 +54,7 @@ export const TASKS_STATUS = {
   },
   BLOCKED: {
     label: 'Blocked',
-    color: '#FF0000',
-    id: `a${nanoid()}`
+    color: '#FF0000'
   },
   DONE: {
     label: 'Done',

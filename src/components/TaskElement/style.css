@@ -15,11 +15,7 @@
   gap: 5px;
 }
 
-.task-status-box {
-  width: 8px;
-  height: 8px;
-  border-radius: 1.5px;
-}
+
 .task-element-title {
   font-size: 9px;
   font-weight: 400;

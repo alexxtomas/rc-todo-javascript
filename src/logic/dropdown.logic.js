@@ -1,5 +1,5 @@
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
-import { PRIORITIES, PRIORITIES_ENUM } from '@utils/constants'
+import { PRIORITIES, PRIORITIES_ENUM, TASKS_STATUS } from '@utils/constants'
 import { dropdownSharedLogic } from './shared'
 
 export const taskPriorityDropdownLogic = {
@@ -9,8 +9,8 @@ export const taskPriorityDropdownLogic = {
       const { dispatch, state: { focusedSpace } } = globalStore()
       const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
       const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
-      const $tooltip = document.querySelector(`#${taskId} [data-function="show-tooltip-text"]`)
-      const $dropdown = document.querySelector(`#${taskId} [data-function="show-dropdown-content"]`)
+      const $tooltip = document.querySelector(`#${taskId} [data-function="show-task-element-priority-tooltip-text"]`)
+      const $dropdown = document.querySelector(`#${taskId} [data-function="show-task-element-priority-dropdown-content"]`)
 
       dropdownSharedLogic.showDropdown({ $dropdown, $tooltip })
 
@@ -61,4 +61,55 @@ export const taskPriorityDropdownLogic = {
     $svg.style.color = style.color
   }
 
+}
+
+export const taskStatusDropdownLogic = {
+  handleShowTaskElementStatusButtonClick({ $showTaskElementPriorityButton, callbacks }) {
+    return (e) => {
+      e.stopPropagation()
+      const { dispatch, state: { focusedSpace } } = globalStore()
+      const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
+      const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
+      const $tooltip = document.querySelector(`#${taskId} [data-function="show-task-element-status-tooltip-text"]`)
+      const $dropdown = document.querySelector(`#${taskId} [data-function="show-task-element-status-dropdown-content"]`)
+
+      dropdownSharedLogic.showDropdown({ $dropdown, $tooltip })
+
+      callbacks.forEach(callbackFunction => callbackFunction({ taskId, task, $dropdown, $tooltip }))
+    }
+  },
+  handleSetTaskElementStatusClick({ $setTaskElementStatus, taskId, task, $dropdown, $tooltip }) {
+    return (e) => {
+      e.stopPropagation()
+      const { dispatch, state: { focusedSpace } } = globalStore()
+      const statusKey = $setTaskElementStatus.getAttribute('data-status-key')
+      const status = TASKS_STATUS[statusKey]
+      const $showTaskElementStatus = document.querySelector(`#${taskId} [data-function="show-task-element-status"]`)
+      const $showTasks = document.querySelector(`#${statusKey} [data-function="show-tasks"]`)
+      const $taskElement = document.querySelector(`#${taskId}`)
+      const $previousCounter = document.querySelector(`#${task.status} [data-function="show-tasks-counter"]`)
+      const $nextCounter = document.querySelector(`#${statusKey} [data-function="show-tasks-counter"]`)
+
+      if (task.status === statusKey) {
+        dropdownSharedLogic.closeDropdown({ $dropdown, $tooltip })()
+        return
+      }
+
+      const prevoiousCounterValue = Number($previousCounter.dataset.counter) - 1
+      const nextCounterValue = Number($nextCounter.dataset.counter) + 1
+
+      $previousCounter.dataset.counter = prevoiousCounterValue
+      $nextCounter.dataset.counter = nextCounterValue
+
+      $showTaskElementStatus.style.backgroundColor = status.color
+      $taskElement.remove()
+      $previousCounter.textContent = `${prevoiousCounterValue} ${prevoiousCounterValue === 1 ? 'task' : 'tasks'}`
+      $showTasks.appendChild($taskElement)
+      $nextCounter.textContent = `${nextCounterValue} ${nextCounterValue === 1 ? 'task' : 'tasks'}`
+
+      dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_STATUS, payload: { spaceId: focusedSpace.id, taskId, statusKey } })
+
+      dropdownSharedLogic.closeDropdown({ $dropdown, $tooltip })()
+    }
+  }
 }

@@ -180,7 +180,9 @@ export const newTaskDialogLogic = {
       name: newTaskName.value,
       creationDate,
       status: TASKS_STATUS_ENUM.BACKLOG,
-      priority: PRIORITIES_ENUM.NOT_ASSIGNED
+      priority: PRIORITIES_ENUM.NOT_ASSIGNED,
+      subTasks: [],
+      description: ''
     }
 
     dispatch({ action: GLOBAL_ACTIONS_ENUM.ADD_TASK, payload: { spaceId: focusedSpace.id, task: newTask } })
