@@ -147,6 +147,7 @@ export const newTaskDialogLogic = {
     )
     const $backlogTasks = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks"]`)
     const $backlogTasksCounter = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks-counter"]`)
+    const $backlogTasksCounterSpan = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks-counter-span"]`)
     const $dialogTaskNameInput = document.querySelector('#new-task-name')
 
     const { newTaskName } = e.target
@@ -172,8 +173,14 @@ export const newTaskDialogLogic = {
     $backlogTasks.innerHTML += TaskElement({ creationDate, id: taskId, name: newTaskName.value, iconColor: PRIORITIES.NOT_ASSIGNED.color, statusColor: TASKS_STATUS.BACKLOG.color, statusId: TASKS_STATUS_ENUM.BACKLOG })
 
     const updatedCounterValue = Number($backlogTasksCounter.dataset.counter) + 1
+
     $backlogTasksCounter.setAttribute('data-counter', updatedCounterValue)
     $backlogTasksCounter.innerHTML = `${updatedCounterValue} ${updatedCounterValue === 1 ? 'Task' : 'Tasks'}`
+
+    if ($backlogTasksCounterSpan) {
+      $backlogTasksCounterSpan.setAttribute('data-counter', updatedCounterValue)
+      $backlogTasksCounterSpan.innerHTML = `${updatedCounterValue} ${updatedCounterValue === 1 ? 'Task' : 'Tasks'}`
+    }
 
     const newTask = {
       id: taskId,

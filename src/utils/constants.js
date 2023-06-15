@@ -48,14 +48,15 @@ export const TASKS_STATUS = {
     label: 'Backlog',
     color: '#0000001a'
   },
-  IN_PROGRESS: {
-    label: 'In Progress',
-    color: '#FFFF00'
-  },
   BLOCKED: {
     label: 'Blocked',
     color: '#FF0000'
   },
+  IN_PROGRESS: {
+    label: 'In Progress',
+    color: '#FFFF00'
+  },
+
   DONE: {
     label: 'Done',
     color: '#12EE2A'

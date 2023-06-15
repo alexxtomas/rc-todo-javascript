@@ -32,7 +32,10 @@ export function detailContentLoader() {
       if (!$content) return
 
       const $labelsContainer = document.querySelector(`#${id} [data-function="tasks-labels-container"]`)
-      const $tasksCounter = document.querySelector(`#${id} [data-function="show-tasks-counter"]`)
+      const $tasksCounter = document.querySelector(`#${id} p[data-function="show-tasks-counter"]`)
+
+      const parrafCounterValue = $tasksCounter.getAttribute('data-counter')
+
       const $tasksStatus = document.querySelector(`#${id} [data-function="show-tasks-status"]`)
 
       if (!$content.classList.contains('inactive')) {
@@ -41,7 +44,7 @@ export function detailContentLoader() {
         $content.classList.add('inactive')
         $labelsContainer.classList.add('inactive')
         $tasksCounter.classList.add('inactive')
-        $tasksStatus.innerHTML = `${$tasksStatus.textContent} <span class="tasks-status-counter">${$tasksCounter.textContent}</span>`
+        $tasksStatus.innerHTML = `${$tasksStatus.textContent} <span class="tasks-status-counter" data-counter=${parrafCounterValue} data-function="show-tasks-counter-span">${$tasksCounter.textContent}</span>`
         return
       }
 

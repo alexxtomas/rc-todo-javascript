@@ -7,7 +7,6 @@ import '@views/Detail/style.css'
 export const detailController = () => {
   detailContentLoader()
   syncGlobalStateWithLocalStorage()
-
   taskPriorityDropdownListeners()
   newTaskDialogListeners()
   removeTaskDialogListeners()

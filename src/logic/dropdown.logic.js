@@ -88,7 +88,11 @@ export const taskStatusDropdownLogic = {
       const $showTasks = document.querySelector(`#${statusKey} [data-function="show-tasks"]`)
       const $taskElement = document.querySelector(`#${taskId}`)
       const $previousCounter = document.querySelector(`#${task.status} [data-function="show-tasks-counter"]`)
+
       const $nextCounter = document.querySelector(`#${statusKey} [data-function="show-tasks-counter"]`)
+      const $nextCounterSpan = document.querySelector(`#${statusKey} [data-function="show-tasks-counter-span"]`)
+
+      console.log($nextCounterSpan)
 
       if (task.status === statusKey) {
         dropdownSharedLogic.closeDropdown({ $dropdown, $tooltip })()
@@ -98,14 +102,18 @@ export const taskStatusDropdownLogic = {
       const prevoiousCounterValue = Number($previousCounter.dataset.counter) - 1
       const nextCounterValue = Number($nextCounter.dataset.counter) + 1
 
-      $previousCounter.dataset.counter = prevoiousCounterValue
-      $nextCounter.dataset.counter = nextCounterValue
-
       $showTaskElementStatus.style.backgroundColor = status.color
       $taskElement.remove()
       $previousCounter.textContent = `${prevoiousCounterValue} ${prevoiousCounterValue === 1 ? 'task' : 'tasks'}`
       $showTasks.appendChild($taskElement)
       $nextCounter.textContent = `${nextCounterValue} ${nextCounterValue === 1 ? 'task' : 'tasks'}`
+      $previousCounter.dataset.counter = prevoiousCounterValue
+      $nextCounter.dataset.counter = nextCounterValue
+
+      if ($nextCounterSpan) {
+        $nextCounterSpan.dataset.counter = nextCounterValue
+        $nextCounterSpan.textContent = `${nextCounterValue} ${nextCounterValue === 1 ? 'task' : 'tasks'}`
+      }
 
       dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_STATUS, payload: { spaceId: focusedSpace.id, taskId, statusKey } })
 
