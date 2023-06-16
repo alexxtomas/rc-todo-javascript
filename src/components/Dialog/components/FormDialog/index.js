@@ -1,3 +1,4 @@
+import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import FormField from './components/FormField'
 import './style.css'
 
@@ -6,10 +7,13 @@ const FormDialog = ({
   formAttributes,
   elements,
   firstButton,
-  secondButton
+  closeButton
 }) => {
   return `
   <dialog class="form-dialog" ${dialogAttributes}>
+  <button class="close-form-dialog" ${closeButton.attributes}>
+  ${Icon({ variant: ICON_VARIANTS_ENUM.XMark, props: 'width=24px height=24px stroke-width="1.2" fill="none"' })}
+  </button>
   <form class="form-dialog-form" ${formAttributes}>
   ${
       elements.map(element => {
@@ -17,17 +21,12 @@ const FormDialog = ({
       }).join('').replaceAll(',', '')
   }
     
-    <footer class="form-dialog-footer">
+  
       <button class="form-dialog-first-button" ${firstButton.attributes}>
         ${firstButton.text}
       </button>
-      <button
-        class="form-dialog-second-button"
-       ${secondButton.attributes}
-      >
-        ${secondButton.text}
-      </button>
-    </footer>
+    
+ 
   </form>
 </dialog>
   `

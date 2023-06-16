@@ -13,14 +13,14 @@ export const getFormDialogProps = () => ({
       attributes: 'id="space-name" name="spaceName" type="text"',
       label: {
         attributes: 'for="space-name"',
-        text: 'Space name'
+        text: 'Name'
       }
     },
     {
       variant: FORM_FIELDS_VARIANTS_ENUM.SELECT,
       label: {
         attributes: 'for="space-priority"',
-        text: 'Space priority'
+        text: 'Priority'
       },
       attributes: 'id="space-priority" name="spacePriority"',
       options: PRIORITIES_SELECT_OPTIONS
@@ -30,9 +30,9 @@ export const getFormDialogProps = () => ({
     attributes: 'type="submit" value="default"',
     text: 'Save'
   },
-  secondButton: {
+  closeButton: {
     attributes:
-      'type="reset" data-function="close-edit-space-element-dialog" value="cancel" formmethod="dialog"',
+      'data-function="close-edit-space-element-dialog"',
     text: 'Close'
   }
 })

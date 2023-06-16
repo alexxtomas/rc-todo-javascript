@@ -17,6 +17,10 @@ const { outsideClick, showDialogClick, closeDialogClick } = dialogSharedLogic
 export const newSpaceDialogLogic = {
   showDialogClick,
   closeDialogClick,
+  restoreDialogValues: () => {
+    const $newSpaceName = document.querySelector('#new-space-name')
+    $newSpaceName.value = ''
+  },
   saveDialogSubmit: ($dialog) => (e) => {
     e.preventDefault()
     const $spacesContainer = document.querySelector('#spaces-container')
@@ -92,6 +96,7 @@ export const removeSpaceDialogLogic = {
 export const editSpaceDialogLogic = {
   showDialogClick,
   closeDialogClick,
+
   saveDialogSubmit: ($dialog, id) => (e) => {
     e.preventDefault()
     const $dialogValidationErrorMessage = document.querySelector(
@@ -188,8 +193,8 @@ export const newTaskDialogLogic = {
       creationDate,
       status: TASKS_STATUS_ENUM.BACKLOG,
       priority: PRIORITIES_ENUM.NOT_ASSIGNED,
-      subTasks: [],
-      description: ''
+      description: '',
+      image: null
     }
 
     dispatch({ action: GLOBAL_ACTIONS_ENUM.ADD_TASK, payload: { spaceId: focusedSpace.id, task: newTask } })
@@ -223,5 +228,61 @@ export const removeTaskDialogLogic = {
     dispatch({ action: GLOBAL_ACTIONS_ENUM.REMOVE_TASK, payload: { spaceId: focusedSpace.id, taskId } })
   },
   closeDialogClick,
+  outsideClick
+}
+export const taskDetailDialogLogic = {
+  showDialogClick: ($dialog, taskId) => (e) => {
+    e.stopPropagation()
+    const { state: { focusedSpace }, dispatch } = globalStore()
+    const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
+
+    if (task.description) {
+      const $taskDescription = document.querySelector(`#${taskId} [data-function="show-task-description"]`)
+      $taskDescription.innerHTML = task.description
+    }
+    if (task.image) {
+      const $taskImage = document.querySelector(`#${taskId} [data-function="show-input-file-image"]`)
+      const $taskImageIcon = document.querySelector(`#${taskId} [data-function="show-input-file-icon"]`)
+      $taskImageIcon.classList.add('visually-hidden')
+      $taskImage.setAttribute('src', task.image)
+      $taskImage.classList.remove('visually-hidden')
+    }
+    $dialog.showModal()
+  },
+  saveDialogSubmit: ($dialog, taskId) => (e) => {
+    e.preventDefault()
+    const $taskImageInput = document.querySelector(`#${taskId} [data-function="upload-task-image"]`)
+    const $taskDescriptionTextarea = document.querySelector(`#${taskId} [data-function="show-task-description"]`)
+    const { state: { focusedSpace }, dispatch } = globalStore()
+
+    dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_DESCRIPTION, payload: { spaceId: focusedSpace.id, taskId, description: $taskDescriptionTextarea.value } })
+
+    if ($taskImageInput.files.length !== 0) {
+      // eslint-disable-next-line no-undef
+      const reader = new FileReader()
+
+      reader.onload = () => {
+        dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_IMAGE, payload: { spaceId: focusedSpace.id, taskId, image: reader.result } })
+      }
+
+      reader.readAsDataURL($taskImageInput.files[0])
+    }
+
+    $dialog.close()
+  },
+  closeDialogClick: ($dialog, taskId) => (e) => {
+    const { state: { focusedSpace }, dispatch } = globalStore()
+    const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
+    const $taskDescription = document.querySelector(`#${taskId} [data-function="show-task-description"]`)
+    const $taskImage = document.querySelector(`#${taskId} [data-function="show-input-file-image"]`)
+
+    if (task.description !== $taskDescription.value) {
+      $taskDescription.value = task.description
+    }
+    if (task.image !== $taskImage.src) {
+      $taskImage.src = task.image
+    }
+    $dialog.close()
+  },
   outsideClick
 }

@@ -3,7 +3,8 @@ import {
   newSpaceDialogLogic,
   editSpaceDialogLogic,
   newTaskDialogLogic,
-  removeTaskDialogLogic
+  removeTaskDialogLogic,
+  taskDetailDialogLogic
 } from '@logic/dialog.logic'
 
 export function newSpaceDialogListeners() {
@@ -18,7 +19,7 @@ export function newSpaceDialogListeners() {
   )
   $closeDialogButton?.addEventListener(
     'click',
-    newSpaceDialogLogic.closeDialogClick($dialog, '#new-space-dialog')
+    newSpaceDialogLogic.closeDialogClick($dialog, '#new-space-dialog', newSpaceDialogLogic.restoreDialogValues)
   )
   $dialog?.addEventListener('click', newSpaceDialogLogic.outsideClick($dialog))
   $dialogForm?.addEventListener(
@@ -127,5 +128,24 @@ export function removeTaskDialogListeners() {
     $removeTaskDialogButton?.addEventListener('click', removeTaskDialogLogic.remove(taskId))
 
     $dialog?.addEventListener('click', removeTaskDialogLogic.outsideClick($dialog))
+  })
+}
+
+export function taskDetailDialogListeners() {
+  const $$showTaskDetailDialog = document.querySelectorAll('[data-function="show-task-element-detail-dialog"]')
+
+  $$showTaskDetailDialog.forEach($showTaskDetailDialog => {
+    const taskId = $showTaskDetailDialog.getAttribute('id')
+    const $dialog = document.querySelector(`#${taskId} dialog[data-function="task-element-detail-dialog"]`)
+    const $form = document.querySelector(`#${taskId} form[data-function="task-element-detail-form"]`)
+    const $closeDialogButton = document.querySelector(`#${taskId} [data-function="close-task-element-detail-dialog-button"]`)
+
+    $showTaskDetailDialog?.addEventListener('click', taskDetailDialogLogic.showDialogClick($dialog, taskId))
+
+    $form?.addEventListener('submit', taskDetailDialogLogic.saveDialogSubmit($dialog, taskId))
+
+    $closeDialogButton?.addEventListener('click', taskDetailDialogLogic.closeDialogClick($dialog, taskId))
+
+    $dialog?.addEventListener('click', taskDetailDialogLogic.outsideClick($dialog))
   })
 }

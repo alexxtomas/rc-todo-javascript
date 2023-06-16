@@ -9,7 +9,7 @@ const Tasks = ({ color, id, label, tasks }) => {
   <div class="tasks-element" id=${id}>
   <header class="tasks-header">
     <div class="tasks-header-container">
-     ${Icon({ variant: ICON_VARIANTS_ENUM.CHEVRON_RIGHT, props: `width=12px height=12px stroke-width="0.3" fill="none" data-function="tasks-accordion-toggle"  class="tasks-accordion-toggle rotate" data-id=${id}` })}
+     ${Icon({ variant: ICON_VARIANTS_ENUM.CHEVRON_RIGHT, props: `width=20px height=20px stroke-width="0.3" fill="none" data-function="tasks-accordion-toggle"  class="tasks-accordion-toggle rotate" data-id=${id}` })}
     <h3 data-function="show-tasks-status" class="tasks-status" style="background:${color}">${label}</h3>
       <p data-function="show-tasks-counter" data-counter=${tasksLength} class="tasks-counter">${tasksLength} ${tasksLength === 1 ? 'Task' : 'Tasks'}</p>
    </div>

@@ -4,7 +4,7 @@ import './style.css'
 
 const RemoveButton = ({ buttonAttributes, confirmDialogProps }) => {
   return `
-  <button class="remove-button" ${buttonAttributes}>${Icon({ variant: ICON_VARIANTS_ENUM.TRASH, props: 'width=10px stroke-width="1" fill="none"' })}</button>
+  <button class="remove-button" ${buttonAttributes}>${Icon({ variant: ICON_VARIANTS_ENUM.TRASH, props: 'width=16px stroke-width="1" fill="none"' })}</button>
   ${Dialog(confirmDialogProps)}
   `
 }

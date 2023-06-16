@@ -1,5 +1,5 @@
 .confirmation-dialog {
-  max-width: 300px;
+  max-width: 400px;
   overflow: hidden;
 }
 
@@ -10,8 +10,7 @@
   padding: 8px;
 }
 .confirmation-dialog-text {
-  font-size: 12px;
-  max-width: 180px;
+  font-size: 18px;
   text-align: center;
   font-weight: 400;
 }
@@ -24,14 +23,13 @@
 
 .confirmation-dialog-first-button,
 .confirmation-dialog-second-button {
-  font-size: 8px;
-  padding: 4px 10px;
+  font-size: 16px;
+  padding: 6px 24px;
   border-radius: 4px;
   border: none;
   outline: none;
   font-weight: 400;
   transition: all 0.2s ease-in-out;
-  width: 50px;
 }
 
 .confirmation-dialog-first-button:hover,

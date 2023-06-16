@@ -20,6 +20,7 @@ export function detailContentLoader() {
       id: key,
       label: value.label,
       tasks
+
     })
   })
 

@@ -1,5 +1,10 @@
 .form-dialog {
-  max-width: 400px;
+  overflow: hidden;
+}
+.close-form-dialog {
+  position: absolute;
+  right: 8px;
+  top: 10px;
 }
 .form-dialog-form {
   display: flex;
@@ -7,6 +12,7 @@
   width: 100%;
   flex-direction: column;
   gap: 8px;
+  margin-top: 20px;
 }
 
 .form-dialog-footer {
@@ -16,23 +22,19 @@
   gap: 8px;
 }
 
-.form-dialog-first-button,
-.form-dialog-second-button {
-  margin-top: 10px;
-  padding: 4px 8px;
-  font-size: 8px;
-  border-radius: 8px;
-}
+
 
 .form-dialog-first-button {
-  background-color: #fff;
-  border: 1px solid #8d9093;
-  color: #8d9093;
+color: #fff;
+  background-color: #03b6fc;
   transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+  padding: 6px 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  max-width: 110px;
+  transition: all 0.3s ease-in-out; 
 }
-.form-dialog-second-button {
-  background-color: #8d9093;
-  border: 1px solid #8d9093;
-  color: #fff;
-  transition: all 0.3s ease-in-out;
+.form-dialog-first-button:hover {
+  filter: brightness(1.2);
 }

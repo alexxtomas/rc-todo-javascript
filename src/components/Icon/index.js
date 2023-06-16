@@ -5,6 +5,7 @@ import FlagIcon from './components/FlagIcon'
 import PlusIcon from './components/PlusIcon'
 import TrashIcon from './components/TrashIcon'
 import XCirlceIcon from './components/XCircleIcon'
+import XMarkIcon from './components/XMarkIcon'
 const ICON_VARIANTS = {
   FLAG: FlagIcon,
   TRASH: TrashIcon,
@@ -12,7 +13,8 @@ const ICON_VARIANTS = {
   ARROW_DOWN_CIRCLE: ArrowDownCircleIcon,
   CHEVRON_RIGHT: ChevronRightIcon,
   XCIRCLE: XCirlceIcon,
-  PLUS: PlusIcon
+  PLUS: PlusIcon,
+  XMark: XMarkIcon
 }
 
 export const ICON_VARIANTS_ENUM = {
@@ -22,7 +24,8 @@ export const ICON_VARIANTS_ENUM = {
   ARROW_DOWN_CIRCLE: 'ARROW_DOWN_CIRCLE',
   CHEVRON_RIGHT: 'CHEVRON_RIGHT',
   XCIRCLE: 'XCIRCLE',
-  PLUS: 'PLUS'
+  PLUS: 'PLUS',
+  XMark: 'XMark'
 }
 
 const Icon = ({ variant, props }) => {

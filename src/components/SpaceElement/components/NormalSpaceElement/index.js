@@ -8,7 +8,7 @@ const NormalSpaceElement = ({ name, iconColor }) => {
    <div class='normal-space-elemen-containert'>
       ${Icon({
         variant: ICON_VARIANTS_ENUM.FLAG,
-        props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor}`
+        props: `width=16px stroke-width="0.8" fill=${iconColor} color=${iconColor}`
       })}
      <h3 class="normal-space-elemen-containert-title">${name}</h3>
    </div>

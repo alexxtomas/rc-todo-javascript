@@ -52,6 +52,18 @@ const GLOBAL_ACTIONS = {
     GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].status = statusKey
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
+  setTaskImage: ({ spaceId, taskId, image }) => {
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
+    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
+    GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].image = image
+    updateGlobalStateStorage({ state: GLOBAL_STATE })
+  },
+  setTaskDescription: ({ spaceId, taskId, description }) => {
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
+    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
+    GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].description = description
+    updateGlobalStateStorage({ state: GLOBAL_STATE })
+  },
   addFocusedSpace: ({ spaceId }) => {
     GLOBAL_STATE.focusedSpace = GLOBAL_STATE.spaces.find((space) => space.id === spaceId)
     updateGlobalStateStorage({ state: GLOBAL_STATE })
@@ -72,6 +84,8 @@ export const GLOBAL_ACTIONS_ENUM = {
   REMOVE_TASK: 'removeTask',
   SET_TASK_PRIORITY: 'setTaskPriority',
   SET_TASK_STATUS: 'setTaskStatus',
+  SET_TASK_IMAGE: 'setTaskImage',
+  SET_TASK_DESCRIPTION: 'setTaskDescription',
   GET_TASK_BY_ID: 'getTaskById',
   ADD_FOCUSED_SPACE: 'addFocusedSpace',
   REMOVE_FOUCSED_SPACE: 'removeFocusedSpace'

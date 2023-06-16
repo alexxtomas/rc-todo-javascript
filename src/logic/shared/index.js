@@ -1,10 +1,12 @@
 import { transparentBackgroundListeners } from '@listeners/transparentBackground.listeners'
 
 export const dialogSharedLogic = {
-  showDialogClick: ($dialog) => () => {
+  showDialogClick: ($dialog) => (e) => {
+    e.stopPropagation()
     $dialog.showModal()
   },
-  closeDialogClick: ($dialog, dialogSelector) => () => {
+  closeDialogClick: ($dialog, dialogSelector, callback) => (e) => {
+    e.stopPropagation()
     $dialog.close()
 
     if (dialogSelector) {
@@ -15,8 +17,10 @@ export const dialogSharedLogic = {
         $dialogValidationErrorMessage.textContent = ''
       }
     }
+    callback && callback()
   },
   outsideClick: ($dialog) => (e) => {
+    e.stopPropagation()
     if (e.target === $dialog) {
       $dialog.close()
     }

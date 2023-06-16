@@ -12,7 +12,7 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
     <h3 data-function="show-space-element-name" class="functional-space-element-title">${name}</h3>
     ${Icon({
       variant: ICON_VARIANTS_ENUM.FLAG,
-      props: `width=10px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="show-space-element-priority"`
+      props: `width=16px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="show-space-element-priority"`
     })}
     </header>
     </a>
@@ -20,7 +20,7 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
     <button class="functional-space-element-first-button" data-function="edit-space-element"  data-id=${id}>
     ${Icon({
       variant: ICON_VARIANTS_ENUM.EDIT,
-      props: 'width=10px stroke-width="1.2" fill="none"'
+      props: 'width=16px stroke-width="1.2" fill="none"'
     })}
     </button>
     ${Button(getRemoveButtonProps({ spaceName: name, numberOfTasks: tasks.length, id }))}

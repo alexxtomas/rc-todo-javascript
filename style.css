@@ -16,7 +16,7 @@
 body {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
   width: 100vw;
   background-color: rgba(247, 248, 249, 1);
@@ -45,8 +45,8 @@ button {
 }
 
 h1 {
-  font-size: 28px;
-  letter-spacing: 1.7px;
+  font-size: 32px;
+  letter-spacing: 1.5px;
 }
 
 dialog {
@@ -92,7 +92,7 @@ main {
   white-space: nowrap;
 }
 .validation-error {
-  font-size: 8px;
+  font-size: 14px;
   color: #f71310;
   padding-left: 4px;
 }

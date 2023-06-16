@@ -16,14 +16,14 @@ export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
         attributes: 'id="new-space-name" name="newSpaceName" type="text"',
         label: {
           attributes: 'for="new-space-name"',
-          text: 'Space name'
+          text: 'Name'
         }
       },
       {
         variant: FORM_FIELDS_VARIANTS_ENUM.SELECT,
         label: {
           attributes: 'for="new-space-priority"',
-          text: 'Space priority'
+          text: 'Priority'
         },
         attributes: 'id="new-space-priority" name="newSpacePriority"',
         options: PRIORITIES_SELECT_OPTIONS
@@ -33,9 +33,9 @@ export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
       attributes: 'type="submit" value="default"',
       text: 'Save'
     },
-    secondButton: {
+    closeButton: {
       attributes:
-         'type="reset" id="close-new-space-dialog-button" value="cancel" formmethod="dialog"',
+         ' id="close-new-space-dialog-button""',
       text: 'Close'
     }
   }
@@ -62,7 +62,7 @@ export const DETAIL_CONTROLLER_ADD_BUTTON_PROPS = {
       attributes: 'type="submit" value="default"',
       text: 'Save'
     },
-    secondButton: {
+    closeButton: {
       attributes:
        'type="reset" id="cancel-new-task-button" value="cancel" formmethod="dialog"',
       text: 'Close'
