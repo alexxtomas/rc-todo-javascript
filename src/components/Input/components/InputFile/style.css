@@ -1,0 +1,22 @@
+.form-field-file-container {
+  width: 200px;
+  height: 150px;
+  position: relative;
+}
+
+.form-field-file-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-fit: center;
+  border-radius: 4px;
+}
+.form-field-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}

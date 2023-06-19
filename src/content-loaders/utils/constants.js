@@ -1,6 +1,6 @@
 import { BUTTON_VARIANTS_ENUM } from '@components/Button'
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
-import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
+import { INPUT_VARIANTS_ENUM } from '@components/Input'
 import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 
 export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
@@ -12,7 +12,7 @@ export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
     formAttributes: 'id="new-space-form"',
     elements: [
       {
-        variant: FORM_FIELDS_VARIANTS_ENUM.INPUT,
+        variant: INPUT_VARIANTS_ENUM.TEXT,
         attributes: 'id="new-space-name" name="newSpaceName" type="text"',
         label: {
           attributes: 'for="new-space-name"',
@@ -20,7 +20,7 @@ export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
         }
       },
       {
-        variant: FORM_FIELDS_VARIANTS_ENUM.SELECT,
+        variant: INPUT_VARIANTS_ENUM.SELECT,
         label: {
           attributes: 'for="new-space-priority"',
           text: 'Priority'
@@ -34,8 +34,7 @@ export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
       text: 'Save'
     },
     closeButton: {
-      attributes:
-         ' id="close-new-space-dialog-button""',
+      attributes: ' id="close-new-space-dialog-button""',
       text: 'Close'
     }
   }
@@ -50,7 +49,7 @@ export const DETAIL_CONTROLLER_ADD_BUTTON_PROPS = {
     formAttributes: 'id="new-task-form"',
     elements: [
       {
-        variant: FORM_FIELDS_VARIANTS_ENUM.INPUT,
+        variant: INPUT_VARIANTS_ENUM.TEXT,
         attributes: 'id="new-task-name" name="newTaskName" type="text"',
         label: {
           attributes: 'for="new-task-name"',
@@ -64,7 +63,7 @@ export const DETAIL_CONTROLLER_ADD_BUTTON_PROPS = {
     },
     closeButton: {
       attributes:
-       'type="reset" id="cancel-new-task-button" value="cancel" formmethod="dialog"',
+        'type="reset" id="cancel-new-task-button" value="cancel" formmethod="dialog"',
       text: 'Close'
     }
   }

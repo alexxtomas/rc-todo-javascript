@@ -1,6 +1,6 @@
 import { BUTTON_VARIANTS_ENUM } from '@components/Button'
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
-import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
+import { INPUT_VARIANTS_ENUM } from '@components/Input'
 import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 
 export const getFormDialogProps = () => ({
@@ -9,7 +9,7 @@ export const getFormDialogProps = () => ({
   formAttributes: 'data-function="edit-space-element-submit-data"',
   elements: [
     {
-      variant: FORM_FIELDS_VARIANTS_ENUM.INPUT,
+      variant: INPUT_VARIANTS_ENUM.TEXT,
       attributes: 'id="space-name" name="spaceName" type="text"',
       label: {
         attributes: 'for="space-name"',
@@ -17,7 +17,7 @@ export const getFormDialogProps = () => ({
       }
     },
     {
-      variant: FORM_FIELDS_VARIANTS_ENUM.SELECT,
+      variant: INPUT_VARIANTS_ENUM.SELECT,
       label: {
         attributes: 'for="space-priority"',
         text: 'Priority'
@@ -31,8 +31,7 @@ export const getFormDialogProps = () => ({
     text: 'Save'
   },
   closeButton: {
-    attributes:
-      'data-function="close-edit-space-element-dialog"',
+    attributes: 'data-function="close-edit-space-element-dialog"',
     text: 'Close'
   }
 })

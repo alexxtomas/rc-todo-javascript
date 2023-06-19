@@ -1,0 +1,13 @@
+.form-field-textarea {
+  display: block;
+  overflow: hidden;
+  resize: none;
+  padding: 12px;
+  min-width: 800px;
+  font-size: 16px;
+  line-height: 125%;
+  background-color: rgba(0, 0, 0, 0.04);
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}

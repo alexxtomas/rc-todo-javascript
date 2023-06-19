@@ -1,9 +1,11 @@
 import { BUTTON_VARIANTS_ENUM } from '@components/Button'
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
-import TaskElementDropdownListItems, { TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS } from '../components/TaskElementDropdownListItems'
+import TaskElementDropdownListItems, {
+  TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS
+} from '../components/TaskElementDropdownListItems'
 import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import TaskElementStatusBox from '../components/TaskElementStatusBox'
-import { FORM_FIELDS_VARIANTS_ENUM } from '@components/Dialog/components/FormDialog/components/FormField'
+import { INPUT_VARIANTS_ENUM } from '@components/Input'
 
 export const getStatusDropdownButtonProps = ({ statusColor, id }) => ({
   variant: BUTTON_VARIANTS_ENUM.DROP_DOWN,
@@ -12,9 +14,12 @@ export const getStatusDropdownButtonProps = ({ statusColor, id }) => ({
     attributes: 'data-function="show-task-element-status-tooltip-text"'
   },
   children: TaskElementStatusBox({ statusColor }),
-  dropdownListItems: TaskElementDropdownListItems({ variant: TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS.STATUS }),
+  dropdownListItems: TaskElementDropdownListItems({
+    variant: TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS.STATUS
+  }),
   buttonAttributes: `data-function="show-task-element-status-button"  data-id=${id}`,
-  dropdownContentAttributes: 'data-function="show-task-element-status-dropdown-content"'
+  dropdownContentAttributes:
+    'data-function="show-task-element-status-dropdown-content"'
 })
 export const getPriorityDropdownButtonProps = ({ iconColor, id }) => ({
   variant: BUTTON_VARIANTS_ENUM.DROP_DOWN,
@@ -23,10 +28,16 @@ export const getPriorityDropdownButtonProps = ({ iconColor, id }) => ({
     text: 'Set priority',
     attributes: 'data-function="show-task-element-priority-tooltip-text"'
   },
-  children: Icon({ variant: ICON_VARIANTS_ENUM.FLAG, props: `width=16px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="show-task-element-priority" ` }),
-  dropdownListItems: TaskElementDropdownListItems({ variant: TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS.PRIORITY }),
+  children: Icon({
+    variant: ICON_VARIANTS_ENUM.FLAG,
+    props: `width=16px stroke-width="0.8" fill=${iconColor} color=${iconColor} data-function="show-task-element-priority" `
+  }),
+  dropdownListItems: TaskElementDropdownListItems({
+    variant: TASK_ELEMENT_DROPDOWN_LIST_ITEMS_VARIANTS.PRIORITY
+  }),
   buttonAttributes: `data-function="show-task-element-priority-button" data-id=${id}`,
-  dropdownContentAttributes: 'data-function="show-task-element-priority-dropdown-content"'
+  dropdownContentAttributes:
+    'data-function="show-task-element-priority-dropdown-content"'
 })
 
 export const getRemoveButtonProps = ({ taskName, id }) => ({
@@ -53,16 +64,17 @@ export const getDetailFormDialogProps = ({ id }) => ({
   formAttributes: 'data-function="task-element-detail-form"',
   elements: [
     {
-      variant: FORM_FIELDS_VARIANTS_ENUM.TEXTAREA,
-      attributes: 'name="taskDescription" data-function="show-task-description" ',
+      variant: INPUT_VARIANTS_ENUM.TEXTAREA,
+      attributes:
+        'name="taskDescription" data-function="show-task-description" ',
       label: {
         attributes: 'for="task-description"',
         text: 'Description'
       }
     },
     {
-      variant: FORM_FIELDS_VARIANTS_ENUM.FILE,
-      attributes: `data-function="upload-task-image" data-id=${id} name="taskImage"`,
+      variant: INPUT_VARIANTS_ENUM.FILE,
+      attributes: `data-function="upload-task-image" data-id=${id} name="taskImage" accept="image/*"`,
       label: {
         attributes: 'for="task-file"',
         text: 'Image'
