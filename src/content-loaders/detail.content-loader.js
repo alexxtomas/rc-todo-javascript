@@ -3,10 +3,12 @@ import { globalStore } from '@store/global.state'
 import { DETAIL_CONTROLLER_ADD_BUTTON_PROPS } from './utils/constants'
 import { TASKS_STATUS } from '@utils/constants'
 import Tasks from '@components/Tasks'
-import { $ } from '@utils/functions'
+import { $, $$ } from '@utils/functions'
 
 export function detailContentLoader() {
-  const { state: { focusedSpace } } = globalStore()
+  const {
+    state: { focusedSpace }
+  } = globalStore()
 
   const $pageHeaderContent = $('#page-header-content')
 
@@ -15,25 +17,26 @@ export function detailContentLoader() {
   const $tasksContainer = $('#tasks-container')
 
   Object.entries(TASKS_STATUS).forEach(([key, value]) => {
-    const tasks = focusedSpace.tasks.filter(task => task.status === key)
+    const tasks = focusedSpace.tasks.filter((task) => task.status === key)
     $tasksContainer.innerHTML += Tasks({
       color: value.color,
       id: key,
       label: value.label,
       tasks
-
     })
   })
 
-  const $$toggle = document.querySelectorAll('[data-function="tasks-accordion-toggle"]')
+  const $$toggle = $$('[data-function="tasks-accordion-toggle"]')
 
-  $$toggle.forEach($toggle => {
+  $$toggle.forEach(($toggle) => {
     $toggle.addEventListener('click', () => {
       const id = $toggle.getAttribute('data-id')
       const $content = $(`#${id} [data-function="show-tasks"]`)
       if (!$content) return
 
-      const $labelsContainer = $(`#${id} [data-function="tasks-labels-container"]`)
+      const $labelsContainer = $(
+        `#${id} [data-function="tasks-labels-container"]`
+      )
       const $tasksCounter = $(`#${id} p[data-function="show-tasks-counter"]`)
 
       const parrafCounterValue = $tasksCounter.getAttribute('data-counter')
@@ -55,7 +58,10 @@ export function detailContentLoader() {
       $content.classList.remove('inactive')
       $labelsContainer.classList.remove('inactive')
       $tasksCounter.classList.remove('inactive')
-      $tasksStatus.innerHTML = $tasksStatus.textContent.split(' ').slice(0, -2).join(' ')
+      $tasksStatus.innerHTML = $tasksStatus.textContent
+        .split(' ')
+        .slice(0, -2)
+        .join(' ')
     })
   })
 }

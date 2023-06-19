@@ -6,7 +6,7 @@ import {
   removeTaskDialogLogic,
   taskDetailDialogLogic
 } from '@logic/dialog.logic'
-import { $ } from '@utils/functions'
+import { $, $$ } from '@utils/functions'
 
 export function newSpaceDialogListeners() {
   const $dialog = $('#new-space-dialog')
@@ -20,7 +20,11 @@ export function newSpaceDialogListeners() {
   )
   $closeDialogButton?.addEventListener(
     'click',
-    newSpaceDialogLogic.closeDialogClick($dialog, '#new-space-dialog', newSpaceDialogLogic.restoreDialogValues)
+    newSpaceDialogLogic.closeDialogClick(
+      $dialog,
+      '#new-space-dialog',
+      newSpaceDialogLogic.restoreDialogValues
+    )
   )
   $dialog?.addEventListener('click', newSpaceDialogLogic.outsideClick($dialog))
   $dialogForm?.addEventListener(
@@ -30,7 +34,7 @@ export function newSpaceDialogListeners() {
 }
 
 export function removeSpaceDialogListeners() {
-  const $$showRemoveSpaceElementDialog = document.querySelectorAll(
+  const $$showRemoveSpaceElementDialog = $$(
     'button[data-function="show-remove-space-element-dialog"]'
   )
   $$showRemoveSpaceElementDialog.forEach(($showRemoveSpaceElementDialog) => {
@@ -68,7 +72,7 @@ export function removeSpaceDialogListeners() {
 }
 
 export function editSpaceDialogListeners() {
-  const $$editSpaceElementButton = document.querySelectorAll(
+  const $$editSpaceElementButton = $$(
     'button[data-function="edit-space-element"]'
   )
 
@@ -78,18 +82,35 @@ export function editSpaceDialogListeners() {
       `#${id} > dialog[data-function="show-edit-space-element-dialog"]`
     )
 
-    const $dialogForm = $(`#${id} [data-function="edit-space-element-submit-data"]`)
+    const $dialogForm = $(
+      `#${id} [data-function="edit-space-element-submit-data"]`
+    )
 
     const $closeDialogButton = $(
       `#${id} button[data-function="close-edit-space-element-dialog"]`
     )
-    $editSpaceElementButton?.addEventListener('click', editSpaceDialogLogic.showDialogClick($dialog))
+    $editSpaceElementButton?.addEventListener(
+      'click',
+      editSpaceDialogLogic.showDialogClick($dialog)
+    )
 
-    $closeDialogButton?.addEventListener('click', editSpaceDialogLogic.closeDialogClick($dialog, `#${id} > dialog[data-function="show-edit-space-element-dialog"]`))
+    $closeDialogButton?.addEventListener(
+      'click',
+      editSpaceDialogLogic.closeDialogClick(
+        $dialog,
+        `#${id} > dialog[data-function="show-edit-space-element-dialog"]`
+      )
+    )
 
-    $dialog?.addEventListener('click', editSpaceDialogLogic.outsideClick($dialog))
+    $dialog?.addEventListener(
+      'click',
+      editSpaceDialogLogic.outsideClick($dialog)
+    )
 
-    $dialogForm?.addEventListener('submit', editSpaceDialogLogic.saveDialogSubmit($dialog, id))
+    $dialogForm?.addEventListener(
+      'submit',
+      editSpaceDialogLogic.saveDialogSubmit($dialog, id)
+    )
   })
 }
 
@@ -114,39 +135,77 @@ export function newTaskDialogListeners() {
 }
 
 export function removeTaskDialogListeners() {
-  const $$showRemoveTaskElementDialog = document.querySelectorAll('[data-function="show-remove-task-element-dialog"]')
+  const $$showRemoveTaskElementDialog = $$(
+    '[data-function="show-remove-task-element-dialog"]'
+  )
 
-  $$showRemoveTaskElementDialog.forEach($showRemoveTaskElementDialog => {
+  $$showRemoveTaskElementDialog.forEach(($showRemoveTaskElementDialog) => {
     const taskId = $showRemoveTaskElementDialog.getAttribute('data-id')
-    const $dialog = $(`#${taskId} dialog[data-function="remove-task-element-dialog"]`)
-    const $removeTaskDialogButton = $(`#${taskId} button[data-function="remove-task-element-button"]`)
-    const $closeDialogButton = $(`#${taskId} button[data-function="close-remove-task-element-dialog-button"]`)
+    const $dialog = $(
+      `#${taskId} dialog[data-function="remove-task-element-dialog"]`
+    )
+    const $removeTaskDialogButton = $(
+      `#${taskId} button[data-function="remove-task-element-button"]`
+    )
+    const $closeDialogButton = $(
+      `#${taskId} button[data-function="close-remove-task-element-dialog-button"]`
+    )
 
-    $showRemoveTaskElementDialog?.addEventListener('click', removeTaskDialogLogic.showDialogClick($dialog))
+    $showRemoveTaskElementDialog?.addEventListener(
+      'click',
+      removeTaskDialogLogic.showDialogClick($dialog)
+    )
 
-    $closeDialogButton?.addEventListener('click', removeTaskDialogLogic.closeDialogClick($dialog))
+    $closeDialogButton?.addEventListener(
+      'click',
+      removeTaskDialogLogic.closeDialogClick($dialog)
+    )
 
-    $removeTaskDialogButton?.addEventListener('click', removeTaskDialogLogic.remove(taskId))
+    $removeTaskDialogButton?.addEventListener(
+      'click',
+      removeTaskDialogLogic.remove(taskId)
+    )
 
-    $dialog?.addEventListener('click', removeTaskDialogLogic.outsideClick($dialog))
+    $dialog?.addEventListener(
+      'click',
+      removeTaskDialogLogic.outsideClick($dialog)
+    )
   })
 }
 
 export function taskDetailDialogListeners() {
-  const $$showTaskDetailDialog = document.querySelectorAll('[data-function="show-task-element-detail-dialog"]')
+  const $$showTaskDetailDialog = $$(
+    '[data-function="show-task-element-detail-dialog"]'
+  )
 
-  $$showTaskDetailDialog.forEach($showTaskDetailDialog => {
+  $$showTaskDetailDialog.forEach(($showTaskDetailDialog) => {
     const taskId = $showTaskDetailDialog.getAttribute('id')
-    const $dialog = $(`#${taskId} dialog[data-function="task-element-detail-dialog"]`)
+    const $dialog = $(
+      `#${taskId} dialog[data-function="task-element-detail-dialog"]`
+    )
     const $form = $(`#${taskId} form[data-function="task-element-detail-form"]`)
-    const $closeDialogButton = $(`#${taskId} [data-function="close-task-element-detail-dialog-button"]`)
+    const $closeDialogButton = $(
+      `#${taskId} [data-function="close-task-element-detail-dialog-button"]`
+    )
 
-    $showTaskDetailDialog?.addEventListener('click', taskDetailDialogLogic.showDialogClick($dialog, taskId))
+    $showTaskDetailDialog?.addEventListener(
+      'click',
+      taskDetailDialogLogic.showDialogClick($dialog, taskId)
+    )
 
-    $form?.addEventListener('submit', taskDetailDialogLogic.saveDialogSubmit($dialog, taskId))
+    $form?.addEventListener(
+      'submit',
+      taskDetailDialogLogic.saveDialogSubmit($dialog, taskId)
+    )
 
-    $closeDialogButton?.addEventListener('click', taskDetailDialogLogic.closeDialogClick($dialog, taskId))
+    $closeDialogButton?.addEventListener(
+      'click',
+      taskDetailDialogLogic.closeDialogClick($dialog, taskId)
+    )
 
-    $dialog?.addEventListener('click', taskDetailDialogLogic.outsideClick($dialog))
+    $dialog?.addEventListener(
+      'click',
+      taskDetailDialogLogic.outsideClick($dialog)
+    )
   })
 }
