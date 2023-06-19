@@ -1,4 +1,6 @@
 import { transparentBackgroundListeners } from '@listeners/transparentBackground.listeners'
+import { $ } from '@utils/functions'
+
 
 export const dialogSharedLogic = {
   showDialogClick: ($dialog) => (e) => {
@@ -10,7 +12,7 @@ export const dialogSharedLogic = {
     $dialog.close()
 
     if (dialogSelector) {
-      const $dialogValidationErrorMessage = document.querySelector(
+      const $dialogValidationErrorMessage = $(
         `${dialogSelector} [data-function="input-validation-error"]`
       )
       if ($dialogValidationErrorMessage.textContent !== '') {
@@ -29,7 +31,7 @@ export const dialogSharedLogic = {
 
 export const dropdownSharedLogic = {
   showDropdown({ $tooltip, $dropdown }) {
-    const $transparentBackground = document.querySelector('#transparent-background')
+    const $transparentBackground = $('#transparent-background')
     $transparentBackground.classList.remove('visually-hidden')
     $tooltip.classList.add('visibility-hidden')
     $dropdown.classList.add('display-block')
@@ -38,7 +40,7 @@ export const dropdownSharedLogic = {
   },
   closeDropdown({ $tooltip, $dropdown }) {
     return () => {
-      const $transparentBackground = document.querySelector('#transparent-background')
+      const $transparentBackground = $('#transparent-background')
 
       $transparentBackground.classList.add('visually-hidden')
       $tooltip.classList.remove('visibility-hidden')

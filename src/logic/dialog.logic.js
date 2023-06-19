@@ -11,6 +11,8 @@ import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import { taskNameValidation } from '@validations/task.validation'
 import TaskElement from '@components/TaskElement'
 import { taskPriorityDropdownListeners } from '@listeners/dropwdown.listeners'
+import { $ } from '@utils/functions'
+
 
 const { outsideClick, showDialogClick, closeDialogClick } = dialogSharedLogic
 
@@ -18,18 +20,18 @@ export const newSpaceDialogLogic = {
   showDialogClick,
   closeDialogClick,
   restoreDialogValues: () => {
-    const $newSpaceName = document.querySelector('#new-space-name')
+    const $newSpaceName = $('#new-space-name')
     $newSpaceName.value = ''
   },
   saveDialogSubmit: ($dialog) => (e) => {
     e.preventDefault()
-    const $spacesContainer = document.querySelector('#spaces-container')
-    const $dialogValidationErrorMessage = document.querySelector(
+    const $spacesContainer = $('#spaces-container')
+    const $dialogValidationErrorMessage = $(
       '[data-function="input-validation-error"]'
     )
-    const $dialogSpaceNameInput = document.querySelector('#new-space-name')
+    const $dialogSpaceNameInput = $('#new-space-name')
     const $dialogSpacePrioritySelect =
-      document.querySelector('#new-space-priority')
+      $('#new-space-priority')
     const { newSpaceName, newSpacePriority } = e.target
 
     const newSpaceNameValidation = spaceNameValidation({
@@ -83,7 +85,7 @@ export const newSpaceDialogLogic = {
 export const removeSpaceDialogLogic = {
   showDialogClick,
   remove: (id) => () => {
-    const $spaceElement = document.querySelector(`#${id}`)
+    const $spaceElement = $(`#${id}`)
     const { dispatch } = globalStore()
 
     $spaceElement.remove()
@@ -99,14 +101,14 @@ export const editSpaceDialogLogic = {
 
   saveDialogSubmit: ($dialog, id) => (e) => {
     e.preventDefault()
-    const $dialogValidationErrorMessage = document.querySelector(
+    const $dialogValidationErrorMessage = $(
       `#${id} [data-function="input-validation-error"]`
     )
-    const $spaceElementName = document.querySelector(`#${id} [data-function="show-space-element-name"]`)
-    const $spaceElementPriority = document.querySelector(`#${id} [data-function="show-space-element-priority"]`)
-    const $dialogSpaceNameInput = document.querySelector('#space-name')
+    const $spaceElementName = $(`#${id} [data-function="show-space-element-name"]`)
+    const $spaceElementPriority = $(`#${id} [data-function="show-space-element-priority"]`)
+    const $dialogSpaceNameInput = $('#space-name')
     const $dialogSpacePrioritySelect =
-       document.querySelector('#space-priority')
+       $('#space-priority')
     const { spaceName, spacePriority } = e.target
     const { dispatch } = globalStore()
 
@@ -147,13 +149,13 @@ export const newTaskDialogLogic = {
   saveDialogSubmit: ($dialog) => (e) => {
     e.preventDefault()
     const { state: { focusedSpace } } = globalStore()
-    const $dialogValidationErrorMessage = document.querySelector(
+    const $dialogValidationErrorMessage = $(
       '#new-task-dialog [data-function="input-validation-error"]'
     )
-    const $backlogTasks = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks"]`)
-    const $backlogTasksCounter = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks-counter"]`)
-    const $backlogTasksCounterSpan = document.querySelector(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks-counter-span"]`)
-    const $dialogTaskNameInput = document.querySelector('#new-task-name')
+    const $backlogTasks = $(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks"]`)
+    const $backlogTasksCounter = $(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks-counter"]`)
+    const $backlogTasksCounterSpan = $(`#${TASKS_STATUS_ENUM.BACKLOG} [data-function="show-tasks-counter-span"]`)
+    const $dialogTaskNameInput = $('#new-task-name')
 
     const { newTaskName } = e.target
 
@@ -215,10 +217,10 @@ export const removeTaskDialogLogic = {
   remove: (taskId) => () => {
     const { state: { focusedSpace }, dispatch } = globalStore()
 
-    const $task = document.querySelector(`#${taskId}`)
+    const $task = $(`#${taskId}`)
 
     const statusKey = $task.getAttribute('data-status')
-    const $statusCounter = document.querySelector(`#${statusKey} [data-function="show-tasks-counter"]`)
+    const $statusCounter = $(`#${statusKey} [data-function="show-tasks-counter"]`)
 
     const updatedCounterValue = Number($statusCounter.getAttribute('data-counter')) - 1
     $statusCounter.setAttribute('data-counter', updatedCounterValue)
@@ -237,12 +239,12 @@ export const taskDetailDialogLogic = {
     const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
 
     if (task.description) {
-      const $taskDescription = document.querySelector(`#${taskId} [data-function="show-task-description"]`)
+      const $taskDescription = $(`#${taskId} [data-function="show-task-description"]`)
       $taskDescription.innerHTML = task.description
     }
     if (task.image) {
-      const $taskImage = document.querySelector(`#${taskId} [data-function="show-input-file-image"]`)
-      const $taskImageIcon = document.querySelector(`#${taskId} [data-function="show-input-file-icon"]`)
+      const $taskImage = $(`#${taskId} [data-function="show-input-file-image"]`)
+      const $taskImageIcon = $(`#${taskId} [data-function="show-input-file-icon"]`)
       $taskImageIcon.classList.add('visually-hidden')
       $taskImage.setAttribute('src', task.image)
       $taskImage.classList.remove('visually-hidden')
@@ -251,8 +253,8 @@ export const taskDetailDialogLogic = {
   },
   saveDialogSubmit: ($dialog, taskId) => (e) => {
     e.preventDefault()
-    const $taskImageInput = document.querySelector(`#${taskId} [data-function="upload-task-image"]`)
-    const $taskDescriptionTextarea = document.querySelector(`#${taskId} [data-function="show-task-description"]`)
+    const $taskImageInput = $(`#${taskId} [data-function="upload-task-image"]`)
+    const $taskDescriptionTextarea = $(`#${taskId} [data-function="show-task-description"]`)
     const { state: { focusedSpace }, dispatch } = globalStore()
 
     dispatch({ action: GLOBAL_ACTIONS_ENUM.SET_TASK_DESCRIPTION, payload: { spaceId: focusedSpace.id, taskId, description: $taskDescriptionTextarea.value } })
@@ -273,8 +275,8 @@ export const taskDetailDialogLogic = {
   closeDialogClick: ($dialog, taskId) => (e) => {
     const { state: { focusedSpace }, dispatch } = globalStore()
     const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
-    const $taskDescription = document.querySelector(`#${taskId} [data-function="show-task-description"]`)
-    const $taskImage = document.querySelector(`#${taskId} [data-function="show-input-file-image"]`)
+    const $taskDescription = $(`#${taskId} [data-function="show-task-description"]`)
+    const $taskImage = $(`#${taskId} [data-function="show-input-file-image"]`)
 
     if (task.description !== $taskDescription.value) {
       $taskDescription.value = task.description

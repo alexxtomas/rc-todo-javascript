@@ -1,6 +1,8 @@
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { PRIORITIES, PRIORITIES_ENUM, TASKS_STATUS } from '@utils/constants'
 import { dropdownSharedLogic } from './shared'
+import { $ } from '@utils/functions'
+
 
 export const taskPriorityDropdownLogic = {
   handleShowTaskElementPriorityButtonClick({ $showTaskElementPriorityButton, callbacks }) {
@@ -9,8 +11,8 @@ export const taskPriorityDropdownLogic = {
       const { dispatch, state: { focusedSpace } } = globalStore()
       const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
       const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
-      const $tooltip = document.querySelector(`#${taskId} [data-function="show-task-element-priority-tooltip-text"]`)
-      const $dropdown = document.querySelector(`#${taskId} [data-function="show-task-element-priority-dropdown-content"]`)
+      const $tooltip = $(`#${taskId} [data-function="show-task-element-priority-tooltip-text"]`)
+      const $dropdown = $(`#${taskId} [data-function="show-task-element-priority-dropdown-content"]`)
 
       dropdownSharedLogic.showDropdown({ $dropdown, $tooltip })
 
@@ -23,7 +25,7 @@ export const taskPriorityDropdownLogic = {
       e.stopPropagation()
       const priorityKey = $setTaskElementPriority.getAttribute('data-priority-key')
       const priorityColor = PRIORITIES[priorityKey].color
-      const $svg = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+      const $svg = $(`#${taskId} [data-function="show-task-element-priority"]`)
 
       if (task.priority === priorityKey) {
         dropdownSharedLogic.closeDropdown({ $dropdown, $tooltip })()
@@ -39,7 +41,7 @@ export const taskPriorityDropdownLogic = {
     const changeTaskPriority = this.changeTaskPriority
     return (e) => {
       e.stopPropagation()
-      const $svg = document.querySelector(`#${taskId} [data-function="show-task-element-priority"]`)
+      const $svg = $(`#${taskId} [data-function="show-task-element-priority"]`)
 
       if (task.priority === PRIORITIES_ENUM.NOT_ASSIGNED) {
         dropdownSharedLogic.closeDropdown({ $dropdown, $tooltip })()
@@ -70,8 +72,8 @@ export const taskStatusDropdownLogic = {
       const { dispatch, state: { focusedSpace } } = globalStore()
       const taskId = $showTaskElementPriorityButton.getAttribute('data-id')
       const task = dispatch({ action: GLOBAL_ACTIONS_ENUM.GET_TASK_BY_ID, payload: { spaceId: focusedSpace.id, taskId } })
-      const $tooltip = document.querySelector(`#${taskId} [data-function="show-task-element-status-tooltip-text"]`)
-      const $dropdown = document.querySelector(`#${taskId} [data-function="show-task-element-status-dropdown-content"]`)
+      const $tooltip = $(`#${taskId} [data-function="show-task-element-status-tooltip-text"]`)
+      const $dropdown = $(`#${taskId} [data-function="show-task-element-status-dropdown-content"]`)
 
       dropdownSharedLogic.showDropdown({ $dropdown, $tooltip })
 
@@ -84,13 +86,13 @@ export const taskStatusDropdownLogic = {
       const { dispatch, state: { focusedSpace } } = globalStore()
       const statusKey = $setTaskElementStatus.getAttribute('data-status-key')
       const status = TASKS_STATUS[statusKey]
-      const $showTaskElementStatus = document.querySelector(`#${taskId} [data-function="show-task-element-status"]`)
-      const $showTasks = document.querySelector(`#${statusKey} [data-function="show-tasks"]`)
-      const $taskElement = document.querySelector(`#${taskId}`)
-      const $previousCounter = document.querySelector(`#${task.status} [data-function="show-tasks-counter"]`)
+      const $showTaskElementStatus = $(`#${taskId} [data-function="show-task-element-status"]`)
+      const $showTasks = $(`#${statusKey} [data-function="show-tasks"]`)
+      const $taskElement = $(`#${taskId}`)
+      const $previousCounter = $(`#${task.status} [data-function="show-tasks-counter"]`)
 
-      const $nextCounter = document.querySelector(`#${statusKey} [data-function="show-tasks-counter"]`)
-      const $nextCounterSpan = document.querySelector(`#${statusKey} [data-function="show-tasks-counter-span"]`)
+      const $nextCounter = $(`#${statusKey} [data-function="show-tasks-counter"]`)
+      const $nextCounterSpan = $(`#${statusKey} [data-function="show-tasks-counter-span"]`)
 
       console.log($nextCounterSpan)
 

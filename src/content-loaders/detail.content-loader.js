@@ -3,15 +3,16 @@ import { globalStore } from '@store/global.state'
 import { DETAIL_CONTROLLER_ADD_BUTTON_PROPS } from './utils/constants'
 import { TASKS_STATUS } from '@utils/constants'
 import Tasks from '@components/Tasks'
+import { $ } from '@utils/functions'
 
 export function detailContentLoader() {
   const { state: { focusedSpace } } = globalStore()
 
-  const $pageHeaderContent = document.querySelector('#page-header-content')
+  const $pageHeaderContent = $('#page-header-content')
 
   $pageHeaderContent.innerHTML = Button(DETAIL_CONTROLLER_ADD_BUTTON_PROPS)
 
-  const $tasksContainer = document.querySelector('#tasks-container')
+  const $tasksContainer = $('#tasks-container')
 
   Object.entries(TASKS_STATUS).forEach(([key, value]) => {
     const tasks = focusedSpace.tasks.filter(task => task.status === key)
@@ -29,15 +30,15 @@ export function detailContentLoader() {
   $$toggle.forEach($toggle => {
     $toggle.addEventListener('click', () => {
       const id = $toggle.getAttribute('data-id')
-      const $content = document.querySelector(`#${id} [data-function="show-tasks"]`)
+      const $content = $(`#${id} [data-function="show-tasks"]`)
       if (!$content) return
 
-      const $labelsContainer = document.querySelector(`#${id} [data-function="tasks-labels-container"]`)
-      const $tasksCounter = document.querySelector(`#${id} p[data-function="show-tasks-counter"]`)
+      const $labelsContainer = $(`#${id} [data-function="tasks-labels-container"]`)
+      const $tasksCounter = $(`#${id} p[data-function="show-tasks-counter"]`)
 
       const parrafCounterValue = $tasksCounter.getAttribute('data-counter')
 
-      const $tasksStatus = document.querySelector(`#${id} [data-function="show-tasks-status"]`)
+      const $tasksStatus = $(`#${id} [data-function="show-tasks-status"]`)
 
       if (!$content.classList.contains('inactive')) {
         $toggle.setAttribute('aria-expanded', 'false')

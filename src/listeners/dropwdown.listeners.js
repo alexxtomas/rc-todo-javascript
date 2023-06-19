@@ -1,4 +1,5 @@
 import { taskPriorityDropdownLogic, taskStatusDropdownLogic } from '@logic/dropdown.logic'
+import { $ } from '@utils/functions'
 
 export const taskPriorityDropdownListenersObject = {
   showTaskElementPriorityButtonListeners() {
@@ -17,7 +18,7 @@ export const taskPriorityDropdownListenersObject = {
     })
   },
   clearTaskElementPriorityListeners({ taskId, task, $dropdown, $tooltip }) {
-    const $clearTaskElementPriority = document.querySelector(`#${taskId} [data-function="clear-task-element-priority"]`)
+    const $clearTaskElementPriority = $(`#${taskId} [data-function="clear-task-element-priority"]`)
     $clearTaskElementPriority.addEventListener('click', taskPriorityDropdownLogic.handleClearTaskElementPriorityClick({ taskId, task, $dropdown, $tooltip }))
   }
 

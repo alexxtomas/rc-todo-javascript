@@ -1,4 +1,5 @@
 import { inputTextareaLogic } from '@logic/input.logic'
+import { $ } from '@utils/functions'
 
 export function inputTextareaListeners() {
   const $$autoResizeTextarea = document.querySelectorAll('[data-autoresize]')
@@ -21,8 +22,8 @@ export function inputFileListeners() {
       const reader = new FileReader()
 
       reader.onload = () => {
-        const $taskImage = document.querySelector(`#${taskId} [data-function="show-input-file-image"]`)
-        const $taskImageIcon = document.querySelector(`#${taskId} [data-function="show-input-file-icon"]`)
+        const $taskImage = $(`#${taskId} [data-function="show-input-file-image"]`)
+        const $taskImageIcon = $(`#${taskId} [data-function="show-input-file-icon"]`)
         $taskImageIcon.classList.add('visually-hidden')
         $taskImage.setAttribute('src', reader.result)
         $taskImage.classList.remove('visually-hidden')

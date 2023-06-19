@@ -2,11 +2,12 @@ import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import HomeHtml from '@views/Home/index.html?raw'
 import DetailHtml from '@views/Detail/index.html?raw'
 import NotFoundHtml from '@views/404/index.html?raw'
-
 import { homeController } from '@controllers/home.controller'
 import { detailController } from '@controllers/detail.controller'
-const $content = document.querySelector('#content')
-const $pageHeaderContent = document.querySelector('#page-header-content')
+import { $ } from '@utils/functions'
+
+const $content = $('#content')
+const $pageHeaderContent = $('#page-header-content')
 
 export const router = (route) => {
   const { dispatch } = globalStore()

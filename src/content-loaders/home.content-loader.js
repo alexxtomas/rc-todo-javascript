@@ -3,9 +3,10 @@ import { globalStore } from '@store/global.state'
 import SpaceElement, { SPACE_ELEMENT_VARIANTS_ENUM } from '@components/SpaceElement'
 import { PRIORITIES } from '@utils/constants'
 import { HOME_CONTROLLER_ADD_BUTTON_PROPS } from './utils/constants'
+import { $ } from '@utils/functions'
 
 export function homeContentLoader() {
-  const $pageHeaderContent = document.querySelector('#page-header-content')
+  const $pageHeaderContent = $('#page-header-content')
 
   $pageHeaderContent.innerHTML = Button(HOME_CONTROLLER_ADD_BUTTON_PROPS)
 
@@ -14,7 +15,7 @@ export function homeContentLoader() {
   } = globalStore()
 
   if (spaces.length > 0 && spaces[0]?.name) {
-    const $ul = document.querySelector('#spaces-container')
+    const $ul = $('#spaces-container')
     $ul.innerHTML += `
        ${spaces
          .map(({ name, priority, id, tasks }) => {
@@ -32,7 +33,7 @@ export function homeContentLoader() {
  `
   }
 
-  const $prioritiesAsideContainer = document.querySelector('#priorities-aside-container')
+  const $prioritiesAsideContainer = $('#priorities-aside-container')
 
   $prioritiesAsideContainer.innerHTML += `
      ${Object.values(PRIORITIES)
