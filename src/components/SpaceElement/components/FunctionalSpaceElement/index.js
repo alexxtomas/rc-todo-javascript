@@ -23,7 +23,9 @@ const FunctionalSpaceElement = ({ name, iconColor, id, tasks }) => {
       props: 'width=16px stroke-width="1.2" fill="none"'
     })}
     </button>
-    ${Button(getRemoveButtonProps({ spaceName: name, numberOfTasks: tasks.length, id }))}
+    ${Button(
+      getRemoveButtonProps({ spaceName: name, numberOfTasks: tasks.length, id })
+    )}
    
     </div>
 

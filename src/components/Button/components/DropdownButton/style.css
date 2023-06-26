@@ -7,7 +7,7 @@
   display: none;
   position: absolute;
   background-color: #fff;
-  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   z-index: 3;
   border-radius: 4px;
 }
@@ -18,15 +18,14 @@
   gap: 4px;
 }
 
-
 .tooltiptext {
   width: max-content;
   visibility: hidden;
-  background-color: rgba(50,50,50,1);
+  background-color: rgba(50, 50, 50, 1);
   letter-spacing: 0.25px;
   color: #fff;
   font-size: 10px;
-  border-radius: .4em;
+  border-radius: 0.4em;
   padding: 3px 5px;
   position: absolute;
   top: -25px;
@@ -35,14 +34,15 @@
 }
 
 .tooltiptext:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 100%;
   left: 50%;
   margin-left: -2px;
   border-width: 4px;
   border-style: solid;
-  border-color: rgba(50,50,50,1) transparent transparent transparent;}
+  border-color: rgba(50, 50, 50, 1) transparent transparent transparent;
+}
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
@@ -54,4 +54,3 @@
 .display-block {
   display: block;
 }
-

@@ -22,57 +22,81 @@ const GLOBAL_ACTIONS = {
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   addTask: ({ spaceId, task }) => {
-    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
-    GLOBAL_STATE.spaces[spaceIndex].tasks = GLOBAL_STATE.spaces[
-      spaceIndex
-    ].tasks.concat(task)
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex(
+      (space) => space.id === spaceId
+    )
+    GLOBAL_STATE.spaces[spaceIndex].tasks =
+      GLOBAL_STATE.spaces[spaceIndex].tasks.concat(task)
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
 
   getTaskById: ({ spaceId, taskId }) => {
-    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
-    return GLOBAL_STATE.spaces[spaceIndex].tasks.find((task) => task.id === taskId)
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex(
+      (space) => space.id === spaceId
+    )
+    return GLOBAL_STATE.spaces[spaceIndex].tasks.find(
+      (task) => task.id === taskId
+    )
   },
   removeTask: ({ spaceId, taskId }) => {
-    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
-    GLOBAL_STATE.spaces[spaceIndex].tasks = GLOBAL_STATE.spaces[spaceIndex].tasks.filter(
-      (task) => task.id !== taskId
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex(
+      (space) => space.id === spaceId
     )
+    GLOBAL_STATE.spaces[spaceIndex].tasks = GLOBAL_STATE.spaces[
+      spaceIndex
+    ].tasks.filter((task) => task.id !== taskId)
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   setTaskPriority: ({ spaceId, taskId, priority }) => {
-    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
-    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex(
+      (space) => space.id === spaceId
+    )
+    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex(
+      (task) => task.id === taskId
+    )
     GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].priority = priority
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   setTaskStatus: ({ spaceId, taskId, statusKey }) => {
-    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
-    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex(
+      (space) => space.id === spaceId
+    )
+    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex(
+      (task) => task.id === taskId
+    )
     GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].status = statusKey
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   setTaskImage: ({ spaceId, taskId, image }) => {
-    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
-    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex(
+      (space) => space.id === spaceId
+    )
+    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex(
+      (task) => task.id === taskId
+    )
     GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].image = image
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   setTaskDescription: ({ spaceId, taskId, description }) => {
-    const spaceIndex = GLOBAL_STATE.spaces.findIndex((space) => space.id === spaceId)
-    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex((task) => task.id === taskId)
+    const spaceIndex = GLOBAL_STATE.spaces.findIndex(
+      (space) => space.id === spaceId
+    )
+    const taskIndex = GLOBAL_STATE.spaces[spaceIndex].tasks.findIndex(
+      (task) => task.id === taskId
+    )
     GLOBAL_STATE.spaces[spaceIndex].tasks[taskIndex].description = description
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   addFocusedSpace: ({ spaceId }) => {
-    GLOBAL_STATE.focusedSpace = GLOBAL_STATE.spaces.find((space) => space.id === spaceId)
+    GLOBAL_STATE.focusedSpace = GLOBAL_STATE.spaces.find(
+      (space) => space.id === spaceId
+    )
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   },
   removeFocusedSpace: () => {
     GLOBAL_STATE.focusedSpace = null
     updateGlobalStateStorage({ state: GLOBAL_STATE })
   }
-
 }
 
 export const GLOBAL_ACTIONS_ENUM = {

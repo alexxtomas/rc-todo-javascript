@@ -1,6 +1,12 @@
 import './style.css'
 
-const DropdownButton = ({ tooltip, children, dropdownListItems, buttonAttributes, dropdownContentAttributes }) => {
+const DropdownButton = ({
+  tooltip,
+  children,
+  dropdownListItems,
+  buttonAttributes,
+  dropdownContentAttributes
+}) => {
   return `
   <button class="dropdown tooltip" ${buttonAttributes}>
   ${children}

@@ -14,7 +14,6 @@ export default defineConfig({
       '@store': path.resolve(__dirname, './src/store'),
       '@controllers': path.resolve(__dirname, './src/controllers'),
       '@content-loaders': path.resolve(__dirname, './src/content-loaders')
-
     }
   }
 })

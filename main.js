@@ -1,7 +1,3 @@
-import { routerListeners } from '@listeners/router.listeners'
-import { syncGlobalStateWithLocalStorage } from '@logic/localStorage.logic'
-import { router } from '@router/index'
+import { init } from './src'
 
-syncGlobalStateWithLocalStorage()
-router(window.location.hash.replace('#', ''))
-routerListeners()
+init()

@@ -11,7 +11,7 @@
       "@logic/*": ["src/logic/*"],
       "@store/*": ["src/store/*"],
       "@controllers/*": ["src/controllers/*"],
-      "@content-loaders/*": ["src/content-loaders/*"],
+      "@content-loaders/*": ["src/content-loaders/*"]
     }
   }
 }

@@ -1,9 +1,21 @@
 import Dialog from '@components/Dialog'
 import './style.css'
-import { getRemoveButtonProps, getPriorityDropdownButtonProps, getStatusDropdownButtonProps, getDetailFormDialogProps } from './utils/functions'
+import {
+  getRemoveButtonProps,
+  getPriorityDropdownButtonProps,
+  getStatusDropdownButtonProps,
+  getDetailFormDialogProps
+} from './utils/functions'
 import Button from '@components/Button'
 
-const TaskElement = ({ creationDate, name, iconColor, statusColor, id, statusId }) => {
+const TaskElement = ({
+  creationDate,
+  name,
+  iconColor,
+  statusColor,
+  id,
+  statusId
+}) => {
   return `
   <li id=${id} class="task-element" data-status=${statusId} data-function="show-task-element-detail-dialog">
   <div class="tasks-element-container">

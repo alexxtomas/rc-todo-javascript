@@ -24,7 +24,9 @@ export const router = (route) => {
     return
   }
 
-  const { state: { spaces } } = globalStore()
+  const {
+    state: { spaces }
+  } = globalStore()
 
   const space = spaces.find((space) => space.id === route.replace('/', ''))
 
@@ -33,7 +35,10 @@ export const router = (route) => {
     $content.innerHTML = NotFoundHtml
     return
   }
-  dispatch({ action: GLOBAL_ACTIONS_ENUM.ADD_FOCUSED_SPACE, payload: { spaceId: space.id } })
+  dispatch({
+    action: GLOBAL_ACTIONS_ENUM.ADD_FOCUSED_SPACE,
+    payload: { spaceId: space.id }
+  })
   $content.innerHTML = DetailHtml
   detailController(space.id)
 }

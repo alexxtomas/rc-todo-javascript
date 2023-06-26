@@ -1,8 +1,5 @@
-import { router } from '@router/index'
+import { routerLogic } from '@logic/router.logic'
 
 export function routerListeners() {
-  window.addEventListener('hashchange', () => {
-    const location = window.location.hash.replace('#', '')
-    router(location)
-  })
+  window.addEventListener('hashchange', routerLogic.handleHashChange)
 }

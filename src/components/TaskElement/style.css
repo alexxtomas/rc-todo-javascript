@@ -9,13 +9,11 @@
   cursor: pointer;
 }
 
-
 .tasks-element-container {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-
 
 .task-element-title {
   font-size: 16px;
@@ -28,11 +26,7 @@
   align-items: center;
 }
 
-.task-element-info-container-text{
+.task-element-info-container-text {
   font-size: 14px;
   width: 120px;
-  
 }
-
-
-

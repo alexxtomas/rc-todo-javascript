@@ -1,10 +1,12 @@
+import { stringValidation } from './entities'
+
 export const spaceNameValidation = ({ spaceName }) => {
-  if (typeof spaceName !== 'string') {
+  if (stringValidation.type(spaceName) === false) {
     return {
       message: 'Space name must be a string'
     }
   }
-  if (spaceName.length < 2) {
+  if (stringValidation.minLength(spaceName, 2) === false) {
     return {
       message: 'Space name must be at least 2 characters'
     }

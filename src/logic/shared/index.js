@@ -1,7 +1,6 @@
 import { transparentBackgroundListeners } from '@listeners/transparentBackground.listeners'
 import { $ } from '@utils/functions'
 
-
 export const dialogSharedLogic = {
   showDialogClick: ($dialog) => (e) => {
     e.stopPropagation()
@@ -36,7 +35,10 @@ export const dropdownSharedLogic = {
     $tooltip.classList.add('visibility-hidden')
     $dropdown.classList.add('display-block')
 
-    transparentBackgroundListeners({ onClick: this.closeDropdown, props: { $tooltip, $dropdown } })
+    transparentBackgroundListeners({
+      onClick: this.closeDropdown,
+      props: { $tooltip, $dropdown }
+    })
   },
   closeDropdown({ $tooltip, $dropdown }) {
     return () => {
@@ -47,5 +49,4 @@ export const dropdownSharedLogic = {
       $dropdown.classList.remove('display-block')
     }
   }
-
 }

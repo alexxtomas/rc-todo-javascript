@@ -70,13 +70,12 @@ main {
   align-items: center;
 }
 
-.page-header-content{
+.page-header-content {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 12px;
 }
-
 
 .visually-hidden {
   border: 0;
