@@ -2,13 +2,10 @@ import { spaceNameValidation } from '@validations/space.validation'
 import {
   PRIORITIES,
   PRIORITIES_ENUM,
-  PRIORITIES_SELECT_OPTIONS,
   TASKS_STATUS,
   TASKS_STATUS_ENUM
 } from '@utils/constants'
-import SpaceElement, {
-  SPACE_ELEMENT_VARIANTS_ENUM
-} from '@components/SpaceElement'
+import SpaceElement from '@components/SpaceElement'
 import { GLOBAL_ACTIONS_ENUM, globalStore } from '@store/global.state'
 import { nanoid } from 'nanoid'
 import {
@@ -18,7 +15,6 @@ import {
   taskDetailDialogListeners
 } from '@listeners/dialog.listeners'
 import { dialogSharedLogic } from './shared'
-import Icon, { ICON_VARIANTS_ENUM } from '@components/Icon'
 import { taskNameValidation } from '@validations/task.validation'
 import TaskElement from '@components/TaskElement'
 import { taskPriorityDropdownListeners } from '@listeners/dropwdown.listeners'
@@ -40,8 +36,7 @@ export const newSpaceDialogLogic = {
       '[data-function="input-validation-error"]'
     )
     const $dialogSpaceNameInput = $('#new-space-name')
-    const $dialogSpacePrioritySelect = $('#new-space-priority')
-    const { newSpaceName, newSpacePriority } = e.target
+    const { newSpaceName } = e.target
 
     const newSpaceNameValidation = spaceNameValidation({
       spaceName: newSpaceName.value
@@ -56,21 +51,17 @@ export const newSpaceDialogLogic = {
       $dialogValidationErrorMessage.textContent = ''
     }
 
-    const priority = PRIORITIES[newSpacePriority.value]
     const id = `a${nanoid()}`
 
     $spacesContainer.innerHTML += SpaceElement({
       id,
       name: newSpaceName.value,
-      iconColor: priority.color,
-      tasks: [],
-      variant: SPACE_ELEMENT_VARIANTS_ENUM.FUNCTIONAL
+      tasks: []
     })
 
     const newSpace = {
       id,
       name: newSpaceName.value,
-      priority: newSpacePriority.value,
       tasks: []
     }
 
@@ -82,7 +73,6 @@ export const newSpaceDialogLogic = {
     })
 
     $dialogSpaceNameInput.value = ''
-    $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
 
     $dialog.close()
     editSpaceDialogListeners()
@@ -116,12 +106,9 @@ export const editSpaceDialogLogic = {
     const $spaceElementName = $(
       `#${id} [data-function="show-space-element-name"]`
     )
-    const $spaceElementPriority = $(
-      `#${id} [data-function="show-space-element-priority"]`
-    )
+
     const $dialogSpaceNameInput = $('#space-name')
-    const $dialogSpacePrioritySelect = $('#space-priority')
-    const { spaceName, spacePriority } = e.target
+    const { spaceName } = e.target
     const { dispatch } = globalStore()
 
     const spaceNameValidaation = spaceNameValidation({
@@ -137,21 +124,14 @@ export const editSpaceDialogLogic = {
       $dialogValidationErrorMessage.textContent = ''
     }
 
-    const priority = PRIORITIES[spacePriority.value]
-
     $spaceElementName.textContent = spaceName.value
-    $spaceElementPriority.innerHTML = Icon({
-      variant: ICON_VARIANTS_ENUM.FLAG,
-      props: `width=30px stroke-width="0.8" fill=${priority.color} color=${priority.color} data-function="show-space-element-priority"`
-    })
 
     dispatch({
       action: GLOBAL_ACTIONS_ENUM.EDIT_SPACE,
-      payload: { id, name: spaceName.value, priority: spacePriority.value }
+      payload: { id, name: spaceName.value }
     })
 
     $dialogSpaceNameInput.value = ''
-    $dialogSpacePrioritySelect.value = PRIORITIES_SELECT_OPTIONS[0].value
 
     $dialog.close()
   },

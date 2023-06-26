@@ -5,23 +5,3 @@
   justify-content: space-between;
   row-gap: 10px;
 }
-
-.priorities-aside {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  position: fixed;
-  top: 30%;
-  left: 10%;
-}
-.priorities-aside-title {
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-}
-
-.priorities-aside-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}

@@ -29,15 +29,6 @@ export const PRIORITIES_ENUM = {
   NOT_ASSIGNED: 'NOT_ASSIGNED'
 }
 
-export const PRIORITIES_SELECT_OPTIONS = Object.entries(PRIORITIES)
-  .filter(([key, value]) => {
-    return value.label !== 'Not Assigned'
-  })
-  .map(([key, value]) => ({
-    value: key,
-    label: value.label
-  }))
-
 export const TASKS_STATUS = {
   BACKLOG: {
     label: 'Backlog',

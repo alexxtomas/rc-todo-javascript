@@ -1,9 +1,6 @@
 import Button from '@components/Button'
 import { globalStore } from '@store/global.state'
-import SpaceElement, {
-  SPACE_ELEMENT_VARIANTS_ENUM
-} from '@components/SpaceElement'
-import { PRIORITIES } from '@utils/constants'
+import SpaceElement from '@components/SpaceElement'
 import { HOME_CONTROLLER_ADD_BUTTON_PROPS } from './utils/constants'
 import { $ } from '@utils/functions'
 
@@ -21,35 +18,14 @@ export function homeContentLoader() {
     $ul.innerHTML += `
        ${spaces
          .map(({ name, priority, id, tasks }) => {
-           const iconColor = PRIORITIES[priority].color
            return SpaceElement({
              id,
              name,
-             tasks,
-             iconColor,
-             variant: SPACE_ELEMENT_VARIANTS_ENUM.FUNCTIONAL
+             tasks
            })
          })
          .join('')
          .replaceAll(',', '')}
  `
   }
-
-  const $prioritiesAsideContainer = $('#priorities-aside-container')
-
-  $prioritiesAsideContainer.innerHTML += `
-     ${Object.values(PRIORITIES)
-       .filter((priority) => priority.label !== 'Not Assigned')
-       .map((priority) => {
-         return `
-        ${SpaceElement({
-          name: priority.label,
-          iconColor: priority.color,
-          variant: SPACE_ELEMENT_VARIANTS_ENUM.NORMAL
-        })}
-       `
-       })
-       .join('')
-       .replaceAll(',', '')}
- `
 }

@@ -1,7 +1,6 @@
 import { BUTTON_VARIANTS_ENUM } from '@components/Button'
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
 import { INPUT_VARIANTS_ENUM } from '@components/Input'
-import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 
 export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
   variant: BUTTON_VARIANTS_ENUM.ADD,
@@ -18,15 +17,6 @@ export const HOME_CONTROLLER_ADD_BUTTON_PROPS = {
           attributes: 'for="new-space-name"',
           text: 'Name'
         }
-      },
-      {
-        variant: INPUT_VARIANTS_ENUM.SELECT,
-        label: {
-          attributes: 'for="new-space-priority"',
-          text: 'Priority'
-        },
-        attributes: 'id="new-space-priority" name="newSpacePriority"',
-        options: PRIORITIES_SELECT_OPTIONS
       }
     ],
     firstButton: {
