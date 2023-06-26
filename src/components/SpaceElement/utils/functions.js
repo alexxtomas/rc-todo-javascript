@@ -1,7 +1,6 @@
 import { BUTTON_VARIANTS_ENUM } from '@components/Button'
 import { DIALOG_VARIANTS_ENUM } from '@components/Dialog'
 import { INPUT_VARIANTS_ENUM } from '@components/Input'
-import { PRIORITIES_SELECT_OPTIONS } from '@utils/constants'
 
 export const getFormDialogProps = () => ({
   variant: DIALOG_VARIANTS_ENUM.FORM,
@@ -15,15 +14,6 @@ export const getFormDialogProps = () => ({
         attributes: 'for="space-name"',
         text: 'Name'
       }
-    },
-    {
-      variant: INPUT_VARIANTS_ENUM.SELECT,
-      label: {
-        attributes: 'for="space-priority"',
-        text: 'Priority'
-      },
-      attributes: 'id="space-priority" name="spacePriority"',
-      options: PRIORITIES_SELECT_OPTIONS
     }
   ],
   firstButton: {

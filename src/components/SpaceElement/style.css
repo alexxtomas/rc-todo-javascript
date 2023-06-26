@@ -1,37 +1,37 @@
-.functional-space-element {
+.space-element {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px 4px;
 }
 
-.functional-space-element:hover {
+.space-element:hover {
   background-color: #dfdfdf;
   border-radius: 2px;
 }
 
-.functional-space-element-anchore {
+.space-element-anchore {
   padding: 4px 4px 4px 3px;
   width: 100%;
   height: 100%;
 }
 
-.functional-space-element-header {
+.space-element-header {
   display: flex;
   justify-content: space-between;
   width: 50%;
 }
 
-.functional-space-element-container {
+.space-element-container {
   display: flex;
   gap: 10px;
 }
 
-.functional-space-element-first-button:hover {
+.space-element-first-button:hover {
   color: blue;
 }
 
-.functional-space-element-title {
+.space-element-title {
   width: 90%;
   font-weight: 300;
   font-size: 18px;
